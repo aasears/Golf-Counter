@@ -1,54 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14313.13.2" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.68" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14238.4.1"/>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
     </dependencies>
     <scenes>
-        <!--Interface Controller-->
+        <!--Hole XX-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Golf_Counter_WatchKit_App" customModuleProvider="target">
+                <controller title="Hole XX" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Golf_Counter_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <label alignment="left" text="Label" id="OXu-gG-8gB"/>
+                        <group width="1" height="45" alignment="left" id="bY4-7W-UPg">
+                            <items>
+                                <label alignment="center" verticalAlignment="center" text="XX" id="TQj-zl-1dv">
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="40"/>
+                                </label>
+                                <button width="42" height="1" alignment="left" title="-" id="bnI-2d-CEh">
+                                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                    <connections>
+                                        <action selector="minusStrokeButtonPressed" destination="AgC-eL-Hgc" id="xeg-j3-4ix"/>
+                                    </connections>
+                                </button>
+                                <button width="42" height="1" alignment="right" title="+" id="Nnr-PA-L12">
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                    <connections>
+                                        <action selector="plusStrokeButtonPressed" destination="AgC-eL-Hgc" id="0hZ-o5-JKZ"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <label height="20" alignment="center" text="Strokes" id="OXu-gG-8gB">
+                            <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
+                        </label>
+                        <separator alignment="left" verticalAlignment="center" id="Cwc-jp-ZTM"/>
+                        <label height="20" alignment="center" verticalAlignment="bottom" text="Putts" id="MWJ-XG-mTB">
+                            <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
+                        </label>
+                        <group width="1" height="45" alignment="left" verticalAlignment="bottom" id="3KA-UB-sx4">
+                            <items>
+                                <label alignment="center" verticalAlignment="center" text="XX" id="RzP-zt-WC3">
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="40"/>
+                                </label>
+                                <button width="42" height="1" alignment="left" title="-" id="rZU-DJ-4M4">
+                                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                    <connections>
+                                        <action selector="minusPuttButtonPressed" destination="AgC-eL-Hgc" id="Fka-xM-zqh"/>
+                                    </connections>
+                                </button>
+                                <button width="42" height="1" alignment="right" title="+" id="NM9-lR-AAk">
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                    <connections>
+                                        <action selector="plusPuttButtonPressed" destination="AgC-eL-Hgc" id="iVa-Na-OJZ"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
                     </items>
+                    <connections>
+                        <outlet property="puttCounter" destination="RzP-zt-WC3" id="Xcg-vY-TZc"/>
+                        <outlet property="strokeCounter" destination="TQj-zl-1dv" id="hKP-Ss-NZM"/>
+                    </connections>
                 </controller>
             </objects>
             <point key="canvasLocation" x="220" y="345"/>
-        </scene>
-        <!--Static Notification Interface Controller-->
-        <scene sceneID="AEw-b0-oYE">
-            <objects>
-                <notificationController id="YCC-NB-fut">
-                    <items>
-                        <label alignment="left" text="Alert Label" numberOfLines="0" id="IdU-wH-bcW"/>
-                    </items>
-                    <notificationCategory key="notificationCategory" identifier="myCategory" id="JfB-70-Muf"/>
-                    <connections>
-                        <outlet property="notificationAlertLabel" destination="IdU-wH-bcW" id="JKC-fr-R95"/>
-                        <segue destination="4sK-HA-Art" kind="relationship" relationship="dynamicNotificationInterface" id="kXh-Jw-8B1"/>
-                        <segue destination="eXb-UN-Cd0" kind="relationship" relationship="dynamicInteractiveNotificationInterface" id="mpB-YA-K8N"/>
-                    </connections>
-                </notificationController>
-            </objects>
-            <point key="canvasLocation" x="220" y="643"/>
-        </scene>
-        <!--Notification Controller-->
-        <scene sceneID="ZPc-GJ-vnh">
-            <objects>
-                <controller id="4sK-HA-Art" customClass="NotificationController" customModule="Golf_Counter_WatchKit_App" customModuleProvider="target"/>
-            </objects>
-            <point key="canvasLocation" x="468" y="643"/>
-        </scene>
-        <!--Notification Controller-->
-        <scene sceneID="Niz-AI-uX2">
-            <objects>
-                <controller id="eXb-UN-Cd0" customClass="NotificationController" customModule="Golf_Counter_WatchKit_App" customModuleProvider="target"/>
-            </objects>
-            <point key="canvasLocation" x="468" y="345"/>
         </scene>
     </scenes>
 </document>
