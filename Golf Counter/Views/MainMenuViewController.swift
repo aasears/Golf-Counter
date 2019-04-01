@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class MainMenuViewController: UIViewController {
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    var golfHoleArray = [GolfGame]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +39,28 @@ class MainMenuViewController: UIViewController {
     }
     
     @IBAction func continueGame(_ sender: UIButton) {
-        performSegue(withIdentifier: "goToContinueGame", sender: self)
+        
+        loadData()
+        
+        if golfHoleArray.count == 0 {
+            performSegue(withIdentifier: "goToSelectCourse", sender: self)
+        } else {
+            performSegue(withIdentifier: "goToContinueGame", sender: self)
+        }
     }
     
-
+    // MARK: - CoreData functions
+    
+    func loadData() {
+        
+        let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        
+        do {
+            golfHoleArray = try context.fetch(request)
+        } catch {
+            print("Error fetching context \(error)")
+        }
+    }
 
 
 }

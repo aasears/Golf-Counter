@@ -19,6 +19,9 @@ class editCourseHoleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var holeNumLabel: UILabel!
     @IBOutlet weak var parLabel: UILabel!
+    @IBOutlet weak var decreaseParButton: UIButton!
+    @IBOutlet weak var increaseParButton: UIButton!
+    
     var holeNumber = 0
     var parNumber = 0
     
@@ -27,6 +30,8 @@ class editCourseHoleTableViewCell: UITableViewCell {
     func setHoleDetails(holeNum: Int, par: Int) {
         holeNumber = holeNum
         parNumber = par
+        decreaseParButton.layer.cornerRadius = 10
+        increaseParButton.layer.cornerRadius = 10
         setFields()
     }
     

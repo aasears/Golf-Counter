@@ -30,6 +30,8 @@
 		93F209022246C47200A6E39A /* courseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F209012246C47200A6E39A /* courseTableViewCell.swift */; };
 		93F209042246DA6600A6E39A /* EditCourseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F209032246DA6600A6E39A /* EditCourseTableViewController.swift */; };
 		93F209062246DECC00A6E39A /* editCourseHoleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F209052246DECC00A6E39A /* editCourseHoleTableViewCell.swift */; };
+		E5D3FD272251A7670066736A /* newGameCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3FD262251A7670066736A /* newGameCourseTableViewCell.swift */; };
+		E5D3FD292251A96C0066736A /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3FD282251A96C0066736A /* NewGameViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,8 @@
 		93F209012246C47200A6E39A /* courseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseTableViewCell.swift; sourceTree = "<group>"; };
 		93F209032246DA6600A6E39A /* EditCourseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCourseTableViewController.swift; sourceTree = "<group>"; };
 		93F209052246DECC00A6E39A /* editCourseHoleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editCourseHoleTableViewCell.swift; sourceTree = "<group>"; };
+		E5D3FD262251A7670066736A /* newGameCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newGameCourseTableViewCell.swift; sourceTree = "<group>"; };
+		E5D3FD282251A96C0066736A /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +130,6 @@
 		93192352213CD9CD0018B45F = {
 			isa = PBXGroup;
 			children = (
-				93CEEE06214B59590019252C /* Shared */,
 				9319235D213CD9CD0018B45F /* Golf Counter */,
 				93192371213CD9CF0018B45F /* Golf Counter WatchKit App */,
 				93192380213CD9D00018B45F /* Golf Counter WatchKit Extension */,
@@ -201,6 +204,7 @@
 				93F208FB2246998D00A6E39A /* CoursesViewController.swift */,
 				93F209032246DA6600A6E39A /* EditCourseTableViewController.swift */,
 				93D13B5F224C5931006B0840 /* HistoryTableViewController.swift */,
+				E5D3FD282251A96C0066736A /* NewGameViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,17 +216,11 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		93CEEE06214B59590019252C /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
 		93F208F8224484E400A6E39A /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				93F208F92244850D00A6E39A /* holeTableViewCell.swift */,
+				E5D3FD262251A7670066736A /* newGameCourseTableViewCell.swift */,
 				93F209012246C47200A6E39A /* courseTableViewCell.swift */,
 				93F209052246DECC00A6E39A /* editCourseHoleTableViewCell.swift */,
 			);
@@ -297,12 +295,14 @@
 				TargetAttributes = {
 					9319235A213CD9CD0018B45F = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 					};
 					9319236C213CD9CF0018B45F = {
 						CreatedOnToolsVersion = 10.0;
 					};
 					9319237B213CD9D00018B45F = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -369,6 +369,8 @@
 				931923A1213D9BF70018B45F /* DataModel.xcdatamodeld in Sources */,
 				93F209002246B06500A6E39A /* NewGameTableViewController.swift in Sources */,
 				93F209042246DA6600A6E39A /* EditCourseTableViewController.swift in Sources */,
+				E5D3FD272251A7670066736A /* newGameCourseTableViewCell.swift in Sources */,
+				E5D3FD292251A96C0066736A /* NewGameViewController.swift in Sources */,
 				93D13B60224C5931006B0840 /* HistoryTableViewController.swift in Sources */,
 				9319235F213CD9CD0018B45F /* AppDelegate.swift in Sources */,
 				9319239C213D8A070018B45F /* GolfHoleViewController.swift in Sources */,

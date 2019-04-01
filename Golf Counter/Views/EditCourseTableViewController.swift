@@ -16,10 +16,9 @@ class EditCourseTableViewController: UITableViewController, editCourseHoleTableV
     var index: Int = 0
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         loadCourses()
         setSingleCourse()
         navigationItem.title = courseArray[index].courseName
@@ -35,6 +34,7 @@ class EditCourseTableViewController: UITableViewController, editCourseHoleTableV
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "editCourseHoleTableViewCell", for: indexPath) as! editCourseHoleTableViewCell
         cell.setHoleDetails(holeNum: indexPath.row + 1, par: courseHoles[indexPath.row])
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
         cell.delegate = self
         
         return cell
