@@ -537,91 +537,6 @@
             </objects>
             <point key="canvasLocation" x="-930" y="-698"/>
         </scene>
-        <!--New Game Table View Controller-->
-        <scene sceneID="iDp-gY-nN2">
-            <objects>
-                <tableViewController id="S0f-SN-hSd" customClass="NewGameTableViewController" customModule="Golf_Counter" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ABg-ts-8hi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <stackView key="tableHeaderView" opaque="NO" contentMode="scaleToFill" id="lgg-jq-4W4">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUF-Pd-wG6">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <color key="backgroundColor" red="0.0" green="0.075532306300000004" blue="0.73743118519999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                    <state key="normal" title="Select Multiple Courses">
-                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="selectMultipleButton:" destination="WYC-sN-uGG" eventType="touchUpInside" id="rGZ-iH-Zzp"/>
-                                        <action selector="selectMultipleButtonPressed:" destination="WYC-sN-uGG" eventType="touchUpInside" id="7SL-z1-TKZ"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                        </stackView>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newGameCourseTableViewCell" rowHeight="120" id="Wkh-Tp-CGg" customClass="newGameCourseTableViewCell" customModule="Golf_Counter" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="72" width="375" height="120"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wkh-Tp-CGg" id="Mgy-wf-7uu">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="119.66666666666667"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fVM-r7-tks">
-                                            <rect key="frame" x="21" y="21" width="150" height="70"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="150" id="AMX-Hq-iD9"/>
-                                                <constraint firstAttribute="height" constant="70" id="sAR-YV-0Ld"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Holes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9G-zh-79h">
-                                            <rect key="frame" x="305" y="41.666666666666664" width="60" height="28.999999999999993"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="XX" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zD9-IA-8wn">
-                                            <rect key="frame" x="253" y="41.666666666666664" width="32" height="28.999999999999993"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="F9G-zh-79h" firstAttribute="leading" secondItem="zD9-IA-8wn" secondAttribute="trailing" constant="20" id="7BI-46-gyU"/>
-                                        <constraint firstAttribute="trailing" secondItem="F9G-zh-79h" secondAttribute="trailing" constant="10" id="81f-ZK-o33"/>
-                                        <constraint firstItem="F9G-zh-79h" firstAttribute="centerY" secondItem="fVM-r7-tks" secondAttribute="centerY" id="O5d-Vh-o78"/>
-                                        <constraint firstItem="fVM-r7-tks" firstAttribute="leading" secondItem="Mgy-wf-7uu" secondAttribute="leadingMargin" constant="5" id="hqy-qq-JVm"/>
-                                        <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="fVM-r7-tks" secondAttribute="bottom" constant="10" id="nMY-rV-a1G"/>
-                                        <constraint firstItem="zD9-IA-8wn" firstAttribute="centerY" secondItem="fVM-r7-tks" secondAttribute="centerY" id="tlK-f0-N20"/>
-                                        <constraint firstItem="fVM-r7-tks" firstAttribute="top" secondItem="Mgy-wf-7uu" secondAttribute="topMargin" constant="10" id="vpY-o0-p0N"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <outlet property="courseName" destination="fVM-r7-tks" id="VT3-sb-uY6"/>
-                                    <outlet property="holeLabel" destination="F9G-zh-79h" id="Vu8-Sz-fiJ"/>
-                                    <outlet property="numberOfCourseHoles" destination="zD9-IA-8wn" id="tJt-XC-CC6"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="S0f-SN-hSd" id="hv5-jZ-cz2"/>
-                            <outlet property="delegate" destination="S0f-SN-hSd" id="h26-Y8-dSu"/>
-                        </connections>
-                    </tableView>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Rn-sH-sHb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="WYC-sN-uGG" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="593" y="-1625"/>
-        </scene>
         <!--New Game View Controller-->
         <scene sceneID="yNC-ax-oEY">
             <objects>
@@ -634,7 +549,7 @@
                                 <rect key="frame" x="0.0" y="88" width="375" height="630"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="111" id="PtQ-hM-03g" customClass="newGameCourseTableViewCell" customModule="Golf_Counter" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="newGameCourseTableViewCell" rowHeight="111" id="PtQ-hM-03g" customClass="newGameCourseTableViewCell" customModule="Golf_Counter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="111"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PtQ-hM-03g" id="Z78-5D-KHP">
@@ -713,11 +628,83 @@
                     </view>
                     <connections>
                         <outlet property="courseSelectionTableView" destination="TZh-hd-6I6" id="It4-ch-cfo"/>
+                        <outlet property="courseStartView" destination="kIH-yF-t4Y" id="2IM-cg-HSM"/>
                         <outlet property="selectMultipleButton" destination="JDK-lh-SpJ" id="e0k-Bo-8NX"/>
                         <segue destination="eOL-Ya-kU7" kind="show" identifier="goToNewGame" id="MuQ-Lb-kgq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PgH-R7-O3L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view clipsSubviews="YES" contentMode="scaleToFill" id="kIH-yF-t4Y">
+                    <rect key="frame" x="0.0" y="0.0" width="299" height="306"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uj0-Il-k5a">
+                            <rect key="frame" x="120.66666666666669" y="271" width="58" height="30"/>
+                            <state key="normal" title="Go Back">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="courseStartBackButton:" destination="EGY-jW-iOt" eventType="touchUpInside" id="Kzb-ZX-OP4"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where do you want to start?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnh-MP-XPb">
+                            <rect key="frame" x="49.666666666666657" y="44" width="200" height="48"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="200" id="Gob-1r-GzQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="kme-4t-qMa">
+                            <rect key="frame" x="20" y="112" width="259" height="140"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O7h-No-nrb">
+                                    <rect key="frame" x="0.0" y="0.0" width="259" height="40"/>
+                                    <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="xoB-Qc-GXG"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <state key="normal" title="Course 1">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qdi-EU-mj0">
+                                    <rect key="frame" x="0.0" y="50" width="259" height="40"/>
+                                    <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <state key="normal" title="Course 2">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bcK-VB-Ace">
+                                    <rect key="frame" x="0.0" y="100" width="259" height="40"/>
+                                    <color key="backgroundColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <state key="normal" title="Course 3">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="qdi-EU-mj0" firstAttribute="height" secondItem="O7h-No-nrb" secondAttribute="height" id="VOz-IU-M4h"/>
+                                <constraint firstItem="bcK-VB-Ace" firstAttribute="height" secondItem="O7h-No-nrb" secondAttribute="height" id="cLH-4g-GNl"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Uj0-Il-k5a" secondAttribute="bottom" constant="5" id="9u3-ba-IWF"/>
+                        <constraint firstItem="Uj0-Il-k5a" firstAttribute="centerX" secondItem="kIH-yF-t4Y" secondAttribute="centerX" id="EdL-oo-Rig"/>
+                        <constraint firstItem="Dnh-MP-XPb" firstAttribute="centerX" secondItem="kIH-yF-t4Y" secondAttribute="centerX" id="Nia-Vw-zZ3"/>
+                        <constraint firstItem="kme-4t-qMa" firstAttribute="top" secondItem="Dnh-MP-XPb" secondAttribute="bottom" constant="20" id="eE7-e3-yTT"/>
+                        <constraint firstItem="Dnh-MP-XPb" firstAttribute="top" secondItem="O49-69-tve" secondAttribute="top" id="g27-fL-Ish"/>
+                        <constraint firstItem="kme-4t-qMa" firstAttribute="leading" secondItem="O49-69-tve" secondAttribute="leading" constant="20" id="gu5-1u-uUk"/>
+                        <constraint firstItem="O49-69-tve" firstAttribute="trailing" secondItem="kme-4t-qMa" secondAttribute="trailing" constant="20" id="kdo-1w-6gh"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="O49-69-tve"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="-143" y="-1006"/>
         </scene>
