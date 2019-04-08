@@ -9,63 +9,58 @@
 import UIKit
 import CoreData
 
-class GolfHoleViewController: UITableViewController, holeTableViewCellDelegate {
+class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, holeTableViewCellDelegate {
+    
+    @IBOutlet weak var holeSummaryTableView: UITableView!
+    @IBOutlet weak var nextCourseButton: UIButton!
+    @IBOutlet weak var finishGameButton: UIButton!
+    @IBOutlet weak var parTotalLabel: UILabel!
+    @IBOutlet weak var strokesTotalLabel: UILabel!
+    @IBOutlet weak var netTotalLabel: UILabel!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var golfHoleArray = [GolfGame]()
-    var courseArray = [Course]()
-    var index = 0
-    var section = 0
     var continueGame = false
+    var startingCourseIndex = 0
+    
+    var delegate: receiveHoleNumber?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadData()
-        loadCourses()
-        
-        if !continueGame {
-            startNewGame()
-        }
+        holeSummaryTableView.delegate = self
+        holeSummaryTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        tableView.reloadData()
-        navigationItem.title = golfHoleArray[0].courseName
+        navigationItem.title = golfHoleArray[startingCourseIndex].courseName
+        setupButtons()
+        displayTotals()
     }
 
-    
     // MARK: - Table view data source
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if golfHoleArray.count > 0 {
-            return golfHoleArray[0].totalCount?.count ?? 0
+            return golfHoleArray[startingCourseIndex].strokeCount?.count ?? 0
         } else {
             return 0
         }
     }
     
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "holeTableViewCell", for: indexPath) as! holeTableViewCell
+        let index = startingCourseIndex
         
-        cell.setHoleFields(
-            hole: indexPath.row + 1,
-            stroke: golfHoleArray[0].totalCount?[indexPath.row] ?? 0,
-            par: golfHoleArray[0].parCount?[indexPath.row] ?? 0,
-            putt: golfHoleArray[0].puttCount?[indexPath.row] ?? 0)
+        let strokes = golfHoleArray[index].strokeCount?[indexPath.row] ?? 0
+        let par = golfHoleArray[index].parCount?[indexPath.row] ?? 0
+        let putt = golfHoleArray[index].puttCount?[indexPath.row] ?? 0
         
-        
-        if ((golfHoleArray[0].totalCount?[indexPath.row] ?? 0) - (golfHoleArray[0].parCount?[indexPath.row] ?? 0)) > 0 {
-            cell.puttCount.textColor = UIColor.red
-        } else if ((golfHoleArray[0].totalCount?[indexPath.row] ?? 0) - (golfHoleArray[0].parCount?[indexPath.row] ?? 0)) < 0 {
-            cell.puttCount.textColor = UIColor.green
-        } else {
-            cell.puttCount.textColor = UIColor.black
-        }
+        cell.accessoryType = .disclosureIndicator
+        cell.setHoleFields(hole: indexPath.row + 1, stroke: strokes, par: par, putt: putt)
         
         return cell
     }
@@ -73,63 +68,54 @@ class GolfHoleViewController: UITableViewController, holeTableViewCellDelegate {
     
     //MARK: - TableView Delegate Methods
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToCounter", sender: self)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dismissViewController(index: indexPath)
     }
     
+    func dismissViewController(index: IndexPath) {
+        delegate?.sendHoleIndex(indexNumber: index.row)
+        dismiss(animated: true, completion: nil)
+    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToCounter" {
-            
-            let destinationVC = segue.destination as! CounterViewController
-            
-            if let indexPath = tableView.indexPathForSelectedRow {
-                
-                destinationVC.index = indexPath.row
+    func setupButtons() {
+        nextCourseButton.layer.cornerRadius = 15
+        finishGameButton.layer.cornerRadius = 15
+    }
+    
+    func displayTotals() {
+        var parSum = 0
+        var strokeSum = 0
+        var netSum = 0
+        if let holeCount = golfHoleArray[startingCourseIndex].parCount?.count {
+            for hole in 0..<holeCount {
+                let par = golfHoleArray[startingCourseIndex].parCount?[hole] ?? 0
+                let stroke = golfHoleArray[startingCourseIndex].strokeCount?[hole] ?? 0
+                if par > 0 && stroke > 0 {
+                    netSum += stroke - par
+                    parSum += par
+                }
+                if stroke > 0 {
+                    strokeSum += stroke
+                }
             }
         }
-    }
-    
-    // MARK: - Game functions
-    
-    func startNewGame() {
-        
-        if golfHoleArray.count > 0 {
-            context.delete(golfHoleArray[0])
-        }
-        
-        let newGame = GolfGame(context: context)
-        newGame.dateStarted = Date()
-        
-        if section == 0 && index == 0 {
-            newGame.courseName = "9 Hole Course"
-            newGame.puttCount = [0,0,0,0,0,0,0,0,0]
-            newGame.strokeCount = [0,0,0,0,0,0,0,0,0]
-            newGame.totalCount = [0,0,0,0,0,0,0,0,0]
-        }
-        else if section == 0 && index == 1 {
-            newGame.courseName = "18 Hole Course"
-            newGame.puttCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-            newGame.strokeCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-            newGame.totalCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        } else {
-            if courseArray[index].coursePar?.count == 9 {
-                newGame.courseName = courseArray[index].courseName
-                newGame.puttCount = [0,0,0,0,0,0,0,0,0]
-                newGame.strokeCount = [0,0,0,0,0,0,0,0,0]
-                newGame.totalCount = [0,0,0,0,0,0,0,0,0]
-                newGame.parCount = courseArray[index].coursePar
+        if parSum > 0 {
+            parTotalLabel.text = "\(parSum)"
+            netTotalLabel.text = "\(netSum)"
+            if netSum > 0 {
+                netTotalLabel.text = "+\(netSum)"
+                netTotalLabel.textColor = UIColor.red
+            } else if netSum < 0 {
+                netTotalLabel.textColor = UIColor.green
             } else {
-                newGame.courseName = courseArray[index].courseName
-                newGame.puttCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-                newGame.strokeCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-                newGame.totalCount = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-                newGame.parCount = courseArray[index].coursePar
+                netTotalLabel.textColor = UIColor.white
             }
+        } else {
+            parTotalLabel.text = ""
+            netTotalLabel.text = ""
         }
+        strokesTotalLabel.text = "\(strokeSum)"
         
-        golfHoleArray = [newGame]
-        save()
     }
     
     // MARK: - CoreData functions
@@ -145,19 +131,6 @@ class GolfHoleViewController: UITableViewController, holeTableViewCellDelegate {
         }
     }
     
-    func loadCourses() {
-        
-        let request: NSFetchRequest<Course> = Course.fetchRequest()
-        
-        do {
-            courseArray = try context.fetch(request)
-            let sort = NSSortDescriptor(key: "courseName", ascending: true)
-            request.sortDescriptors = [sort]
-        } catch {
-            print("Error fetching context \(error)")
-        }
-    }
-    
     func save() {
         
         do {
@@ -167,5 +140,4 @@ class GolfHoleViewController: UITableViewController, holeTableViewCellDelegate {
         }
     }
     
-
 }

@@ -19,7 +19,7 @@ class holeTableViewCell: UITableViewCell {
     @IBOutlet weak var holeNum: UILabel!
     @IBOutlet weak var strokeCount: UILabel!
     @IBOutlet weak var parCount: UILabel!
-    @IBOutlet weak var puttCount: UILabel!
+    @IBOutlet weak var netCount: UILabel!
     
     func setHoleFields(hole: Int, stroke: Int, par: Int, putt: Int) {
         //putt currently represents stroke - par
@@ -27,22 +27,17 @@ class holeTableViewCell: UITableViewCell {
         strokeCount.text = "\(stroke)"
         parCount.text = "\(par)"
         
-        if stroke == 0 {
-            puttCount.text = ""
-        } else {
-            puttCount.text = "\(stroke - par)"
-        }
-        
-        if (stroke - par) > 0 {
-            puttCount.textColor = UIColor.red
-            puttCount.text = "+\(stroke - par)"
+        if stroke == 0 || par == 0 {
+            netCount.text = ""
+        } else if (stroke - par) > 0 {
+            netCount.textColor = UIColor.red
+            netCount.text = "+\(stroke - par)"
         } else if (stroke - par) < 0 {
-            puttCount.textColor = UIColor.green
+            netCount.textColor = UIColor(red: 0, green: 0.56, blue: 0, alpha: 1)
+            netCount.text = "\(stroke - par)"
         } else {
-            puttCount.textColor = UIColor.black
+            netCount.textColor = UIColor.black
+            netCount.text = "\(stroke - par)"
         }
     }
-    
-
-    
 }

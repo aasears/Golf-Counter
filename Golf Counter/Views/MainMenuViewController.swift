@@ -29,15 +29,6 @@ class MainMenuViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToContinueGame" {
-            
-            let destinationVC = segue.destination as! GolfHoleViewController
-            
-            destinationVC.continueGame = true
-        }
-    }
-    
     @IBAction func continueGame(_ sender: UIButton) {
         
         loadData()

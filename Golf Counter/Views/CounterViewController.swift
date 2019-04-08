@@ -9,68 +9,75 @@
 import UIKit
 import CoreData
 
+protocol receiveHoleNumber {
+    func sendHoleIndex(indexNumber: Int)
+}
 
-//protocol CanReceive {
-//
-//    func dataReceived(data: GolfCounter, index: Int)
-//}
-
-class CounterViewController: UIViewController {
+class CounterViewController: UIViewController, receiveHoleNumber {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var golfHoleArray = [GolfGame]()
-    var index: Int = 0
+    var currentCourse: GolfGame?
+    var startingCourseIndex = 0
+    var index = 0
     
     @IBOutlet weak var holeTitle: UILabel!
-    @IBOutlet weak var totalCountTextField: UITextField!
-    @IBOutlet weak var strokeCountTextField: UITextField!
-    @IBOutlet weak var puttCountTextField: UITextField!
-    
+    @IBOutlet weak var parCountLabel: UILabel!
+    @IBOutlet weak var strokeCountLabel: UILabel!
+    @IBOutlet weak var puttCountLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadData()
+        currentCourse = golfHoleArray[startingCourseIndex]
+        navigationItem.title = currentCourse?.courseName
         loadFields()
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        
-        navigationController?.setNavigationBarHidden(false, animated: false)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToCourseSummary" {
+            let destinationVC = segue.destination as! GolfHoleViewController
+            destinationVC.delegate = self
+        }
     }
     
     @IBAction func countButtonPressed(_ sender: UIButton) {
         
         if sender.tag == 1 {
-            golfHoleArray[0].strokeCount?[index] += 1
+            if (currentCourse?.strokeCount?[index] ?? 0) < 99 {
+                currentCourse?.strokeCount?[index] += 1
+            }
         } else if sender.tag == 2 {
-            golfHoleArray[0].strokeCount?[index] -= 1
+            if (currentCourse?.strokeCount?[index] ?? 0) > 0 &&
+               (currentCourse?.strokeCount?[index] ?? 0) > (currentCourse?.puttCount?[index] ?? 0) {
+                currentCourse?.strokeCount?[index] -= 1
+            }
         } else if sender.tag == 3 {
-            golfHoleArray[0].puttCount?[index] += 1
-            golfHoleArray[0].strokeCount?[index] += 1
+            if (currentCourse?.strokeCount?[index] ?? 0) < 99 {
+                currentCourse?.puttCount?[index] += 1
+                currentCourse?.strokeCount?[index] += 1
+            }
         } else if sender.tag == 4 {
-            golfHoleArray[0].puttCount?[index] -= 1
-            golfHoleArray[0].strokeCount?[index] -= 1
+            if (currentCourse?.strokeCount?[index] ?? 0) > 0 && (currentCourse?.puttCount?[index] ?? 0) > 0 {
+                currentCourse?.puttCount?[index] -= 1
+                currentCourse?.strokeCount?[index] -= 1
+            }
         }
-        
-        golfHoleArray[0].totalCount?[index] = golfHoleArray[0].strokeCount?[index] ?? 0 //+ golfHoleArray[index].puttCount
         
         loadFields()
     }
     
     @IBAction func saveAndChangeHole(_ sender: UIButton) {
         
+        golfHoleArray[startingCourseIndex] = currentCourse ?? golfHoleArray[startingCourseIndex]
         save()
         
         if sender.tag == 5 {
             
-            if index < (golfHoleArray[0].totalCount?.count ?? 0) - 1 {
+            if index < (golfHoleArray[startingCourseIndex].strokeCount?.count ?? 0) - 1 {
                 index += 1
                 loadFields()
             }
@@ -81,22 +88,24 @@ class CounterViewController: UIViewController {
                 index -= 1
                 loadFields()
             }
-            
-        } else if sender.tag == 7 {
-            
-            self.navigationController?.popViewController(animated: true)
         }
-        
     }
     
+    @IBAction func menuButton(_ sender: UIBarButtonItem) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func sendHoleIndex(indexNumber: Int) {
+        index = indexNumber
+        loadFields()
+    }
     
     func loadFields() {
         holeTitle.text = "Hole \(index + 1)"
-        totalCountTextField.text = "\(golfHoleArray[0].parCount?[index] ?? 0)"
-        strokeCountTextField.text = "\(golfHoleArray[0].strokeCount?[index] ?? 0)"
-        puttCountTextField.text = "\(golfHoleArray[0].puttCount?[index] ?? 0)"
+        parCountLabel.text = "\(golfHoleArray[startingCourseIndex].parCount?[index] ?? 0)"
+        strokeCountLabel.text = "\(golfHoleArray[startingCourseIndex].strokeCount?[index] ?? 0)"
+        puttCountLabel.text = "\(golfHoleArray[startingCourseIndex].puttCount?[index] ?? 0)"
     }
-    
     
     func loadData() {
         
@@ -109,7 +118,6 @@ class CounterViewController: UIViewController {
         }
     }
     
-    
     func save() {
         
         do {
@@ -118,7 +126,6 @@ class CounterViewController: UIViewController {
             print("Error saving context \(error)")
         }
     }
-    
 
 }
 

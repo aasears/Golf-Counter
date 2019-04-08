@@ -78,6 +78,7 @@ class CoursesViewController: UITableViewController {
         
         let nineAction = UIAlertAction(title: "9 Hole", style: .default) { (action) in
             let newCourse = Course(context: self.context)
+            newCourse.dateCreated = Date()
             newCourse.courseName = textField.text!
             newCourse.coursePar = [3,3,3,3,3,3,3,3,3]
             self.courseArray.append(newCourse)
@@ -86,6 +87,7 @@ class CoursesViewController: UITableViewController {
         
         let eighteenAction = UIAlertAction(title: "18 Hole", style: .default) { (action) in
             let newCourse = Course(context: self.context)
+            newCourse.dateCreated = Date()
             newCourse.courseName = textField.text!
             newCourse.coursePar = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
             self.courseArray.append(newCourse)
