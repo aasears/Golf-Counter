@@ -19,7 +19,7 @@ class CounterViewController: UIViewController, receiveHoleNumber {
     
     var golfHoleArray = [GolfGame]()
     var currentCourse: GolfGame?
-    var startingCourseIndex = 0
+    var courseIndex = 0
     var index = 0
     
     @IBOutlet weak var holeTitle: UILabel!
@@ -31,16 +31,16 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         super.viewDidLoad()
         
         loadData()
-        currentCourse = golfHoleArray[startingCourseIndex]
+        currentCourse = golfHoleArray[courseIndex]
         navigationItem.title = currentCourse?.courseName
         loadFields()
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToCourseSummary" {
             let destinationVC = segue.destination as! GolfHoleViewController
             destinationVC.delegate = self
+            destinationVC.courseIndex = courseIndex
         }
     }
     
@@ -72,12 +72,12 @@ class CounterViewController: UIViewController, receiveHoleNumber {
     
     @IBAction func saveAndChangeHole(_ sender: UIButton) {
         
-        golfHoleArray[startingCourseIndex] = currentCourse ?? golfHoleArray[startingCourseIndex]
+        golfHoleArray[courseIndex] = currentCourse ?? golfHoleArray[courseIndex]
         save()
         
         if sender.tag == 5 {
             
-            if index < (golfHoleArray[startingCourseIndex].strokeCount?.count ?? 0) - 1 {
+            if index < (golfHoleArray[courseIndex].strokeCount?.count ?? 0) - 1 {
                 index += 1
                 loadFields()
             }
@@ -102,14 +102,16 @@ class CounterViewController: UIViewController, receiveHoleNumber {
     
     func loadFields() {
         holeTitle.text = "Hole \(index + 1)"
-        parCountLabel.text = "\(golfHoleArray[startingCourseIndex].parCount?[index] ?? 0)"
-        strokeCountLabel.text = "\(golfHoleArray[startingCourseIndex].strokeCount?[index] ?? 0)"
-        puttCountLabel.text = "\(golfHoleArray[startingCourseIndex].puttCount?[index] ?? 0)"
+        parCountLabel.text = "\(golfHoleArray[courseIndex].parCount?[index] ?? 0)"
+        strokeCountLabel.text = "\(golfHoleArray[courseIndex].strokeCount?[index] ?? 0)"
+        puttCountLabel.text = "\(golfHoleArray[courseIndex].puttCount?[index] ?? 0)"
     }
     
     func loadData() {
         
         let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        let sort = NSSortDescriptor(key: "orderIdentifier", ascending: true)
+        request.sortDescriptors = [sort]
         
         do {
             golfHoleArray = try context.fetch(request)

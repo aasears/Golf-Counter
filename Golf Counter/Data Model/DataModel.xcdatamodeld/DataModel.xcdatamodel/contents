@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18E2034" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Course" representedClassName="Course" syncable="YES" codeGenerationType="class">
         <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="coursePar" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
@@ -8,12 +8,13 @@
     <entity name="GolfGame" representedClassName=".GolfGame" syncable="YES" codeGenerationType="class">
         <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="orderIdentifier" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="parCount" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
         <attribute name="puttCount" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
         <attribute name="strokeCount" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
     </entity>
     <elements>
         <element name="Course" positionX="-234" positionY="-9" width="128" height="90"/>
-        <element name="GolfGame" positionX="-235.79296875" positionY="-45.6328125" width="128" height="120"/>
+        <element name="GolfGame" positionX="-235.79296875" positionY="-45.6328125" width="128" height="135"/>
     </elements>
 </model>

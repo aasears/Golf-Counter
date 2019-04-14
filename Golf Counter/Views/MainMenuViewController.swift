@@ -45,6 +45,8 @@ class MainMenuViewController: UIViewController {
     func loadData() {
         
         let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        let sort = NSSortDescriptor(key: "orderIdentifier", ascending: true)
+        request.sortDescriptors = [sort]
         
         do {
             golfHoleArray = try context.fetch(request)

@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
+class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var selectMultipleButton: UIButton!
     @IBOutlet weak var courseSelectionTableView: UITableView!
@@ -41,7 +41,6 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         loadCourses()
         courseSelectionTableView.delegate = self
         courseSelectionTableView.dataSource = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,9 +127,8 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
                 courseIndexPath = [indexPath]
             }
         }
-        destinationVC.startingCourseIndex = startingCourseIndex
+        destinationVC.courseIndex = startingCourseIndex
         startNewGame()
-        print(golfHoleArray.count)
     }
     
     @IBAction func selectMultipleButtonPressed(_ sender: UIButton) {
@@ -268,6 +266,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
             context.delete(game)
         }
         
+        var counter = 0
         var newGameArray = [GolfGame]()
         for index in courseIndexPath {
             
@@ -292,6 +291,8 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
                     newGame.parCount = courseArray[index.row].coursePar
                 }
             }
+            newGame.orderIdentifier = Int16(counter)
+            counter += 1
             newGameArray.append(newGame)
         }
         golfHoleArray = newGameArray
@@ -303,6 +304,8 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     func loadData() {
         
         let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        let sort = NSSortDescriptor(key: "orderIdentifier", ascending: true)
+        request.sortDescriptors = [sort]
         
         do {
             golfHoleArray = try context.fetch(request)

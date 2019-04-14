@@ -199,8 +199,8 @@
 			children = (
 				93F208FD2246A0C000A6E39A /* MainMenuViewController.swift */,
 				E5D3FD282251A96C0066736A /* NewGameViewController.swift */,
-				9319239B213D8A070018B45F /* GolfHoleViewController.swift */,
 				93192360213CD9CD0018B45F /* CounterViewController.swift */,
+				9319239B213D8A070018B45F /* GolfHoleViewController.swift */,
 				93F208FB2246998D00A6E39A /* CoursesViewController.swift */,
 				93F209032246DA6600A6E39A /* EditCourseTableViewController.swift */,
 				93D13B5F224C5931006B0840 /* HistoryTableViewController.swift */,
