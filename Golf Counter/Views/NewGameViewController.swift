@@ -262,8 +262,9 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     func startNewGame() {
         
         loadData()
-        for game in golfHoleArray {
-            context.delete(game)
+        
+        for course in golfHoleArray {
+            context.delete(course)
         }
         
         var counter = 0

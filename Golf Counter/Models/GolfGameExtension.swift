@@ -18,6 +18,7 @@ extension GolfGame {
     
     func createNewGame(holes: Int) {
         dateCreated = Date()
+        isActive = true
         var hole = 0
         while hole < holes {
             puttCount?.append(0)

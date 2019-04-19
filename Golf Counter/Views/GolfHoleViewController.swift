@@ -73,16 +73,27 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
         
         return cell
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toGameSummary" {
+            let destinationVC = segue.destination as! GameSummaryViewController
+            destinationVC.courseIndex = courseIndex
+        }
+    }
 
     
     //MARK: - TableView Delegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        dismissViewController(index: indexPath)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func nextCourseButtonPressed(_ sender: UIButton) {
         animateIn()
+    }
+    
+    @IBAction func completeGameButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "toGameSummary", sender: self)
     }
     
     @IBAction func courseButtonPressed(_ sender: UIButton) {

@@ -26,6 +26,12 @@ class CounterViewController: UIViewController, receiveHoleNumber {
     @IBOutlet weak var parCountLabel: UILabel!
     @IBOutlet weak var strokeCountLabel: UILabel!
     @IBOutlet weak var puttCountLabel: UILabel!
+    @IBOutlet weak var previousHoleButton: UIButton!
+    @IBOutlet weak var previousHoleImage: UIImageView!
+    @IBOutlet weak var nextCourseButton: UIButton!
+    @IBOutlet weak var nextCourseImage: UIImageView!
+    @IBOutlet weak var nextHoleButton: UIButton!
+    @IBOutlet weak var nextHoleImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +111,25 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         parCountLabel.text = "\(golfHoleArray[courseIndex].parCount?[index] ?? 0)"
         strokeCountLabel.text = "\(golfHoleArray[courseIndex].strokeCount?[index] ?? 0)"
         puttCountLabel.text = "\(golfHoleArray[courseIndex].puttCount?[index] ?? 0)"
+        
+        if index == 0 {
+            previousHoleButton.setTitle("", for: .normal)
+            previousHoleImage.isHidden = true
+            nextCourseButton.setTitle("", for: .normal)
+            nextCourseButton.isEnabled = false
+        } else if index == (golfHoleArray[courseIndex].strokeCount?.count ?? 0) - 1 {
+            nextHoleButton.setTitle("", for: .normal)
+            nextHoleImage.isHidden = true
+            nextCourseButton.setTitle("Next Course", for: .normal)
+            nextCourseButton.isEnabled = true
+        } else {
+            previousHoleButton.setTitle("Prev", for: .normal)
+            previousHoleImage.isHidden = false
+            nextHoleButton.setTitle("Next", for: .normal)
+            nextHoleImage.isHidden = false
+            nextCourseButton.setTitle("", for: .normal)
+            nextCourseButton.isEnabled = false
+        }
     }
     
     func loadData() {
