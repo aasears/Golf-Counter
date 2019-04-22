@@ -8,17 +8,18 @@
 
 import UIKit
 import CoreData
+import WatchConnectivity
 
 protocol receiveHoleNumber {
-    func sendHoleIndex(indexNumber: Int)
+    func sendHoleIndex(holeIndex: Int, courseIndex: Int)
 }
 
 class CounterViewController: UIViewController, receiveHoleNumber {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let session = WCSession.default
     
     var golfHoleArray = [GolfGame]()
-    var currentCourse: GolfGame?
     var courseIndex = 0
     var index = 0
     
@@ -37,8 +38,10 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         super.viewDidLoad()
         
         loadData()
-        currentCourse = golfHoleArray[courseIndex]
-        navigationItem.title = currentCourse?.courseName
+        NotificationCenter.default.addObserver(self, selector: #selector(messageReceived), name: NSNotification.Name(rawValue: "receivedWatchMessage"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         loadFields()
     }
     
@@ -50,26 +53,33 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         }
     }
     
+    @objc func messageReceived(info: Notification) {
+        let message = info.userInfo!
+//        dispatch_async(dispatch_get_main_queue(), {
+//
+//        })
+    }
+    
     @IBAction func countButtonPressed(_ sender: UIButton) {
         
         if sender.tag == 1 {
-            if (currentCourse?.strokeCount?[index] ?? 0) < 99 {
-                currentCourse?.strokeCount?[index] += 1
+            if (golfHoleArray[courseIndex].strokeCount?[index] ?? 0) < 99 {
+                golfHoleArray[courseIndex].strokeCount?[index] += 1
             }
         } else if sender.tag == 2 {
-            if (currentCourse?.strokeCount?[index] ?? 0) > 0 &&
-               (currentCourse?.strokeCount?[index] ?? 0) > (currentCourse?.puttCount?[index] ?? 0) {
-                currentCourse?.strokeCount?[index] -= 1
+            if (golfHoleArray[courseIndex].strokeCount?[index] ?? 0) > 0 &&
+               (golfHoleArray[courseIndex].strokeCount?[index] ?? 0) > (golfHoleArray[courseIndex].puttCount?[index] ?? 0) {
+                golfHoleArray[courseIndex].strokeCount?[index] -= 1
             }
         } else if sender.tag == 3 {
-            if (currentCourse?.strokeCount?[index] ?? 0) < 99 {
-                currentCourse?.puttCount?[index] += 1
-                currentCourse?.strokeCount?[index] += 1
+            if (golfHoleArray[courseIndex].strokeCount?[index] ?? 0) < 99 {
+                golfHoleArray[courseIndex].puttCount?[index] += 1
+                golfHoleArray[courseIndex].strokeCount?[index] += 1
             }
         } else if sender.tag == 4 {
-            if (currentCourse?.strokeCount?[index] ?? 0) > 0 && (currentCourse?.puttCount?[index] ?? 0) > 0 {
-                currentCourse?.puttCount?[index] -= 1
-                currentCourse?.strokeCount?[index] -= 1
+            if (golfHoleArray[courseIndex].strokeCount?[index] ?? 0) > 0 && (golfHoleArray[courseIndex].puttCount?[index] ?? 0) > 0 {
+                golfHoleArray[courseIndex].puttCount?[index] -= 1
+                golfHoleArray[courseIndex].strokeCount?[index] -= 1
             }
         }
         
@@ -78,7 +88,6 @@ class CounterViewController: UIViewController, receiveHoleNumber {
     
     @IBAction func saveAndChangeHole(_ sender: UIButton) {
         
-        golfHoleArray[courseIndex] = currentCourse ?? golfHoleArray[courseIndex]
         save()
         
         if sender.tag == 5 {
@@ -101,12 +110,14 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         navigationController?.popToRootViewController(animated: true)
     }
     
-    func sendHoleIndex(indexNumber: Int) {
-        index = indexNumber
+    func sendHoleIndex(holeIndex: Int, courseIndex: Int) {
+        self.index = holeIndex
+        self.courseIndex = courseIndex
         loadFields()
     }
     
     func loadFields() {
+        navigationItem.title = golfHoleArray[courseIndex].courseName
         holeTitle.text = "Hole \(index + 1)"
         parCountLabel.text = "\(golfHoleArray[courseIndex].parCount?[index] ?? 0)"
         strokeCountLabel.text = "\(golfHoleArray[courseIndex].strokeCount?[index] ?? 0)"
@@ -135,6 +146,8 @@ class CounterViewController: UIViewController, receiveHoleNumber {
     func loadData() {
         
         let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        let activePredicate = NSPredicate(format: "isActive == true")
+        request.predicate = activePredicate
         let sort = NSSortDescriptor(key: "orderIdentifier", ascending: true)
         request.sortDescriptors = [sort]
         

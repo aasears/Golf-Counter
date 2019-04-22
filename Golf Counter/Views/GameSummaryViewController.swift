@@ -55,17 +55,25 @@ class GameSummaryViewController: UIViewController {
     }
     
     @IBAction func saveAndEndButtonPressed(_ sender: UIButton) {
-        for course in golfHoleArray {
-            course.isActive = false
-        }
         let finalGame = PastGolfGame(context: context)
         finalGame.dateFinished = Date()
-        finalGame.game = golfHoleArray
-        for course in golfHoleArray {
-            context.delete(course)
+        
+        if golfHoleArray.count > 1 {
+            finalGame.title = "\(golfHoleArray[0].courseName ?? "") (\(golfHoleArray.count))"
+        } else {
+            finalGame.title = golfHoleArray[0].courseName
         }
+        
+        for course in golfHoleArray {
+            course.isActive = false
+            course.history = finalGame
+        }
+//        for course in golfHoleArray {
+//            context.delete(course)
+//        }
         save()
-        navigationController?.popToRootViewController(animated: true)
+        
+        //navigationController?.popToRootViewController(animated: true)
     }
     
     func loadFields() {
@@ -122,6 +130,8 @@ class GameSummaryViewController: UIViewController {
         
         setDate()
         let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        let activePredicate = NSPredicate(format: "isActive == true")
+        request.predicate = activePredicate
         let sort = NSSortDescriptor(key: "orderIdentifier", ascending: true)
         request.sortDescriptors = [sort]
         

@@ -9,18 +9,19 @@
 import UIKit
 import CoreData
 
-class HistoryTableViewController: UIViewController {
+class HistoryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var historyTableView: UITableView!
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    var pastGolfHoleArray = [PastGolfGame]()
+    var pastGolfGameArray = [PastGolfGame]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadData()
-
+        historyTableView.delegate = self
+        historyTableView.dataSource = self
     }
     
     //date formating for history page
@@ -34,14 +35,14 @@ class HistoryTableViewController: UIViewController {
     // MARK: - Table view data source
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return pastGolfHoleArray.count
+        return pastGolfGameArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "historyTableViewCell", for: indexPath)
-        cell.textLabel?.text = pastGolfHoleArray[indexPath.row].game?[0].courseName
+        cell.textLabel?.text = pastGolfGameArray[indexPath.row].title
         
-        if let dateFinished = pastGolfHoleArray[indexPath.row].dateFinished {
+        if let dateFinished = pastGolfGameArray[indexPath.row].dateFinished {
             let formatter = DateFormatter()
             formatter.dateStyle = .medium
             formatter.dateFormat = "yyyy-MM-dd"
@@ -55,14 +56,15 @@ class HistoryTableViewController: UIViewController {
     func loadData() {
         
         let request: NSFetchRequest<PastGolfGame> = PastGolfGame.fetchRequest()
-        let sort = NSSortDescriptor(key: "dateFinished", ascending: true)
+        let sort = NSSortDescriptor(key: "title", ascending: true)
         request.sortDescriptors = [sort]
         
         do {
-            pastGolfHoleArray = try context.fetch(request)
+            pastGolfGameArray = try context.fetch(request)
         } catch {
             print("Error fetching context \(error)")
         }
+        print(pastGolfGameArray)
     }
     
 }

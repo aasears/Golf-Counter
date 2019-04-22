@@ -41,9 +41,7 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = golfHoleArray[courseIndex].courseName
-        setupButtons()
-        displayTotals()
+        loadFields()
         blurEffect = visualEffectView.effect
         visualEffectView.effect = nil
         visualEffectView.isHidden = true
@@ -76,8 +74,7 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toGameSummary" {
-            let destinationVC = segue.destination as! GameSummaryViewController
-            destinationVC.courseIndex = courseIndex
+
         }
     }
 
@@ -85,6 +82,7 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - TableView Delegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate?.sendHoleIndex(holeIndex: indexPath.row, courseIndex: courseIndex)
         navigationController?.popViewController(animated: true)
     }
     
@@ -106,6 +104,8 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
         } else {
             print("Unknown error when selecting course.")
         }
+        holeSummaryTableView.reloadData()
+        loadFields()
         animateOut()
     }
     
@@ -159,10 +159,10 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func dismissViewController(index: IndexPath) {
-        delegate?.sendHoleIndex(indexNumber: index.row)
-        dismiss(animated: true, completion: nil)
-    }
+//    func dismissViewController(index: IndexPath) {
+//        delegate?.sendHoleIndex(holeIndex: index.row, courseIndex: courseIndex)
+//        dismiss(animated: true, completion: nil)
+//    }
     
     func setupButtons() {
         nextCourseButton.layer.cornerRadius = 15
@@ -212,11 +212,19 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
         courseIndex = index
     }
     
+    func loadFields() {
+        navigationItem.title = golfHoleArray[courseIndex].courseName
+        setupButtons()
+        displayTotals()
+    }
+    
     // MARK: - CoreData functions
     
     func loadData() {
         
         let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        let activePredicate = NSPredicate(format: "isActive == true")
+        request.predicate = activePredicate
         let sort = NSSortDescriptor(key: "orderIdentifier", ascending: true)
         request.sortDescriptors = [sort]
         

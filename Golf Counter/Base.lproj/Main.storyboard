@@ -960,7 +960,7 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="rdf-WX-Imr" kind="show" id="GvG-18-InB"/>
+                                                    <segue destination="rdf-WX-Imr" kind="show" id="NSL-IO-hP8"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1486,7 +1486,7 @@
         <image name="prevHoleArrow" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="mxK-wS-VdK"/>
+        <segue reference="htm-Cg-eS2"/>
         <segue reference="xDa-nO-m1i"/>
     </inferredMetricsTieBreakers>
 </document>

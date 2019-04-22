@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.98" systemVersion="18E2034" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F108f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Course" representedClassName="Course" syncable="YES" codeGenerationType="class">
         <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="coursePar" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
@@ -14,14 +14,16 @@
         <attribute name="parCount" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
         <attribute name="puttCount" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
         <attribute name="strokeCount" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PastGolfGame" inverseName="games" inverseEntity="PastGolfGame" syncable="YES"/>
     </entity>
     <entity name="PastGolfGame" representedClassName="PastGolfGame" syncable="YES" codeGenerationType="class">
         <attribute name="dateFinished" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="game" optional="YES" attributeType="Transformable" customClassName="[GolfGame]" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GolfGame" inverseName="history" inverseEntity="GolfGame" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Course" positionX="-234" positionY="-9" width="128" height="90"/>
-        <element name="GolfGame" positionX="-235.79296875" positionY="-45.6328125" width="128" height="165"/>
-        <element name="PastGolfGame" positionX="-234" positionY="18" width="128" height="75"/>
+        <element name="Course" positionX="-305.7109375" positionY="-12.0234375" width="128" height="90"/>
+        <element name="GolfGame" positionX="-113.62109375" positionY="-91.25390625" width="128" height="178"/>
+        <element name="PastGolfGame" positionX="-306.75390625" positionY="-95.87109375" width="128" height="88"/>
     </elements>
 </model>

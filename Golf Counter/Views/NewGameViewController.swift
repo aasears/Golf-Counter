@@ -260,9 +260,8 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     // MARK: - New Game Functions
     
     func startNewGame() {
-        
         loadData()
-        
+
         for course in golfHoleArray {
             context.delete(course)
         }
@@ -305,6 +304,8 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     func loadData() {
         
         let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        let activePredicate = NSPredicate(format: "isActive == true")
+        request.predicate = activePredicate
         let sort = NSSortDescriptor(key: "orderIdentifier", ascending: true)
         request.sortDescriptors = [sort]
         
@@ -318,11 +319,11 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     func loadCourses() {
         
         let request: NSFetchRequest<Course> = Course.fetchRequest()
+        let sort = NSSortDescriptor(key: "courseName", ascending: true)
+        request.sortDescriptors = [sort]
         
         do {
             courseArray = try context.fetch(request)
-            let sort = NSSortDescriptor(key: "courseName", ascending: true)
-            request.sortDescriptors = [sort]
         } catch {
             print("Error fetching context \(error)")
         }
