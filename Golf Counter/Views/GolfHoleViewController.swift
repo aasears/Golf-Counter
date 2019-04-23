@@ -11,6 +11,8 @@ import CoreData
 
 class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, holeTableViewCellDelegate {
     
+    @IBOutlet weak var parTitleLabel: UILabel!
+    @IBOutlet weak var netTitleLabel: UILabel!
     @IBOutlet weak var holeSummaryTableView: UITableView!
     @IBOutlet weak var nextCourseButton: UIButton!
     @IBOutlet weak var finishGameButton: UIButton!
@@ -109,7 +111,10 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
         animateOut()
     }
     
-
+    @IBAction func nextCourseBackButtonPressed(_ sender: UIButton) {
+        animateOut()
+    }
+    
     func animateIn() {
         //Setup popup view - these complete smoothly with animation
         self.view.addSubview(nextCourseView)
@@ -192,6 +197,7 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
         if parSum > 0 {
             parTotalLabel.text = "\(parSum)"
             netTotalLabel.text = "\(netSum)"
+            netTitleLabel.text = "Net"
             if netSum > 0 {
                 netTotalLabel.text = "+\(netSum)"
                 netTotalLabel.textColor = UIColor.red
@@ -201,8 +207,9 @@ class GolfHoleViewController: UIViewController, UITableViewDelegate, UITableView
                 netTotalLabel.textColor = UIColor.white
             }
         } else {
-            parTotalLabel.text = ""
+            parTotalLabel.text = "\(parSum)"
             netTotalLabel.text = ""
+            netTitleLabel.text = ""
         }
         strokesTotalLabel.text = "\(strokeSum)"
         

@@ -512,13 +512,15 @@
                         <outlet property="courseTwo" destination="GdW-ZE-HRE" id="2SA-IL-Lyq"/>
                         <outlet property="finishGameButton" destination="hPE-Fa-oCz" id="6He-Zl-bQI"/>
                         <outlet property="holeSummaryTableView" destination="RRR-dq-gdm" id="Np2-DS-kte"/>
+                        <outlet property="netTitleLabel" destination="t6i-Ft-UBk" id="c1l-S3-5y9"/>
                         <outlet property="netTotalLabel" destination="wEI-bt-MWl" id="8Rd-4Z-cQS"/>
                         <outlet property="nextCourseButton" destination="mXG-KD-liH" id="ahe-g4-use"/>
                         <outlet property="nextCourseView" destination="tYU-oZ-qdV" id="S0r-5j-LGL"/>
+                        <outlet property="parTitleLabel" destination="HF3-kl-KKc" id="dgj-Mu-AUy"/>
                         <outlet property="parTotalLabel" destination="Uiz-a0-11K" id="Q2e-2q-yjh"/>
                         <outlet property="strokesTotalLabel" destination="Y6V-Ou-KfQ" id="EgL-kw-oFT"/>
                         <outlet property="visualEffectView" destination="lja-vE-W7E" id="Iiw-lt-xJm"/>
-                        <segue destination="Tm9-K2-aYu" kind="presentation" identifier="toGameSummary" id="TmC-Lj-c6l"/>
+                        <segue destination="Tm9-K2-aYu" kind="show" identifier="toGameSummary" id="TmC-Lj-c6l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pHM-uF-E8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -587,6 +589,7 @@
                                             </state>
                                             <connections>
                                                 <action selector="courseStartBackButton:" destination="EGY-jW-iOt" eventType="touchUpInside" id="NHT-3K-EAT"/>
+                                                <action selector="nextCourseBackButtonPressed:" destination="g4w-tP-06X" eventType="touchUpInside" id="xwI-C3-Igm"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -833,7 +836,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="y53-c1-OQ2" firstAttribute="trailing" secondItem="DbY-iT-HRN" secondAttribute="trailing" id="2YZ-SE-AdH"/>
                             <constraint firstItem="Xge-sC-S9w" firstAttribute="centerY" secondItem="2gf-gx-aRd" secondAttribute="centerY" constant="-40" id="3PP-db-UlV"/>
@@ -883,7 +886,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="182.66666666666666" height="401"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="continueGame" translatesAutoresizingMaskIntoConstraints="NO" id="lKB-Xm-znm">
-                                                <rect key="frame" x="192.66666666666663" y="0.0" width="182.33333333333337" height="401"/>
+                                                <rect key="frame" x="192.66666666666663" y="0.0" width="182.33333333333337" height="401.00000000000023"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -1487,6 +1490,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="htm-Cg-eS2"/>
-        <segue reference="xDa-nO-m1i"/>
+        <segue reference="mJu-2r-Egt"/>
     </inferredMetricsTieBreakers>
 </document>

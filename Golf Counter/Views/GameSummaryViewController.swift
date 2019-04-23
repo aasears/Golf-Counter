@@ -51,7 +51,8 @@ class GameSummaryViewController: UIViewController {
 //    }
     
     @IBAction func backToGameButtonPressed(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
+        //dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
     
     @IBAction func saveAndEndButtonPressed(_ sender: UIButton) {
@@ -68,12 +69,9 @@ class GameSummaryViewController: UIViewController {
             course.isActive = false
             course.history = finalGame
         }
-//        for course in golfHoleArray {
-//            context.delete(course)
-//        }
         save()
         
-        //navigationController?.popToRootViewController(animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     func loadFields() {
