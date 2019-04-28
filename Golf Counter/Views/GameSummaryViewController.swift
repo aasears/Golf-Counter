@@ -12,6 +12,7 @@ import CoreData
 class GameSummaryViewController: UIViewController {
 
     @IBOutlet weak var gameSummaryView: UIView!
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
     @IBOutlet weak var courseNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var strokeCountLabel: UILabel!
@@ -26,19 +27,17 @@ class GameSummaryViewController: UIViewController {
     var golfHoleArray = [GolfGame]()
     var courseIndex = 0
     var currentDate = ""
+    var blurEffect: UIVisualEffect!
+    var onFinish: ((_ endGame: Bool) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         loadData()
-        loadFields()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        gameSummaryView.layer.cornerRadius = 15
-        backToGameButton.layer.cornerRadius = 15
-        saveAndEndButton.layer.cornerRadius = 15
-        navigationController?.setNavigationBarHidden(true, animated: false)
+        setupView()
+        animateIn()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -51,8 +50,7 @@ class GameSummaryViewController: UIViewController {
 //    }
     
     @IBAction func backToGameButtonPressed(_ sender: UIButton) {
-        //dismiss(animated: true, completion: nil)
-        navigationController?.popViewController(animated: true)
+        animateOut()
     }
     
     @IBAction func saveAndEndButtonPressed(_ sender: UIButton) {
@@ -71,7 +69,33 @@ class GameSummaryViewController: UIViewController {
         }
         save()
         
-        navigationController?.popToRootViewController(animated: true)
+        onFinish?(true)
+        animateOut()
+    }
+    
+    func animateIn() {
+        //Setup animation of popup view
+        gameSummaryView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+        gameSummaryView.alpha = 0
+        gameSummaryView.isHidden = false
+        
+        //Perform animation
+        UIView.animate(withDuration: 0.3) {
+            self.visualEffectView.effect = self.blurEffect
+            self.gameSummaryView.alpha = 1
+            self.gameSummaryView.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func animateOut() {
+        //Perform animation
+        UIView.animate(withDuration: 0.2, animations: {
+            self.gameSummaryView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
+            self.gameSummaryView.alpha = 0
+            
+        }) { (success:Bool) in
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     func loadFields() {
@@ -122,6 +146,17 @@ class GameSummaryViewController: UIViewController {
         formatter.dateStyle = .medium
         formatter.dateFormat = "yyyy-MM-dd"
         currentDate = formatter.string(from: date)
+    }
+    
+    func setupView() {
+        loadFields()
+        gameSummaryView.layer.cornerRadius = 15
+        backToGameButton.layer.cornerRadius = 15
+        saveAndEndButton.layer.cornerRadius = 15
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        blurEffect = visualEffectView.effect
+        visualEffectView.effect = nil
+        gameSummaryView.isHidden = true
     }
     
     func loadData() {

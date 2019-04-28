@@ -51,8 +51,11 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
         
         return cell
     }
-
-
+    
+    @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
     func loadData() {
         
         let request: NSFetchRequest<PastGolfGame> = PastGolfGame.fetchRequest()

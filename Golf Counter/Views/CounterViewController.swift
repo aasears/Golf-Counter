@@ -29,10 +29,10 @@ class CounterViewController: UIViewController, receiveHoleNumber {
     @IBOutlet weak var puttCountLabel: UILabel!
     @IBOutlet weak var previousHoleButton: UIButton!
     @IBOutlet weak var previousHoleImage: UIImageView!
-    @IBOutlet weak var nextCourseButton: UIButton!
-    @IBOutlet weak var nextCourseImage: UIImageView!
     @IBOutlet weak var nextHoleButton: UIButton!
     @IBOutlet weak var nextHoleImage: UIImageView!
+    @IBOutlet weak var nextCourseButton: UIButton!
+    @IBOutlet weak var finishGameButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +50,18 @@ class CounterViewController: UIViewController, receiveHoleNumber {
             let destinationVC = segue.destination as! GolfHoleViewController
             destinationVC.delegate = self
             destinationVC.courseIndex = courseIndex
+        } else if segue.identifier == "toNextCourse" {
+            let destinationVC = segue.destination as! NextCourseViewController
+            destinationVC.onSelection = { (courseIndex) in
+                self.courseIndex = courseIndex
+                self.index = 0
+                self.loadFields()
+            }
+        } else if segue.identifier == "toGameSummary" {
+            let destinationVC = segue.destination as! GameSummaryViewController
+            destinationVC.onFinish = { (finsihed) in
+                self.navigationController?.popToRootViewController(animated: true)
+            }
         }
     }
     
@@ -123,23 +135,30 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         strokeCountLabel.text = "\(golfHoleArray[courseIndex].strokeCount?[index] ?? 0)"
         puttCountLabel.text = "\(golfHoleArray[courseIndex].puttCount?[index] ?? 0)"
         
+        nextCourseButton.layer.cornerRadius = 15
+        finishGameButton.layer.cornerRadius = 15
+        
         if index == 0 {
             previousHoleButton.setTitle("", for: .normal)
             previousHoleImage.isHidden = true
-            nextCourseButton.setTitle("", for: .normal)
-            nextCourseButton.isEnabled = false
+            nextHoleButton.setTitle("Next", for: .normal)
+            nextHoleImage.isHidden = false
+            nextCourseButton.isHidden = true
+            finishGameButton.isHidden = true
         } else if index == (golfHoleArray[courseIndex].strokeCount?.count ?? 0) - 1 {
             nextHoleButton.setTitle("", for: .normal)
             nextHoleImage.isHidden = true
-            nextCourseButton.setTitle("Next Course", for: .normal)
-            nextCourseButton.isEnabled = true
+            finishGameButton.isHidden = false
+            if golfHoleArray.count > 1 {
+                nextCourseButton.isHidden = false
+            }
         } else {
             previousHoleButton.setTitle("Prev", for: .normal)
             previousHoleImage.isHidden = false
             nextHoleButton.setTitle("Next", for: .normal)
             nextHoleImage.isHidden = false
-            nextCourseButton.setTitle("", for: .normal)
-            nextCourseButton.isEnabled = false
+            nextCourseButton.isHidden = true
+            finishGameButton.isHidden = true
         }
     }
     

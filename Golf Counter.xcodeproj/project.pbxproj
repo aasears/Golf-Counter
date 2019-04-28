@@ -35,6 +35,7 @@
 		E5763D7022585666002D6F09 /* GolfGameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5763D6F22585666002D6F09 /* GolfGameExtension.swift */; };
 		E5763D742259150A002D6F09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5763D732259150A002D6F09 /* Assets.xcassets */; };
 		E592EA3A2263D94600862BBE /* GameSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E592EA392263D94600862BBE /* GameSummaryViewController.swift */; };
+		E5B9103A227554D500D90D45 /* NextCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B91039227554D500D90D45 /* NextCourseViewController.swift */; };
 		E5D3FD272251A7670066736A /* newGameCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3FD262251A7670066736A /* newGameCourseTableViewCell.swift */; };
 		E5D3FD292251A96C0066736A /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3FD282251A96C0066736A /* NewGameViewController.swift */; };
 /* End PBXBuildFile section */
@@ -136,6 +137,7 @@
 		E5763D6F22585666002D6F09 /* GolfGameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfGameExtension.swift; sourceTree = "<group>"; };
 		E5763D732259150A002D6F09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E592EA392263D94600862BBE /* GameSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSummaryViewController.swift; sourceTree = "<group>"; };
+		E5B91039227554D500D90D45 /* NextCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCourseViewController.swift; sourceTree = "<group>"; };
 		E5D3FD262251A7670066736A /* newGameCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newGameCourseTableViewCell.swift; sourceTree = "<group>"; };
 		E5D3FD282251A96C0066736A /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -259,6 +261,7 @@
 				93F208FB2246998D00A6E39A /* CoursesViewController.swift */,
 				93F209032246DA6600A6E39A /* EditCourseTableViewController.swift */,
 				93D13B5F224C5931006B0840 /* HistoryTableViewController.swift */,
+				E5B91039227554D500D90D45 /* NextCourseViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				E592EA3A2263D94600862BBE /* GameSummaryViewController.swift in Sources */,
 				93F208FC2246998D00A6E39A /* CoursesViewController.swift in Sources */,
 				931923A1213D9BF70018B45F /* DataModel.xcdatamodeld in Sources */,
+				E5B9103A227554D500D90D45 /* NextCourseViewController.swift in Sources */,
 				93F209042246DA6600A6E39A /* EditCourseTableViewController.swift in Sources */,
 				E5D3FD272251A7670066736A /* newGameCourseTableViewCell.swift in Sources */,
 				E5D3FD292251A96C0066736A /* NewGameViewController.swift in Sources */,
