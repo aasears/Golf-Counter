@@ -38,7 +38,7 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         super.viewDidLoad()
         
         loadData()
-        NotificationCenter.default.addObserver(self, selector: #selector(messageReceived), name: NSNotification.Name(rawValue: "receivedWatchMessage"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(messageReceived), name: NSNotification.Name(rawValue: "ReceivedWatchMessage"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -65,11 +65,12 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         }
     }
     
+    
+    
     @objc func messageReceived(info: Notification) {
         let message = info.userInfo!
-//        dispatch_async(dispatch_get_main_queue(), {
-//
-//        })
+
+        parCountLabel.text = message["Msg"] as? String
     }
     
     @IBAction func countButtonPressed(_ sender: UIButton) {
@@ -128,6 +129,12 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         loadFields()
     }
     
+    func sendToWatch() {
+        if self.session.isPaired == true && self.session.isWatchAppInstalled {
+            self.session.sendMessage(["Msg" : "9"], replyHandler: nil, errorHandler: nil)
+        }
+    }
+    
     func loadFields() {
         navigationItem.title = golfHoleArray[courseIndex].courseName
         holeTitle.text = "Hole \(index + 1)"
@@ -184,6 +191,8 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         } catch {
             print("Error saving context \(error)")
         }
+        
+        sendToWatch()
     }
 
 }

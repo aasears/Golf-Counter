@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 import WatchConnectivity
-import GolfCounterKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
@@ -85,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        
+        NSLog("%@", "activationDidCompleteWith activationState:\(activationState) error:\(String(describing: error))")
     }
     
     func sessionDidBecomeInactive(_ session: WCSession) {
@@ -96,9 +95,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         
     }
     
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedWatchMessage"), object: self, userInfo: applicationContext)
-    }
+//    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+//        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedWatchMessage"), object: self, userInfo: applicationContext)
+//    }
 
 }
 

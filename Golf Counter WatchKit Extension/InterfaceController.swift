@@ -8,9 +8,10 @@
 
 import WatchKit
 import Foundation
+import WatchConnectivity
 
 
-class InterfaceController: WKInterfaceController {
+class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
     @IBOutlet var strokeCounter: WKInterfaceLabel!
     @IBOutlet var puttCounter: WKInterfaceLabel!
@@ -18,11 +19,13 @@ class InterfaceController: WKInterfaceController {
     var strokeCount = 0
     var puttCount = 0
     
+    let session = WCSession.default
+    
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceivePhoneData), name: NSNotification.Name(rawValue: "receivedPhoneData"), object: nil)
         
         strokeCounter.setText("\(strokeCount)")
         puttCounter.setText("\(puttCount)")
@@ -40,9 +43,14 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
     
+    func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        
+    }
+    
     @IBAction func plusStrokeButtonPressed() {
         strokeCount += 1
         strokeCounter.setText("\(strokeCount)")
+        toPhoneTapped()
     }
     
     @IBAction func minusStrokeButtonPressed() {
@@ -60,7 +68,17 @@ class InterfaceController: WKInterfaceController {
         puttCounter.setText("\(puttCount)")
     }
     
+    @objc func didReceivePhoneData(info: NSNotification) {
+        
+        let msg = info.userInfo!
+        self.strokeCounter.setText(msg["Msg"] as? String)
+        print(msg["Msg"] as? String ?? "failed")
+        print(info)
+    }
     
+    func toPhoneTapped() {
+        self.session.sendMessage(["Msg" : "9"], replyHandler: nil, errorHandler: nil)
+    }
     
     
 
