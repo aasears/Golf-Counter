@@ -59,7 +59,7 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
     func loadData() {
         
         let request: NSFetchRequest<PastGolfGame> = PastGolfGame.fetchRequest()
-        let sort = NSSortDescriptor(key: "title", ascending: true)
+        let sort = NSSortDescriptor(key: "dateFinished", ascending: false)
         request.sortDescriptors = [sort]
         
         do {
@@ -67,7 +67,6 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
         } catch {
             print("Error fetching context \(error)")
         }
-        print(pastGolfGameArray)
     }
     
 }

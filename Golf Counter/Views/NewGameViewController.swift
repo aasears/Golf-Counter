@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import WatchConnectivity
 
 class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -32,8 +33,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     var golfHoleArray = [GolfGame]()
     var courseArray = [Course]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    
+    let session = WCSession.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -297,6 +297,30 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         golfHoleArray = newGameArray
         save()
+        
+        let dict = golfHoleObjectToDictionary(newGame: newGameArray)
+        sendToWatch(message: dict)
+     }
+    
+    func golfHoleObjectToDictionary(newGame: [GolfGame]) -> Dictionary<String,Any> {
+        
+        //does not yet support multiple courses
+        let dictionaryGame = [
+            "strokes" : newGame[0].strokeCount as Any,
+            "putts" : newGame[0].puttCount as Any,
+            "par" : newGame[0].parCount as Any,
+            "course" : newGame[0].courseName as Any,
+            "dateCreated" : newGame[0].dateCreated as Any,
+            "orderIdentifier" : newGame[0].orderIdentifier as Any]
+        return dictionaryGame
+    }
+    
+
+    
+    func sendToWatch(message: Dictionary<String,Any>) {
+        if self.session.isPaired == true && self.session.isWatchAppInstalled {
+            self.session.sendMessage(message, replyHandler: nil, errorHandler: nil)
+        }
     }
 
     // MARK: - CoreData functions

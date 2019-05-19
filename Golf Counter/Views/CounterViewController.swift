@@ -6,6 +6,7 @@
 //  Copyright © 2018 SearsStudio. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import CoreData
 import WatchConnectivity
@@ -17,7 +18,7 @@ protocol receiveHoleNumber {
 class CounterViewController: UIViewController, receiveHoleNumber {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let session = WCSession.default
+    //let session = WCSession.default
     
     var golfHoleArray = [GolfGame]()
     var courseIndex = 0
@@ -38,7 +39,7 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         super.viewDidLoad()
         
         loadData()
-        NotificationCenter.default.addObserver(self, selector: #selector(messageReceived), name: NSNotification.Name(rawValue: "ReceivedWatchMessage"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(messageReceived), name: NSNotification.Name(rawValue: "ReceivedWatchMessage"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,11 +68,11 @@ class CounterViewController: UIViewController, receiveHoleNumber {
     
     
     
-    @objc func messageReceived(info: Notification) {
-        let message = info.userInfo!
-
-        parCountLabel.text = message["Msg"] as? String
-    }
+//    @objc func messageReceived(info: Notification) {
+//        let message = info.userInfo!
+//
+//        parCountLabel.text = message["Msg"] as? String
+//    }
     
     @IBAction func countButtonPressed(_ sender: UIButton) {
         
@@ -129,11 +130,11 @@ class CounterViewController: UIViewController, receiveHoleNumber {
         loadFields()
     }
     
-    func sendToWatch() {
-        if self.session.isPaired == true && self.session.isWatchAppInstalled {
-            self.session.sendMessage(["Msg" : "9"], replyHandler: nil, errorHandler: nil)
-        }
-    }
+//    func sendToWatch() {
+//        if self.session.isPaired == true && self.session.isWatchAppInstalled {
+//            self.session.sendMessage(["Msg" : "9"], replyHandler: nil, errorHandler: nil)
+//        }
+//    }
     
     func loadFields() {
         navigationItem.title = golfHoleArray[courseIndex].courseName
@@ -192,7 +193,7 @@ class CounterViewController: UIViewController, receiveHoleNumber {
             print("Error saving context \(error)")
         }
         
-        sendToWatch()
+        //sendToWatch()
     }
 
 }
