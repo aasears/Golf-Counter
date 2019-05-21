@@ -35,8 +35,17 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         //NSLog("%@", "activationDidCompleteWith activationState:\(activationState) error:\(String(describing: error))")
     }
     
-    func session(_ session: WCSession, didReceiveApplicationContext message: [String : Any]) {
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "receivedPhoneData"), object: self, userInfo: message)
+    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+        parseDictionaryFromPhone(message: applicationContext)
+    }
+    
+    func parseDictionaryFromPhone(message: Dictionary<String,Any>) {
+        UserDefaults.standard.set(message["course"], forKey: "course")
+        UserDefaults.standard.set(message["strokes"], forKey: "strokes")
+        UserDefaults.standard.set(message["putts"], forKey: "putts")
+        UserDefaults.standard.set(message["par"], forKey: "par")
+        UserDefaults.standard.set(message["dateCreated"], forKey: "dateCreated")
+        UserDefaults.standard.set(message["orderIdentifier"], forKey: "orderIdentifier")
     }
 
     @available(watchOSApplicationExtension 5.0, *)

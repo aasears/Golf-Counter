@@ -299,7 +299,8 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         save()
         
         let dict = golfHoleObjectToDictionary(newGame: newGameArray)
-        sendToWatch(message: dict)
+        
+        sendToWatch(applicationContext: dict)
      }
     
     func golfHoleObjectToDictionary(newGame: [GolfGame]) -> Dictionary<String,Any> {
@@ -315,11 +316,17 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
         return dictionaryGame
     }
     
-
     
-    func sendToWatch(message: Dictionary<String,Any>) {
+    
+    func sendToWatch(applicationContext: Dictionary<String,Any>) {
         if self.session.isPaired == true && self.session.isWatchAppInstalled {
-            self.session.sendMessage(message, replyHandler: nil, errorHandler: nil)
+            
+            do {
+                try session.updateApplicationContext(applicationContext)
+            } catch {
+                print("Error sending data: \(error)")
+            }
+            //self.session.sendMessage(message, replyHandler: nil, errorHandler: nil)
         }
     }
 

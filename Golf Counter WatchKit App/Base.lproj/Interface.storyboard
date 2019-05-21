@@ -136,7 +136,7 @@
                                         </group>
                                     </items>
                                 </group>
-                                <group width="1" alignment="left" layout="vertical" id="w9U-Zj-xyK" userLabel="Finish Group">
+                                <group width="1" alignment="left" hidden="YES" layout="vertical" id="w9U-Zj-xyK" userLabel="Finish Group">
                                     <items>
                                         <button width="1" alignment="left" hidden="YES" title="Next Course" id="4fs-U3-bHi">
                                             <connections>

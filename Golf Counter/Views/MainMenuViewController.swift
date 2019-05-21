@@ -20,13 +20,17 @@ class MainMenuViewController: UIViewController, WCSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if UserDefaults.standard.bool(forKey: "contextUpdated") {
+            dictionaryToGolfHoleObject(message: session.receivedApplicationContext)
+            UserDefaults.standard.set(false, forKey: "contextUpdated")
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveWatchData), name: NSNotification.Name(rawValue: "ReceivedWatchMessage"), object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(didReceiveWatchData), name: NSNotification.Name(rawValue: "ReceivedWatchMessage"), object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -34,10 +38,10 @@ class MainMenuViewController: UIViewController, WCSessionDelegate {
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    @objc func didReceiveWatchData(info: NSNotification) {
-        print("hit on phone")
-        dictionaryToGolfHoleObject(message: info.userInfo as? Dictionary<String,Any> ?? ["error" : "Error passing data"])
-    }
+//    @objc func didReceiveWatchData(info: NSNotification) {
+//        print("hit on phone")
+//        dictionaryToGolfHoleObject(message: info.userInfo as? Dictionary<String,Any> ?? ["error" : "Error passing data"])
+//    }
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }

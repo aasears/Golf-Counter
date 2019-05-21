@@ -42,8 +42,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(didReceivePhoneData), name: NSNotification.Name(rawValue: "receivedPhoneData"), object: nil)
-        
         loadData()
     }
     
@@ -105,7 +103,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         UserDefaults.standard.set(strokeCount, forKey: "strokes")
         UserDefaults.standard.set(puttCount, forKey: "putts")
         let dict = parseFinishedDefaultsFromWatch()
-        sendGameToPhone(message: dict)
+        sendGameToPhone(applicationContext: dict)
         
         dismiss()
         
@@ -158,21 +156,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
     
-    @objc func didReceivePhoneData(info: NSNotification) {
-        parseDictionaryFromPhone(message: info.userInfo as? Dictionary<String, Any> ?? ["" : "Error"])
-        loadData()
-        loadFields()
-    }
-    
-    func parseDictionaryFromPhone(message: Dictionary<String,Any>) {
-        UserDefaults.standard.set(message["course"], forKey: "course")
-        UserDefaults.standard.set(message["strokes"], forKey: "strokes")
-        UserDefaults.standard.set(message["putts"], forKey: "putts")
-        UserDefaults.standard.set(message["par"], forKey: "par")
-        UserDefaults.standard.set(message["dateCreated"], forKey: "dateCreated")
-        UserDefaults.standard.set(message["orderIdentifier"], forKey: "orderIdentifier")
-    }
-    
     func parseDefaultsFromWatch() -> Dictionary<String,Any> {
         
         let dictionaryGame = [
@@ -200,10 +183,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         return dictionaryGame
     }
     
-    func sendGameToPhone(message: Dictionary<String,Any>) {
-        if self.session.isReachable == true {
+    func sendGameToPhone(applicationContext: Dictionary<String,Any>) {
+        if session.isReachable == true {
             do {
-                try self.session.updateApplicationContext(message)
+                try session.updateApplicationContext(applicationContext)
             } catch {
                 print("error saving context \(error)")
             }
