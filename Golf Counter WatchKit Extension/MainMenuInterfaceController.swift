@@ -31,23 +31,32 @@ class MainMenuInterfaceController: WKInterfaceController {
     override func contextForSegue(withIdentifier segueIdentifier: String) -> Any? {
         
         if segueIdentifier == "goToNewNineHoleGame" {
-            UserDefaults.standard.set("9 Hole Course", forKey: "course")
-            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0], forKey: "strokes")
-            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0], forKey: "putts")
-            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0], forKey: "par")
-            UserDefaults.standard.set(Date(), forKey: "dateCreated")
-            UserDefaults.standard.set(0, forKey: "orderIdentifier")
+            newGame(numberOfHoles: 9, withCourseName: "9 Hole Course")
         } else if segueIdentifier == "goToNewEighteenHoleGame" {
-            UserDefaults.standard.set("18 Hole Course", forKey: "course")
-            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], forKey: "strokes")
-            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], forKey: "putts")
-            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], forKey: "par")
-            UserDefaults.standard.set(Date(), forKey: "dateCreated")
-            UserDefaults.standard.set(0, forKey: "orderIdentifier")
+            newGame(numberOfHoles: 18, withCourseName: "18 Hole Course")
         } else if segueIdentifier == "goToContinueGame" {
             
         }
         return nil
     }
+    
+    func newGame(numberOfHoles: Int, withCourseName: String) {
+        
+        UserDefaults.standard.set(withCourseName, forKey: "course")
+        UserDefaults.standard.set(Date(), forKey: "dateCreated")
+        UserDefaults.standard.set(0, forKey: "orderIdentifier")
+        
+        if numberOfHoles == 9 {
+            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0], forKey: "strokes")
+            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0], forKey: "putts")
+            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0], forKey: "par")
+        } else if numberOfHoles == 18 {
+            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], forKey: "strokes")
+            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], forKey: "putts")
+            UserDefaults.standard.set([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], forKey: "par")
+        }
+    }
+    
+    
 
 }

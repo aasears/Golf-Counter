@@ -48,7 +48,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
         
-        loadFields()
+        loadCounterFields()
     }
     
     override func didDeactivate() {
@@ -115,7 +115,10 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
         if index < strokeCount.count - 1 {
             index += 1
-            loadFields()
+            loadCounterFields()
+            counterGroup.setHidden(false)
+            summaryTable.setHidden(true)
+            finishGroup.setHidden(true)
         } else if index == strokeCount.count - 1 {
             index += 1
             loadSummaryFields()
@@ -132,12 +135,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     @IBAction func rightSwipe(_ sender: Any) {
         
-        if index > 0 && index < strokeCount.count {
+        if index > 0 && index <= strokeCount.count {
             index -= 1
-            loadFields()
-        } else if index == strokeCount.count {
-            index -= 1
-            loadFields()
+            loadCounterFields()
             counterGroup.setHidden(false)
             summaryTable.setHidden(true)
             finishGroup.setHidden(true)
@@ -202,7 +202,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         parCount = UserDefaults.standard.array(forKey: "par") as! [Int]
     }
     
-    func loadFields() {
+    func loadCounterFields() {
         setTitle("Hole \(index + 1)")
         strokeCounter.setText("\(strokeCount[index])")
         puttCounter.setText("\(puttCount[index])")
@@ -246,53 +246,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
                 holeIndex += 1
             }
         }
-        
-//        print(rowTypes)
-//        if parSum > 0 {
-//            for row in 0...1 {
-//                guard let controller = summaryTable.rowController(at: row) as? HeaderRowController else {print("Unable to assign header rows")
-//                    return}
-//                if row == 0 {
-//                    controller.title = "Total"
-//                    controller.count = strokeSum
-//                } else if row == 1 {
-//                    controller.title = "Par"
-//                    controller.count = parSum
-//                }
-//            }
-//            parGroup.setHidden(false)
-//        } else {
-//            guard let controller = summaryTable.rowController(at: 0) as? HeaderRowController else {print("Unable to assign header row")
-//                return}
-//            controller.title = "Total"
-//            controller.count = strokeSum
-//            parGroup.setHidden(true)
-//        }
-        
-        //summaryTable.setNumberOfRows(strokeCount.count, withRowType: "SummaryRow")
-//        for row in 2..<summaryTable.numberOfRows {
-//            guard let controller = summaryTable.rowController(at: row) as? SummaryRowController else {continue}
-//
-//            controller.hole = row + 1
-//            controller.strokes = strokeCount[row]
-//        }
-        
-//        var totalCount = 0
-//        var parTotalCount = 0
-//        for hole in strokeCount {
-//            totalCount += hole
-//        }
-//        totalCountLabel.setText("\(totalCount)")
-//
-//        if parCount[0] > 0 {
-//            for hole in parCount {
-//                parTotalCount += hole
-//            }
-//            parCountLabel.setText("\(parTotalCount)")
-//            parGroup.setHidden(false)
-//        } else {
-//            parGroup.setHidden(true)
-//        }
     }
 
 }
