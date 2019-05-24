@@ -221,54 +221,78 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         }
         
         if parSum == 0 {
-            rowTypes.remove(at: 0)
+            rowTypes.remove(at: 1)
         }
         summaryTable.setRowTypes(rowTypes)
-        print(rowTypes)
-        if parSum > 0 {
-            for row in 0...1 {
-                guard let controller = summaryTable.rowController(at: row) as? HeaderRowController else {continue}
-                if row == 0 {
+        
+        var holeIndex = 0
+        for index in 0..<summaryTable.numberOfRows {
+            
+            switch rowTypes[index] {
+            case "HeaderRowController":
+                if index == 0 {
+                    let controller = summaryTable.rowController(at: 0) as! HeaderRowController
                     controller.title = "Total"
                     controller.count = strokeSum
-                } else if row == 1 {
+                } else if index == 1 {
+                    let controller = summaryTable.rowController(at: 1) as! HeaderRowController
                     controller.title = "Par"
                     controller.count = parSum
                 }
+            default:
+                let controller = summaryTable.rowController(at: index) as! SummaryRowController
+                controller.hole = holeIndex + 1
+                controller.strokes = strokeCount[holeIndex]
+                holeIndex += 1
             }
-            parGroup.setHidden(false)
-        } else {
-            guard let controller = summaryTable.rowController(at: 0) as? HeaderRowController else {print("Unable to assign title row")
-                return}
-            controller.title = "Total"
-            controller.count = strokeSum
-            parGroup.setHidden(true)
         }
+        
+//        print(rowTypes)
+//        if parSum > 0 {
+//            for row in 0...1 {
+//                guard let controller = summaryTable.rowController(at: row) as? HeaderRowController else {print("Unable to assign header rows")
+//                    return}
+//                if row == 0 {
+//                    controller.title = "Total"
+//                    controller.count = strokeSum
+//                } else if row == 1 {
+//                    controller.title = "Par"
+//                    controller.count = parSum
+//                }
+//            }
+//            parGroup.setHidden(false)
+//        } else {
+//            guard let controller = summaryTable.rowController(at: 0) as? HeaderRowController else {print("Unable to assign header row")
+//                return}
+//            controller.title = "Total"
+//            controller.count = strokeSum
+//            parGroup.setHidden(true)
+//        }
         
         //summaryTable.setNumberOfRows(strokeCount.count, withRowType: "SummaryRow")
-        for row in 2..<summaryTable.numberOfRows {
-            guard let controller = summaryTable.rowController(at: row) as? SummaryRowController else {continue}
-            
-            controller.hole = row + 1
-            controller.strokes = strokeCount[row]
-        }
+//        for row in 2..<summaryTable.numberOfRows {
+//            guard let controller = summaryTable.rowController(at: row) as? SummaryRowController else {continue}
+//
+//            controller.hole = row + 1
+//            controller.strokes = strokeCount[row]
+//        }
         
-        var totalCount = 0
-        var parTotalCount = 0
-        for hole in strokeCount {
-            totalCount += hole
-        }
-        totalCountLabel.setText("\(totalCount)")
-        
-        if parCount[0] > 0 {
-            for hole in parCount {
-                parTotalCount += hole
-            }
-            parCountLabel.setText("\(parTotalCount)")
-            parGroup.setHidden(false)
-        } else {
-            parGroup.setHidden(true)
-        }
+//        var totalCount = 0
+//        var parTotalCount = 0
+//        for hole in strokeCount {
+//            totalCount += hole
+//        }
+//        totalCountLabel.setText("\(totalCount)")
+//
+//        if parCount[0] > 0 {
+//            for hole in parCount {
+//                parTotalCount += hole
+//            }
+//            parCountLabel.setText("\(parTotalCount)")
+//            parGroup.setHidden(false)
+//        } else {
+//            parGroup.setHidden(true)
+//        }
     }
 
 }
