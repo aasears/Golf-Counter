@@ -22,6 +22,7 @@
 		9319239C213D8A070018B45F /* GolfHoleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9319239B213D8A070018B45F /* GolfHoleViewController.swift */; };
 		931923A1213D9BF70018B45F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9319239F213D9BF70018B45F /* DataModel.xcdatamodeld */; };
 		93D13B60224C5931006B0840 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D13B5F224C5931006B0840 /* HistoryTableViewController.swift */; };
+		93D7013922963E7400382509 /* HeaderRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D7013822963E7400382509 /* HeaderRowController.swift */; };
 		93F208FA2244850D00A6E39A /* holeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F208F92244850D00A6E39A /* holeTableViewCell.swift */; };
 		93F208FC2246998D00A6E39A /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F208FB2246998D00A6E39A /* CoursesViewController.swift */; };
 		93F208FE2246A0C000A6E39A /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F208FD2246A0C000A6E39A /* MainMenuViewController.swift */; };
@@ -114,6 +115,7 @@
 		9319239B213D8A070018B45F /* GolfHoleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfHoleViewController.swift; sourceTree = "<group>"; };
 		931923A0213D9BF70018B45F /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		93D13B5F224C5931006B0840 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		93D7013822963E7400382509 /* HeaderRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderRowController.swift; sourceTree = "<group>"; };
 		93F208F92244850D00A6E39A /* holeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = holeTableViewCell.swift; sourceTree = "<group>"; };
 		93F208FB2246998D00A6E39A /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		93F208FD2246A0C000A6E39A /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				93085CCF226BC466000AEC35 /* Golf Counter WatchKit Extension.entitlements */,
 				E55472AC2291F0E80005DD62 /* MainMenuInterfaceController.swift */,
 				93192381213CD9D00018B45F /* InterfaceController.swift */,
+				93D7013822963E7400382509 /* HeaderRowController.swift */,
 				E55472AA2291AC870005DD62 /* SummaryRowController.swift */,
 				93192383213CD9D00018B45F /* ExtensionDelegate.swift */,
 				93192385213CD9D00018B45F /* NotificationController.swift */,
@@ -429,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E55472AB2291AC870005DD62 /* SummaryRowController.swift in Sources */,
+				93D7013922963E7400382509 /* HeaderRowController.swift in Sources */,
 				93192386213CD9D00018B45F /* NotificationController.swift in Sources */,
 				93192384213CD9D00018B45F /* ExtensionDelegate.swift in Sources */,
 				E55472AD2291F0E80005DD62 /* MainMenuInterfaceController.swift in Sources */,

@@ -19,7 +19,6 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var counterGroup: WKInterfaceGroup!
     
     // Summary Outlets
-    @IBOutlet var summaryGroup: WKInterfaceGroup!
     @IBOutlet var summaryTable: WKInterfaceTable!
     @IBOutlet var totalCountLabel: WKInterfaceLabel!
     @IBOutlet var parCountLabel: WKInterfaceLabel!
@@ -121,12 +120,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             index += 1
             loadSummaryFields()
             counterGroup.setHidden(true)
-            summaryGroup.setHidden(false)
+            summaryTable.setHidden(false)
             finishGroup.setHidden(true)
         } else if index == strokeCount.count {
             index += 1
             counterGroup.setHidden(true)
-            summaryGroup.setHidden(true)
+            summaryTable.setHidden(true)
             finishGroup.setHidden(false)
         }
     }
@@ -140,13 +139,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             index -= 1
             loadFields()
             counterGroup.setHidden(false)
-            summaryGroup.setHidden(true)
+            summaryTable.setHidden(true)
             finishGroup.setHidden(true)
         } else if index == strokeCount.count + 1 {
             index -= 1
             loadSummaryFields()
             counterGroup.setHidden(true)
-            summaryGroup.setHidden(false)
+            summaryTable.setHidden(false)
             finishGroup.setHidden(true)
         }
     }
@@ -211,8 +210,43 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func loadSummaryFields() {
         setTitle(courseName)
-        summaryTable.setNumberOfRows(strokeCount.count, withRowType: "SummaryRow")
-        for row in 0..<summaryTable.numberOfRows {
+        
+        var rowTypes = ["HeaderRowController","HeaderRowController"]
+        var strokeSum = 0
+        var parSum = 0
+        for hole in 0..<strokeCount.count {
+            rowTypes.append("SummaryRowController")
+            strokeSum += strokeCount[hole]
+            parSum += parCount[hole]
+        }
+        
+        if parSum == 0 {
+            rowTypes.remove(at: 0)
+        }
+        summaryTable.setRowTypes(rowTypes)
+        print(rowTypes)
+        if parSum > 0 {
+            for row in 0...1 {
+                guard let controller = summaryTable.rowController(at: row) as? HeaderRowController else {continue}
+                if row == 0 {
+                    controller.title = "Total"
+                    controller.count = strokeSum
+                } else if row == 1 {
+                    controller.title = "Par"
+                    controller.count = parSum
+                }
+            }
+            parGroup.setHidden(false)
+        } else {
+            guard let controller = summaryTable.rowController(at: 0) as? HeaderRowController else {print("Unable to assign title row")
+                return}
+            controller.title = "Total"
+            controller.count = strokeSum
+            parGroup.setHidden(true)
+        }
+        
+        //summaryTable.setNumberOfRows(strokeCount.count, withRowType: "SummaryRow")
+        for row in 2..<summaryTable.numberOfRows {
             guard let controller = summaryTable.rowController(at: row) as? SummaryRowController else {continue}
             
             controller.hole = row + 1

@@ -14,6 +14,11 @@
             <objects>
                 <controller id="RB9-qn-abP" customClass="MainMenuInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
                     <items>
+                        <button width="1" alignment="left" title="Continue Game" id="sz4-R2-LpA">
+                            <connections>
+                                <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToContinueGame" id="nKI-jb-KwY"/>
+                            </connections>
+                        </button>
                         <button width="1" alignment="left" title="New 9 Hole" id="5v4-ST-znd">
                             <connections>
                                 <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToNewNineHoleGame" id="q0f-i2-qkR"/>
@@ -22,11 +27,6 @@
                         <button width="1" alignment="left" title="New 18 Hole" id="Rrm-a9-IXP">
                             <connections>
                                 <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToNewEighteenHoleGame" id="Rhe-43-oLg"/>
-                            </connections>
-                        </button>
-                        <button width="1" alignment="left" title="Continue Game" id="sz4-R2-LpA">
-                            <connections>
-                                <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToContinueGame" id="nKI-jb-KwY"/>
                             </connections>
                         </button>
                     </items>
@@ -39,7 +39,7 @@
             <objects>
                 <controller title="Hole XX" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Golf_Counter_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="1" alignment="left" layout="vertical" id="RRs-6v-jS8" userLabel="Overall Group">
+                        <group width="1" height="1" alignment="left" layout="vertical" id="RRs-6v-jS8" userLabel="Overall Group">
                             <items>
                                 <group width="1" alignment="left" layout="vertical" id="U13-Qu-84I">
                                     <items>
@@ -95,47 +95,41 @@
                                         </group>
                                     </items>
                                 </group>
-                                <group width="1" alignment="left" hidden="YES" layout="vertical" id="Yhs-ZW-zaz">
+                                <table alignment="left" hidden="YES" id="hxB-0J-kie">
                                     <items>
-                                        <table alignment="left" id="hxB-0J-kie">
-                                            <items>
-                                                <tableRow identifier="SummaryRow" selectable="NO" id="4P1-Hu-OG5" customClass="SummaryRowController" customModule="Golf_Counter_WatchKit_Extension">
-                                                    <group key="rootItem" width="1" height="0.0" alignment="left" spacing="3" id="iUW-mt-O8V">
-                                                        <items>
-                                                            <label alignment="left" text="Hole" textAlignment="left" id="Jxu-FM-aXY">
-                                                                <fontDescription key="font" type="system" pointSize="16"/>
-                                                            </label>
-                                                            <label alignment="left" text="XX" id="xtl-Io-yGU"/>
-                                                            <label alignment="right" text="XX" textAlignment="right" id="n9F-Jg-dH7">
-                                                                <fontDescription key="font" type="system" pointSize="16"/>
-                                                            </label>
-                                                        </items>
-                                                    </group>
-                                                    <connections>
-                                                        <outlet property="holeNumberLabel" destination="xtl-Io-yGU" id="aGf-mP-n6u"/>
-                                                        <outlet property="strokeCountLabel" destination="n9F-Jg-dH7" id="ewf-kq-xMl"/>
-                                                    </connections>
-                                                </tableRow>
-                                            </items>
-                                        </table>
-                                        <group width="1" alignment="left" id="fmF-vX-W4r">
-                                            <items>
-                                                <label alignment="left" text="Total" id="KS1-ml-rT4">
-                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
-                                                </label>
-                                                <label alignment="right" text="XXX" textAlignment="right" id="UjZ-Ek-ZEW">
-                                                    <fontDescription key="font" type="system" pointSize="16"/>
-                                                </label>
-                                            </items>
-                                        </group>
-                                        <group width="1" alignment="left" id="ohs-Tw-17R">
-                                            <items>
-                                                <label alignment="left" text="Par" id="qAX-xj-fSi"/>
-                                                <label alignment="right" text="XXX" id="woE-Eh-uZm"/>
-                                            </items>
-                                        </group>
+                                        <tableRow identifier="TotalTitileRow" selectable="NO" id="4P1-Hu-OG5" userLabel="HeaderRow" customClass="HeaderRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                            <group key="rootItem" width="1" height="30" alignment="left" radius="4" spacing="3" id="iUW-mt-O8V">
+                                                <items>
+                                                    <label alignment="left" verticalAlignment="center" text="Total" id="ohq-jg-mlr">
+                                                        <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
+                                                    </label>
+                                                    <label alignment="right" verticalAlignment="center" text="XXX" textAlignment="right" id="lCt-5h-Sc1">
+                                                        <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                            <connections>
+                                                <outlet property="titleCountLabel" destination="lCt-5h-Sc1" id="pmJ-kt-Fzd"/>
+                                                <outlet property="titleLabel" destination="ohq-jg-mlr" id="otd-ms-NBw"/>
+                                            </connections>
+                                        </tableRow>
+                                        <tableRow identifier="SummaryRow" selectable="NO" id="bV9-po-4kJ" userLabel="SummaryRow" customClass="SummaryRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                            <group key="rootItem" width="1" height="30" alignment="left" id="5eP-D4-DUD">
+                                                <items>
+                                                    <label alignment="left" verticalAlignment="center" text="Hole" textAlignment="left" id="MFB-3M-Gmc">
+                                                        <fontDescription key="font" type="system" pointSize="18"/>
+                                                    </label>
+                                                    <label alignment="left" verticalAlignment="center" text="XX" id="Qc1-dL-qbp">
+                                                        <fontDescription key="font" type="system" pointSize="18"/>
+                                                    </label>
+                                                    <label alignment="right" verticalAlignment="center" text="XX" textAlignment="right" id="tea-Gx-edg">
+                                                        <fontDescription key="font" type="system" pointSize="18"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                        </tableRow>
                                     </items>
-                                </group>
+                                </table>
                                 <group width="1" alignment="left" hidden="YES" layout="vertical" id="w9U-Zj-xyK" userLabel="Finish Group">
                                     <items>
                                         <button width="1" alignment="left" hidden="YES" title="Next Course" id="4fs-U3-bHi">
@@ -143,7 +137,7 @@
                                                 <action selector="nextCourseButtonPressed" destination="AgC-eL-Hgc" id="S12-sB-7N8"/>
                                             </connections>
                                         </button>
-                                        <button width="1" alignment="left" title="FInish Game" id="eTW-7S-VX0">
+                                        <button width="1" height="50" alignment="left" title="FInish Game" id="eTW-7S-VX0">
                                             <connections>
                                                 <action selector="finishGameButtonPressed" destination="AgC-eL-Hgc" id="Xyu-lc-rRe"/>
                                             </connections>
@@ -170,13 +164,9 @@
                         <outlet property="finishGameButton" destination="eTW-7S-VX0" id="dXy-Ps-8PD"/>
                         <outlet property="finishGroup" destination="w9U-Zj-xyK" id="Wvu-Pj-hpb"/>
                         <outlet property="nextCourseButton" destination="4fs-U3-bHi" id="ujX-Fr-UEx"/>
-                        <outlet property="parCountLabel" destination="woE-Eh-uZm" id="JXr-jI-dgE"/>
-                        <outlet property="parGroup" destination="ohs-Tw-17R" id="8mY-eN-nNE"/>
                         <outlet property="puttCounter" destination="RzP-zt-WC3" id="Xcg-vY-TZc"/>
                         <outlet property="strokeCounter" destination="TQj-zl-1dv" id="hKP-Ss-NZM"/>
-                        <outlet property="summaryGroup" destination="Yhs-ZW-zaz" id="Fgo-EF-9Dj"/>
                         <outlet property="summaryTable" destination="hxB-0J-kie" id="gYG-U5-ka6"/>
-                        <outlet property="totalCountLabel" destination="UjZ-Ek-ZEW" id="xkt-fY-ngf"/>
                     </connections>
                 </controller>
             </objects>
