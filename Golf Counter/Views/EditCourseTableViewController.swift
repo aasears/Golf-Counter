@@ -80,7 +80,7 @@ class EditCourseTableViewController: UITableViewController, editCourseHoleTableV
     }
     
     func decreasePar(holeNumber: Int) {
-        if courseArray[index].coursePar?[holeNumber - 1] ?? 0 > 1 {
+        if courseArray[index].coursePar?[holeNumber - 1] ?? 0 > 3 {
             courseArray[index].coursePar?[holeNumber - 1] -= 1
         }
     }

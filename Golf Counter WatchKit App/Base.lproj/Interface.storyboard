@@ -15,16 +15,19 @@
                 <controller id="RB9-qn-abP" customClass="MainMenuInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
                     <items>
                         <button width="1" height="50" alignment="left" title="Continue Game" id="sz4-R2-LpA">
+                            <fontDescription key="font" type="system" pointSize="16"/>
                             <connections>
                                 <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToContinueGame" id="nKI-jb-KwY"/>
                             </connections>
                         </button>
                         <button width="1" alignment="left" title="New 9 Hole" id="5v4-ST-znd">
+                            <fontDescription key="font" type="system" pointSize="16"/>
                             <connections>
                                 <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToNewNineHoleGame" id="q0f-i2-qkR"/>
                             </connections>
                         </button>
                         <button width="1" alignment="left" title="New 18 Hole" id="Rrm-a9-IXP">
+                            <fontDescription key="font" type="system" pointSize="16"/>
                             <connections>
                                 <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToNewEighteenHoleGame" id="Rhe-43-oLg"/>
                             </connections>

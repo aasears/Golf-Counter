@@ -51,8 +51,10 @@ class editCourseHoleTableViewCell: UITableViewCell {
     @IBAction func decreaseParTapped(_ sender: UIButton) {
         
         delegate?.decreasePar(holeNumber: holeNumber)
-        parNumber -= 1
-        setFields()
+        if parNumber > 3 {
+            parNumber -= 1
+            setFields()
+        }
     }
     
 }

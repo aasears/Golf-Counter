@@ -202,11 +202,11 @@
 			isa = PBXGroup;
 			children = (
 				93085CCF226BC466000AEC35 /* Golf Counter WatchKit Extension.entitlements */,
+				93192383213CD9D00018B45F /* ExtensionDelegate.swift */,
 				E55472AC2291F0E80005DD62 /* MainMenuInterfaceController.swift */,
 				93192381213CD9D00018B45F /* InterfaceController.swift */,
 				93D7013822963E7400382509 /* HeaderRowController.swift */,
 				E55472AA2291AC870005DD62 /* SummaryRowController.swift */,
-				93192383213CD9D00018B45F /* ExtensionDelegate.swift */,
 				93192385213CD9D00018B45F /* NotificationController.swift */,
 				93192387213CD9D00018B45F /* Assets.xcassets */,
 				93192389213CD9D00018B45F /* Info.plist */,

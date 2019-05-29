@@ -139,7 +139,11 @@ class CounterViewController: UIViewController, receiveHoleNumber {
     func loadFields() {
         navigationItem.title = golfHoleArray[courseIndex].courseName
         holeTitle.text = "Hole \(index + 1)"
-        parCountLabel.text = "\(golfHoleArray[courseIndex].parCount?[index] ?? 0)"
+        if (golfHoleArray[courseIndex].parCount?[index] ?? 0) == 0 {
+            parCountLabel.text = ""
+        } else {
+            parCountLabel.text = "Par \(golfHoleArray[courseIndex].parCount?[index] ?? 0)"
+        }
         strokeCountLabel.text = "\(golfHoleArray[courseIndex].strokeCount?[index] ?? 0)"
         puttCountLabel.text = "\(golfHoleArray[courseIndex].puttCount?[index] ?? 0)"
         

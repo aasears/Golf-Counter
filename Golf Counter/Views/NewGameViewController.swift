@@ -44,7 +44,7 @@ class NewGameViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     override func viewWillAppear(_ animated: Bool) {
-
+        
         blurEffect = visualEffectView.effect
         visualEffectView.effect = nil
         visualEffectView.isHidden = true
