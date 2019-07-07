@@ -52,6 +52,19 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToPastGameSummary", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToPastGameSummary" {
+            let destinationVC = segue.destination as! HistoryGameViewController
+            if let indexPath = historyTableView.indexPathForSelectedRow {
+                destinationVC.pastGolfGame = pastGolfGameArray[indexPath.row]
+            }
+        }
+    }
+    
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         navigationController?.popToRootViewController(animated: true)
     }

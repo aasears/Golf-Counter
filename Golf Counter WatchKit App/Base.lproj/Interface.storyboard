@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RB9-qn-abP">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RG7-5O-1J5">
     <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,6 +9,125 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
     </dependencies>
     <scenes>
+        <!--Main Menu Interface Controller-->
+        <scene sceneID="nCY-Yb-gPS">
+            <objects>
+                <controller id="RG7-5O-1J5" customClass="MainMenuInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="vertical" id="EZ9-jS-EGL">
+                            <items>
+                                <group width="1" height="0.5" alignment="left" id="aKJ-v6-LLa">
+                                    <items>
+                                        <button width="1" height="1" alignment="left" title="New Game" id="QKi-Kn-CzJ">
+                                            <fontDescription key="font" type="system" pointSize="12"/>
+                                            <connections>
+                                                <segue destination="0nV-3q-rKp" kind="push" identifier="goToNewGame" id="kcQ-nf-Nns"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" height="0.5" alignment="left" id="d46-rR-9Fm">
+                                    <items>
+                                        <button width="0.5" height="1" alignment="left" title="Courses" id="PEv-YO-jcP">
+                                            <fontDescription key="font" type="system" pointSize="12"/>
+                                            <connections>
+                                                <segue destination="jYB-vN-jXm" kind="push" id="MWr-21-l0G"/>
+                                            </connections>
+                                        </button>
+                                        <button width="0.5" height="1" alignment="left" title="Continue" id="cpv-16-pbS">
+                                            <fontDescription key="font" type="system" pointSize="12"/>
+                                            <connections>
+                                                <segue destination="0nV-3q-rKp" kind="push" identifier="goToContinueGame" id="PnQ-k7-Buh"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-785" y="357"/>
+        </scene>
+        <!--New Game-->
+        <scene sceneID="Yhh-dN-YAd">
+            <objects>
+                <controller title="New Game" id="0nV-3q-rKp" customClass="NewGameInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
+                    <items>
+                        <table alignment="left" id="IAC-Ll-TeV">
+                            <items>
+                                <tableRow identifier="GenericGameRowController" id="FpK-S5-Xdb" userLabel="GenericGameRowController" customClass="GenericGameRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" layout="vertical" id="7Uf-dP-1C3">
+                                        <items>
+                                            <label alignment="left" text="Course Name" id="YWd-CC-9Jy">
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="courseNameLabel" destination="YWd-CC-9Jy" id="Kgc-aG-mlr"/>
+                                    </connections>
+                                </tableRow>
+                                <tableRow identifier="CourseGameRowController" id="Sea-iH-UX6" userLabel="CourseGameRowController" customClass="CourseGameRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                    <group key="rootItem" width="1" alignment="left" layout="vertical" id="th3-vM-64a">
+                                        <items>
+                                            <label alignment="left" text="Course Name" id="ou3-t9-NAO">
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                            <label alignment="left" text="XX Holes" id="nBW-D4-Yqp">
+                                                <fontDescription key="font" type="system" pointSize="12"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="courseNameLabel" destination="ou3-t9-NAO" id="1xW-vB-Pb2"/>
+                                        <outlet property="holeCountLabel" destination="nBW-D4-Yqp" id="3Ru-nM-WaX"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="courseTable" destination="IAC-Ll-TeV" id="WDS-V6-UMd"/>
+                        <segue destination="vCC-qd-scM" kind="relationship" relationship="nextPage" id="wkj-9P-XGh"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-444" y="357"/>
+        </scene>
+        <!--Course Interface Controller-->
+        <scene sceneID="uuk-gs-maF">
+            <objects>
+                <controller id="jYB-vN-jXm" customClass="CourseInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
+                    <items>
+                        <table alignment="left" id="3Ju-bk-KLG">
+                            <items>
+                                <tableRow identifier="CourseGameRowController" selectable="NO" id="HxU-T2-csA" userLabel="CourseGameRowController" customClass="CourseGameRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="r3I-CO-sUA">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="Course Name" id="VfL-n0-N52">
+                                                <fontDescription key="font" type="system" pointSize="16"/>
+                                            </label>
+                                            <label alignment="left" verticalAlignment="center" text="XX Holes" id="WT8-u3-5lG">
+                                                <fontDescription key="font" type="system" pointSize="12"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="courseNameLabel" destination="VfL-n0-N52" id="3GG-vm-6H2"/>
+                                        <outlet property="holeCountLabel" destination="WT8-u3-5lG" id="3kR-Nc-C0r"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="courseTable" destination="3Ju-bk-KLG" id="GlQ-Yb-apK"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-785" y="716"/>
+        </scene>
         <!--Main Menu Interface Controller-->
         <scene sceneID="efF-SG-Rk3">
             <objects>
@@ -35,14 +154,14 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-67" y="345"/>
+            <point key="canvasLocation" x="221" y="345"/>
         </scene>
         <!--Hole XX-->
         <scene sceneID="aou-V4-d1y">
             <objects>
                 <controller title="Hole XX" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Golf_Counter_WatchKit_App" customModuleProvider="target">
                     <items>
-                        <group width="1" height="1" alignment="left" layout="vertical" id="U13-Qu-84I">
+                        <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="U13-Qu-84I">
                             <items>
                                 <group width="1" height="45" alignment="center" id="bY4-7W-UPg">
                                     <items>
@@ -108,7 +227,7 @@
                                 </swipeGestureRecognizer>
                             </gestureRecognizers>
                         </group>
-                        <table alignment="left" hidden="YES" id="hxB-0J-kie">
+                        <table alignment="left" id="hxB-0J-kie">
                             <items>
                                 <tableRow identifier="HeaderRowController" selectable="NO" id="4P1-Hu-OG5" userLabel="HeaderRow" customClass="HeaderRowController" customModule="Golf_Counter_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="30" alignment="left" radius="4" spacing="3" id="iUW-mt-O8V">
@@ -197,10 +316,191 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="220" y="345"/>
+            <point key="canvasLocation" x="543" y="345"/>
+        </scene>
+        <!--Hole XX-->
+        <scene sceneID="62k-W4-flv">
+            <objects>
+                <controller identifier="GameController" title="Hole XX" fullScreen="YES" id="vCC-qd-scM" customClass="InterfaceController" customModule="Golf_Counter_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="vertical" id="98i-hB-g0P">
+                            <items>
+                                <group width="1" height="45" alignment="center" id="iNj-WF-kLo">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="XX" id="MuE-z1-YVm">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="40"/>
+                                        </label>
+                                        <button width="42" height="1" alignment="left" title="-" id="Tvi-Jj-hhg">
+                                            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                            <connections>
+                                                <action selector="minusStrokeButtonPressed" destination="vCC-qd-scM" id="dS8-ag-mea"/>
+                                            </connections>
+                                        </button>
+                                        <button width="42" height="1" alignment="right" title="+" id="xeu-Lf-Amx">
+                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                            <connections>
+                                                <action selector="plusStrokeButtonPressed" destination="vCC-qd-scM" id="lqh-5V-KH5"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                                <label height="20" alignment="center" text="Strokes" id="sOx-27-lkm">
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
+                                </label>
+                                <separator alignment="left" verticalAlignment="center" id="2tt-b6-P3h"/>
+                                <label height="20" alignment="center" verticalAlignment="bottom" text="Putts" id="Nlw-sP-3Ep">
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
+                                </label>
+                                <group width="1" height="45" alignment="center" verticalAlignment="bottom" id="RKj-US-Zy4">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="XX" id="GUM-0b-m8V">
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="40"/>
+                                        </label>
+                                        <button width="42" height="1" alignment="left" verticalAlignment="center" title="-" id="GVW-c2-d8h">
+                                            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                            <connections>
+                                                <action selector="minusPuttButtonPressed" destination="vCC-qd-scM" id="LF2-8K-BSd"/>
+                                            </connections>
+                                        </button>
+                                        <button width="42" height="1" alignment="right" verticalAlignment="center" title="+" id="WOi-5t-t1W">
+                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                            <connections>
+                                                <action selector="plusPuttButtonPressed" destination="vCC-qd-scM" id="uLG-hl-wI6"/>
+                                            </connections>
+                                        </button>
+                                    </items>
+                                </group>
+                            </items>
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer id="q9k-Wq-HsB" userLabel="Right Swipe">
+                                    <connections>
+                                        <action selector="rightSwipe:" destination="vCC-qd-scM" id="dlb-Vd-imU"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="2" id="dyl-qg-9V8" userLabel="Left Swipe">
+                                    <connections>
+                                        <action selector="leftSwipe:" destination="vCC-qd-scM" id="l3R-t2-0dC"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                        </group>
+                        <table alignment="left" hidden="YES" id="oh6-he-zIh">
+                            <items>
+                                <tableRow identifier="HeaderRowController" selectable="NO" id="9pS-Pz-I5N" userLabel="HeaderRow" customClass="HeaderRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="30" alignment="left" radius="4" spacing="3" id="Zau-B6-bEy">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="Total" id="a8G-MF-8yP">
+                                                <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
+                                            </label>
+                                            <label alignment="right" verticalAlignment="center" text="XXX" textAlignment="right" id="qoa-lE-ZDj">
+                                                <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="titleCountLabel" destination="qoa-lE-ZDj" id="Cdi-Bp-IPO"/>
+                                        <outlet property="titleLabel" destination="a8G-MF-8yP" id="4sx-IS-1ua"/>
+                                    </connections>
+                                </tableRow>
+                                <tableRow identifier="SummaryRowController" selectable="NO" id="pVg-0d-Lqc" userLabel="SummaryRow" customClass="SummaryRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="30" alignment="left" id="z64-1b-J7J">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="Hole" textAlignment="left" id="M2K-na-Umd">
+                                                <fontDescription key="font" type="system" pointSize="18"/>
+                                            </label>
+                                            <label alignment="left" verticalAlignment="center" text="XX" id="ELj-RK-1EP">
+                                                <fontDescription key="font" type="system" pointSize="18"/>
+                                            </label>
+                                            <label alignment="right" verticalAlignment="center" text="XX" textAlignment="right" id="NDS-h4-xzO">
+                                                <fontDescription key="font" type="system" pointSize="18"/>
+                                            </label>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="holeNumberLabel" destination="ELj-RK-1EP" id="HKO-of-jKa"/>
+                                        <outlet property="strokeCountLabel" destination="NDS-h4-xzO" id="eNp-wf-3cA"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer id="4Np-kP-Y1r" userLabel="Right Swipe">
+                                    <connections>
+                                        <action selector="rightSwipe:" destination="vCC-qd-scM" id="V5S-ec-O89"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="2" id="M6T-Em-OtM" userLabel="Left Swipe">
+                                    <connections>
+                                        <action selector="leftSwipe:" destination="vCC-qd-scM" id="aqQ-Oa-gVT"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                        </table>
+                        <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="Yb2-d5-eah" userLabel="Finish Group">
+                            <items>
+                                <button width="1" height="50" alignment="left" hidden="YES" title="Next Course" id="4jS-4G-OfN">
+                                    <connections>
+                                        <action selector="nextCourseButtonPressed" destination="vCC-qd-scM" id="dfD-kp-YWw"/>
+                                    </connections>
+                                </button>
+                                <button width="1" height="50" alignment="left" title="FInish Game" id="9qm-aS-tpT">
+                                    <connections>
+                                        <action selector="finishGameButtonPressed" destination="vCC-qd-scM" id="DOM-Zt-4dz"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <gestureRecognizers>
+                                <swipeGestureRecognizer id="Xcl-he-o7O" userLabel="Right Swipe">
+                                    <connections>
+                                        <action selector="rightSwipe:" destination="vCC-qd-scM" id="bYZ-yp-gpr"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                                <swipeGestureRecognizer direction="2" id="hg9-yS-Tey" userLabel="Left Swipe">
+                                    <connections>
+                                        <action selector="leftSwipe:" destination="vCC-qd-scM" id="u3D-ai-GK1"/>
+                                    </connections>
+                                </swipeGestureRecognizer>
+                            </gestureRecognizers>
+                        </group>
+                    </items>
+                    <menu key="menu" id="PX5-0G-TxU">
+                        <items>
+                            <menuItem title="Menu" image="HomeBarButton" id="p2S-P5-zNz"/>
+                            <menuItem title="Hole Select" image="HoleFlag" id="nHv-5y-nCs"/>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="counterGroup" destination="98i-hB-g0P" id="xcx-8h-QHG"/>
+                        <outlet property="finishGameButton" destination="9qm-aS-tpT" id="xJp-uK-i0N"/>
+                        <outlet property="finishGroup" destination="Yb2-d5-eah" id="Qbf-EL-OeI"/>
+                        <outlet property="nextCourseButton" destination="4jS-4G-OfN" id="iOu-g4-lXD"/>
+                        <outlet property="puttCounter" destination="GUM-0b-m8V" id="5DM-Af-0qw"/>
+                        <outlet property="strokeCounter" destination="MuE-z1-YVm" id="ELR-fZ-SYE"/>
+                        <outlet property="summaryTable" destination="oh6-he-zIh" id="78Y-c9-gq0"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-137" y="357"/>
+        </scene>
+        <!--Interface Controller-->
+        <scene sceneID="xxI-xg-pSz">
+            <objects>
+                <controller fullScreen="YES" id="gkS-wC-dmC">
+                    <items>
+                        <label alignment="left" text="Go To Hole:" id="cWC-gu-XWc"/>
+                        <picker height="100" alignment="left" id="3OK-CT-V8S"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-444" y="716"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Rhe-43-oLg"/>
+        <segue reference="q0f-i2-qkR"/>
+        <segue reference="PnQ-k7-Buh"/>
     </inferredMetricsTieBreakers>
 </document>

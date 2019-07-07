@@ -35,8 +35,14 @@
 		E5763D742259150A002D6F09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5763D732259150A002D6F09 /* Assets.xcassets */; };
 		E592EA3A2263D94600862BBE /* GameSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E592EA392263D94600862BBE /* GameSummaryViewController.swift */; };
 		E5B9103A227554D500D90D45 /* NextCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B91039227554D500D90D45 /* NextCourseViewController.swift */; };
+		E5BF64B622C98EC100A68A12 /* HistoryGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BF64B522C98EC100A68A12 /* HistoryGameViewController.swift */; };
 		E5D3FD272251A7670066736A /* newGameCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3FD262251A7670066736A /* newGameCourseTableViewCell.swift */; };
 		E5D3FD292251A96C0066736A /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3FD282251A96C0066736A /* NewGameViewController.swift */; };
+		E5DDBF2C22BEC3870019C232 /* NewGameInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DDBF2B22BEC3870019C232 /* NewGameInterfaceController.swift */; };
+		E5DDBF2E22BEC3B00019C232 /* CourseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DDBF2D22BEC3B00019C232 /* CourseInterfaceController.swift */; };
+		E5DDBF3022BEC6880019C232 /* GenericGameRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DDBF2F22BEC6880019C232 /* GenericGameRowController.swift */; };
+		E5DDBF3222BEC8410019C232 /* CourseGameRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DDBF3122BEC8410019C232 /* CourseGameRowController.swift */; };
+		E5F5C46A229E2CC000FB1E7E /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F5C469229E2CC000FB1E7E /* Course.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,8 +134,14 @@
 		E5763D732259150A002D6F09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E592EA392263D94600862BBE /* GameSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSummaryViewController.swift; sourceTree = "<group>"; };
 		E5B91039227554D500D90D45 /* NextCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCourseViewController.swift; sourceTree = "<group>"; };
+		E5BF64B522C98EC100A68A12 /* HistoryGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGameViewController.swift; sourceTree = "<group>"; };
 		E5D3FD262251A7670066736A /* newGameCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newGameCourseTableViewCell.swift; sourceTree = "<group>"; };
 		E5D3FD282251A96C0066736A /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
+		E5DDBF2B22BEC3870019C232 /* NewGameInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameInterfaceController.swift; sourceTree = "<group>"; };
+		E5DDBF2D22BEC3B00019C232 /* CourseInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInterfaceController.swift; sourceTree = "<group>"; };
+		E5DDBF2F22BEC6880019C232 /* GenericGameRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericGameRowController.swift; sourceTree = "<group>"; };
+		E5DDBF3122BEC8410019C232 /* CourseGameRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseGameRowController.swift; sourceTree = "<group>"; };
+		E5F5C469229E2CC000FB1E7E /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,10 +216,15 @@
 				93085CCF226BC466000AEC35 /* Golf Counter WatchKit Extension.entitlements */,
 				93192383213CD9D00018B45F /* ExtensionDelegate.swift */,
 				E55472AC2291F0E80005DD62 /* MainMenuInterfaceController.swift */,
+				E5DDBF2B22BEC3870019C232 /* NewGameInterfaceController.swift */,
 				93192381213CD9D00018B45F /* InterfaceController.swift */,
+				E5DDBF2D22BEC3B00019C232 /* CourseInterfaceController.swift */,
 				93D7013822963E7400382509 /* HeaderRowController.swift */,
 				E55472AA2291AC870005DD62 /* SummaryRowController.swift */,
+				E5DDBF2F22BEC6880019C232 /* GenericGameRowController.swift */,
+				E5DDBF3122BEC8410019C232 /* CourseGameRowController.swift */,
 				93192385213CD9D00018B45F /* NotificationController.swift */,
+				E5F5C469229E2CC000FB1E7E /* Course.swift */,
 				93192387213CD9D00018B45F /* Assets.xcassets */,
 				93192389213CD9D00018B45F /* Info.plist */,
 				9319238A213CD9D00018B45F /* PushNotificationPayload.apns */,
@@ -234,6 +251,7 @@
 				93F208FB2246998D00A6E39A /* CoursesViewController.swift */,
 				93F209032246DA6600A6E39A /* EditCourseTableViewController.swift */,
 				93D13B5F224C5931006B0840 /* HistoryTableViewController.swift */,
+				E5BF64B522C98EC100A68A12 /* HistoryGameViewController.swift */,
 				E5B91039227554D500D90D45 /* NextCourseViewController.swift */,
 			);
 			path = Views;
@@ -410,6 +428,7 @@
 			files = (
 				93F209022246C47200A6E39A /* courseTableViewCell.swift in Sources */,
 				93F208FE2246A0C000A6E39A /* MainMenuViewController.swift in Sources */,
+				E5BF64B622C98EC100A68A12 /* HistoryGameViewController.swift in Sources */,
 				93F209062246DECC00A6E39A /* editCourseHoleTableViewCell.swift in Sources */,
 				E5763D7022585666002D6F09 /* GolfGameExtension.swift in Sources */,
 				93192361213CD9CD0018B45F /* CounterViewController.swift in Sources */,
@@ -431,12 +450,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5DDBF2C22BEC3870019C232 /* NewGameInterfaceController.swift in Sources */,
 				E55472AB2291AC870005DD62 /* SummaryRowController.swift in Sources */,
+				E5F5C46A229E2CC000FB1E7E /* Course.swift in Sources */,
+				E5DDBF3022BEC6880019C232 /* GenericGameRowController.swift in Sources */,
 				93D7013922963E7400382509 /* HeaderRowController.swift in Sources */,
+				E5DDBF2E22BEC3B00019C232 /* CourseInterfaceController.swift in Sources */,
 				93192386213CD9D00018B45F /* NotificationController.swift in Sources */,
 				93192384213CD9D00018B45F /* ExtensionDelegate.swift in Sources */,
 				E55472AD2291F0E80005DD62 /* MainMenuInterfaceController.swift in Sources */,
 				93192382213CD9D00018B45F /* InterfaceController.swift in Sources */,
+				E5DDBF3222BEC8410019C232 /* CourseGameRowController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -39,6 +39,10 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         parseDictionaryFromPhone(message: applicationContext)
     }
     
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
+        parseCoursesFromPhone(message: userInfo)
+    }
+    
     func parseDictionaryFromPhone(message: Dictionary<String,Any>) {
         UserDefaults.standard.set(message["course"], forKey: "course")
         UserDefaults.standard.set(message["strokes"], forKey: "strokes")
@@ -47,7 +51,28 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         UserDefaults.standard.set(message["dateCreated"], forKey: "dateCreated")
         UserDefaults.standard.set(message["orderIdentifier"], forKey: "orderIdentifier")
     }
-
+    
+    func parseCoursesFromPhone(message: Dictionary<String,Any>) {
+        if message["addCourse"] as! Bool {
+                
+            if var courseArray = UserDefaults.standard.stringArray(forKey: "courses") {
+                courseArray.append(message["title"] as! String)
+                UserDefaults.standard.set(courseArray, forKey: "courses")
+            } else {
+                UserDefaults.standard.set([message["title"]] as! [String], forKey: "courses")
+            }
+            
+            if var parArray = UserDefaults.standard.array(forKey: "coursePar") {
+                parArray.append(message["par"] as Any)
+                UserDefaults.standard.set(parArray, forKey: "coursePar")
+            } else {
+                UserDefaults.standard.set([message["par"]] as Any, forKey: "coursePar")
+            }
+        } else if message["removeCourse"] as! Bool {
+            
+        }
+    }
+    
     @available(watchOSApplicationExtension 5.0, *)
     func handle(_ backgroundTasks: Set<WKRefreshBackgroundTask>) {
         // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.

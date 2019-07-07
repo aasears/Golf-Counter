@@ -8,11 +8,13 @@
 
 import UIKit
 import CoreData
+import WatchConnectivity
 
 class CoursesViewController: UITableViewController {
 
     var courseArray = [Course]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let session = WCSession.default
     
     
     override func viewDidLoad() {
@@ -75,27 +77,46 @@ class CoursesViewController: UITableViewController {
         var textField = UITextField()
         
         let alert = UIAlertController(title: "Add New Course", message: "", preferredStyle: .alert)
+        let missingCourseAlert = UIAlertController(title: "You must enter a course name", message: "", preferredStyle: .alert)
         
         let nineAction = UIAlertAction(title: "9 Hole", style: .default) { (action) in
-            let newCourse = Course(context: self.context)
-            newCourse.dateCreated = Date()
-            newCourse.courseName = textField.text!
-            newCourse.coursePar = [3,3,3,3,3,3,3,3,3]
-            self.courseArray.append(newCourse)
-            self.save()
+            
+            if textField.text != "" {
+                let newCourse = Course(context: self.context)
+                newCourse.dateCreated = Date()
+                newCourse.courseName = textField.text
+                newCourse.coursePar = [3,3,3,3,3,3,3,3,3]
+                self.courseArray.append(newCourse)
+                self.save()
+                self.session.transferUserInfo(["addCourse" : true,
+                                               "title" : newCourse.courseName as Any,
+                                               "par" : newCourse.coursePar as Any])
+            } else {
+                self.present(missingCourseAlert, animated: true, completion: nil)
+            }
         }
         
         let eighteenAction = UIAlertAction(title: "18 Hole", style: .default) { (action) in
-            let newCourse = Course(context: self.context)
-            newCourse.dateCreated = Date()
-            newCourse.courseName = textField.text!
-            newCourse.coursePar = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
-            self.courseArray.append(newCourse)
-            self.save()
+            
+            if textField.text != "" {
+                let newCourse = Course(context: self.context)
+                newCourse.dateCreated = Date()
+                newCourse.courseName = textField.text
+                newCourse.coursePar = [3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
+                self.courseArray.append(newCourse)
+                self.save()
+                self.session.transferUserInfo(["addCourse" : true,
+                                               "title" : newCourse.courseName as Any,
+                                               "par" : newCourse.coursePar as Any])
+            } else {
+                self.present(missingCourseAlert, animated: true, completion: nil)
+            }
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .default) { (action) in
         }
+        
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
         
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Add a Course Name"
@@ -105,6 +126,8 @@ class CoursesViewController: UITableViewController {
         alert.addAction(nineAction)
         alert.addAction(eighteenAction)
         alert.addAction(cancelAction)
+        missingCourseAlert.addAction(dismissAction)
+        
         present(alert, animated: true, completion: nil)
         tableView.reloadData()
     }

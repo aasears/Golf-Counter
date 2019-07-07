@@ -47,7 +47,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     override func willActivate() {
         super.willActivate()
         
-        loadCounterFields()
+        loadInterfaceViews()
     }
     
     override func didDeactivate() {
@@ -55,6 +55,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
         UserDefaults.standard.set(strokeCount, forKey: "strokes")
         UserDefaults.standard.set(puttCount, forKey: "putts")
+        UserDefaults.standard.set(index, forKey: "currentHole")
     }
     
     // MARK: - Count Functions
@@ -100,6 +101,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
         UserDefaults.standard.set(strokeCount, forKey: "strokes")
         UserDefaults.standard.set(puttCount, forKey: "putts")
+        UserDefaults.standard.set(false, forKey: "activeGame")
         let dict = parseFinishedDefaultsFromWatch()
         sendGameToPhone(applicationContext: dict)
         
@@ -112,41 +114,22 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     @IBAction func leftSwipe(_ sender: Any) {
         
-        if index < strokeCount.count - 1 {
+        if index <= strokeCount.count {
             index += 1
-            loadCounterFields()
-            counterGroup.setHidden(false)
-            summaryTable.setHidden(true)
-            finishGroup.setHidden(true)
-        } else if index == strokeCount.count - 1 {
-            index += 1
-            loadSummaryFields()
-            counterGroup.setHidden(true)
-            summaryTable.setHidden(false)
-            finishGroup.setHidden(true)
-        } else if index == strokeCount.count {
-            index += 1
-            counterGroup.setHidden(true)
-            summaryTable.setHidden(true)
-            finishGroup.setHidden(false)
         }
+        
+        loadInterfaceViews()
+        UserDefaults.standard.set(index, forKey: "currentHole")
     }
     
     @IBAction func rightSwipe(_ sender: Any) {
         
-        if index > 0 && index <= strokeCount.count {
+        if index > 0 {
             index -= 1
-            loadCounterFields()
-            counterGroup.setHidden(false)
-            summaryTable.setHidden(true)
-            finishGroup.setHidden(true)
-        } else if index == strokeCount.count + 1 {
-            index -= 1
-            loadSummaryFields()
-            counterGroup.setHidden(true)
-            summaryTable.setHidden(false)
-            finishGroup.setHidden(true)
         }
+        
+        loadInterfaceViews()
+        UserDefaults.standard.set(index, forKey: "currentHole")
     }
     
     // MARK: - Connectivity Methods
@@ -186,7 +169,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             do {
                 try session.updateApplicationContext(applicationContext)
             } catch {
-                print("error saving context \(error)")
+                print("error sending to phone \(error)")
             }
             //self.session.sendMessage(message, replyHandler: nil, errorHandler: nil)
         }
@@ -199,6 +182,25 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         strokeCount = UserDefaults.standard.array(forKey: "strokes") as! [Int]
         puttCount = UserDefaults.standard.array(forKey: "putts") as! [Int]
         parCount = UserDefaults.standard.array(forKey: "par") as! [Int]
+        index = UserDefaults.standard.integer(forKey: "currentHole")
+    }
+    
+    func loadInterfaceViews() {
+        if index < strokeCount.count {
+            loadCounterFields()
+            counterGroup.setHidden(false)
+            summaryTable.setHidden(true)
+            finishGroup.setHidden(true)
+        } else if index == strokeCount.count {
+            loadSummaryFields()
+            counterGroup.setHidden(true)
+            summaryTable.setHidden(false)
+            finishGroup.setHidden(true)
+        } else if index == strokeCount.count + 1 {
+            counterGroup.setHidden(true)
+            summaryTable.setHidden(true)
+            finishGroup.setHidden(false)
+        }
     }
     
     func loadCounterFields() {
@@ -246,5 +248,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             }
         }
     }
+    
+
 
 }
