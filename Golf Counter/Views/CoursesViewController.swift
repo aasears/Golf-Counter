@@ -16,7 +16,6 @@ class CoursesViewController: UITableViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let session = WCSession.default
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -61,11 +60,19 @@ class CoursesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
+        let deleteCourse = courseArray[indexPath.row]
+        
         let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             self.context.delete(self.courseArray[indexPath.row])
             self.courseArray.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+        self.session.transferUserInfo(["addCourse" : false,
+                                       "updateCourse" : false,
+                                       "deleteCourse" : true,
+                                       "dateCreated" : deleteCourse.dateCreated as Any,
+                                       "title" : deleteCourse.courseName as Any,
+                                       "par" : deleteCourse.coursePar as Any])
         
         return [delete]
     }
@@ -89,6 +96,9 @@ class CoursesViewController: UITableViewController {
                 self.courseArray.append(newCourse)
                 self.save()
                 self.session.transferUserInfo(["addCourse" : true,
+                                               "updateCourse" : false,
+                                               "deleteCourse" : false,
+                                               "dateCreated" : newCourse.dateCreated as Any,
                                                "title" : newCourse.courseName as Any,
                                                "par" : newCourse.coursePar as Any])
             } else {
@@ -106,6 +116,9 @@ class CoursesViewController: UITableViewController {
                 self.courseArray.append(newCourse)
                 self.save()
                 self.session.transferUserInfo(["addCourse" : true,
+                                               "updateCourse" : false,
+                                               "deleteCourse" : false,
+                                               "dateCreated" : newCourse.dateCreated as Any,
                                                "title" : newCourse.courseName as Any,
                                                "par" : newCourse.coursePar as Any])
             } else {

@@ -36,8 +36,19 @@ class CourseInterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
     
+    // MARK: - Menu Item Methods
+    
+    @IBAction func mainMenuButton() {
+        popToRootController()
+    }
+    
+    @IBAction func addCourseMenuButton() {
+    }
+    
+    // MARK: - Load Data Methods
+    
     func loadCourseFields() {
-        setTitle("Saved Courses")
+        setTitle("Courses")
         
         var rowTypes = [String]()
         for _ in 0..<courseArray.count {
@@ -52,7 +63,6 @@ class CourseInterfaceController: WKInterfaceController {
         
         for index in 0..<courseTable.numberOfRows {
             let controller = courseTable.rowController(at: index) as! CourseGameRowController
-            print(courseArray[index])
             controller.course = courseArray[index]
             if courseArray[0] != "Nothing to show" {
                 controller.count = courseParArray[index].count

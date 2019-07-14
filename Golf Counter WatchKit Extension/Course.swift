@@ -12,5 +12,6 @@ public class Course {
     
     var title = ""
     var par = [Int]()
+    var dateCreated = Date()
     
 }

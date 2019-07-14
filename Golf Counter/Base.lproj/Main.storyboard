@@ -905,7 +905,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="182.66666666666666" height="401"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="continueGame" translatesAutoresizingMaskIntoConstraints="NO" id="lKB-Xm-znm">
-                                                <rect key="frame" x="192.66666666666663" y="0.0" width="182.33333333333337" height="401"/>
+                                                <rect key="frame" x="192.66666666666663" y="0.0" width="182.33333333333337" height="401.00000000000023"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -1465,7 +1465,7 @@
                             <outlet property="delegate" destination="NkG-Ac-JPD" id="lZH-MA-YWv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Course Title" id="OQE-DQ-OiH">
+                    <navigationItem key="navigationItem" title="Course Title" prompt="Enter Par" id="OQE-DQ-OiH">
                         <barButtonItem key="leftBarButtonItem" systemItem="save" id="tM2-t1-qVH">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -1714,8 +1714,8 @@
         <image name="prevHoleArrow" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="V3I-IX-59S"/>
-        <segue reference="Iyg-Gp-A5X"/>
-        <segue reference="iOE-OZ-Yhh"/>
+        <segue reference="9JP-WS-mx2"/>
+        <segue reference="R8X-cS-R75"/>
+        <segue reference="xDa-nO-m1i"/>
     </inferredMetricsTieBreakers>
 </document>

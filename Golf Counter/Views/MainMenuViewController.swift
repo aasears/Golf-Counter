@@ -29,6 +29,8 @@ class MainMenuViewController: UIViewController, WCSessionDelegate {
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.barStyle = .black
         
         //NotificationCenter.default.addObserver(self, selector: #selector(didReceiveWatchData), name: NSNotification.Name(rawValue: "ReceivedWatchMessage"), object: nil)
     }

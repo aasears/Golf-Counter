@@ -47,7 +47,7 @@
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-785" y="357"/>
+            <point key="canvasLocation" x="-785" y="254"/>
         </scene>
         <!--New Game-->
         <scene sceneID="Yhh-dN-YAd">
@@ -57,9 +57,9 @@
                         <table alignment="left" id="IAC-Ll-TeV">
                             <items>
                                 <tableRow identifier="GenericGameRowController" id="FpK-S5-Xdb" userLabel="GenericGameRowController" customClass="GenericGameRowController" customModule="Golf_Counter_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" layout="vertical" id="7Uf-dP-1C3">
+                                    <group key="rootItem" width="1" height="60" alignment="left" layout="vertical" id="7Uf-dP-1C3">
                                         <items>
-                                            <label alignment="left" text="Course Name" id="YWd-CC-9Jy">
+                                            <label alignment="left" verticalAlignment="center" text="Course Name" id="YWd-CC-9Jy">
                                                 <fontDescription key="font" type="system" pointSize="16"/>
                                             </label>
                                         </items>
@@ -69,12 +69,12 @@
                                     </connections>
                                 </tableRow>
                                 <tableRow identifier="CourseGameRowController" id="Sea-iH-UX6" userLabel="CourseGameRowController" customClass="CourseGameRowController" customModule="Golf_Counter_WatchKit_Extension">
-                                    <group key="rootItem" width="1" alignment="left" layout="vertical" id="th3-vM-64a">
+                                    <group key="rootItem" width="1" height="60" alignment="left" layout="vertical" id="th3-vM-64a">
                                         <items>
-                                            <label alignment="left" text="Course Name" id="ou3-t9-NAO">
+                                            <label alignment="left" verticalAlignment="center" text="Course Name" id="ou3-t9-NAO">
                                                 <fontDescription key="font" type="system" pointSize="16"/>
                                             </label>
-                                            <label alignment="left" text="XX Holes" id="nBW-D4-Yqp">
+                                            <label alignment="left" verticalAlignment="center" text="XX Holes" id="nBW-D4-Yqp">
                                                 <fontDescription key="font" type="system" pointSize="12"/>
                                             </label>
                                         </items>
@@ -89,11 +89,11 @@
                     </items>
                     <connections>
                         <outlet property="courseTable" destination="IAC-Ll-TeV" id="WDS-V6-UMd"/>
-                        <segue destination="vCC-qd-scM" kind="relationship" relationship="nextPage" id="wkj-9P-XGh"/>
+                        <segue destination="vCC-qd-scM" kind="relationship" relationship="nextPage" id="g1E-Fk-egm"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-444" y="357"/>
+            <point key="canvasLocation" x="-444" y="254"/>
         </scene>
         <!--Course Interface Controller-->
         <scene sceneID="uuk-gs-maF">
@@ -103,7 +103,7 @@
                         <table alignment="left" id="3Ju-bk-KLG">
                             <items>
                                 <tableRow identifier="CourseGameRowController" selectable="NO" id="HxU-T2-csA" userLabel="CourseGameRowController" customClass="CourseGameRowController" customModule="Golf_Counter_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="r3I-CO-sUA">
+                                    <group key="rootItem" width="1" height="60" alignment="left" layout="vertical" id="r3I-CO-sUA">
                                         <items>
                                             <label alignment="left" verticalAlignment="center" text="Course Name" id="VfL-n0-N52">
                                                 <fontDescription key="font" type="system" pointSize="16"/>
@@ -121,12 +121,31 @@
                             </items>
                         </table>
                     </items>
+                    <menu key="menu" id="kef-El-yIh">
+                        <items>
+                            <menuItem title="Menu" image="HomeBarButton" id="vix-Mo-lMK">
+                                <connections>
+                                    <action selector="mainMenuButton" destination="jYB-vN-jXm" id="B67-hc-5fh"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="New Course" icon="add" id="khU-3l-0GN">
+                                <connections>
+                                    <action selector="addCourseMenuButton" destination="jYB-vN-jXm" id="3MS-Zk-7oC"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                        <variation key="default">
+                            <mask key="items">
+                                <exclude reference="khU-3l-0GN"/>
+                            </mask>
+                        </variation>
+                    </menu>
                     <connections>
                         <outlet property="courseTable" destination="3Ju-bk-KLG" id="GlQ-Yb-apK"/>
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-785" y="716"/>
+            <point key="canvasLocation" x="-1081" y="641"/>
         </scene>
         <!--Main Menu Interface Controller-->
         <scene sceneID="efF-SG-Rk3">
@@ -392,7 +411,7 @@
                         <table alignment="left" hidden="YES" id="oh6-he-zIh">
                             <items>
                                 <tableRow identifier="HeaderRowController" selectable="NO" id="9pS-Pz-I5N" userLabel="HeaderRow" customClass="HeaderRowController" customModule="Golf_Counter_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="30" alignment="left" radius="4" spacing="3" id="Zau-B6-bEy">
+                                    <group key="rootItem" width="1" height="35" alignment="left" radius="4" id="Zau-B6-bEy">
                                         <items>
                                             <label alignment="left" verticalAlignment="center" text="Total" id="a8G-MF-8yP">
                                                 <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
@@ -408,7 +427,7 @@
                                     </connections>
                                 </tableRow>
                                 <tableRow identifier="SummaryRowController" selectable="NO" id="pVg-0d-Lqc" userLabel="SummaryRow" customClass="SummaryRowController" customModule="Golf_Counter_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="30" alignment="left" id="z64-1b-J7J">
+                                    <group key="rootItem" width="1" height="35" alignment="left" id="z64-1b-J7J">
                                         <items>
                                             <label alignment="left" verticalAlignment="center" text="Hole" textAlignment="left" id="M2K-na-Umd">
                                                 <fontDescription key="font" type="system" pointSize="18"/>
@@ -466,17 +485,41 @@
                                 </swipeGestureRecognizer>
                             </gestureRecognizers>
                         </group>
+                        <group width="1" alignment="left" hidden="YES" layout="vertical" id="agK-6t-Y7z" userLabel="Hole Select Group">
+                            <items>
+                                <picker height="100" alignment="left" focusStyle="stack" id="CIR-Wk-jDd">
+                                    <connections>
+                                        <action selector="pickerAction:" destination="vCC-qd-scM" id="l51-eV-qoN"/>
+                                    </connections>
+                                </picker>
+                                <button width="1" alignment="left" title="Go" id="oA1-IB-33K">
+                                    <connections>
+                                        <action selector="goToHole" destination="vCC-qd-scM" id="WuF-oF-Ugn"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
                     </items>
                     <menu key="menu" id="PX5-0G-TxU">
                         <items>
-                            <menuItem title="Menu" image="HomeBarButton" id="p2S-P5-zNz"/>
-                            <menuItem title="Hole Select" image="HoleFlag" id="nHv-5y-nCs"/>
+                            <menuItem title="Menu" image="HomeBarButton" id="p2S-P5-zNz">
+                                <connections>
+                                    <action selector="mainMenuButton" destination="vCC-qd-scM" id="d77-Ci-BaZ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Hole Select" image="FlagBarButton" id="nHv-5y-nCs">
+                                <connections>
+                                    <action selector="holeSelectMenuButton" destination="vCC-qd-scM" id="JSy-p9-QSy"/>
+                                </connections>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
                         <outlet property="counterGroup" destination="98i-hB-g0P" id="xcx-8h-QHG"/>
                         <outlet property="finishGameButton" destination="9qm-aS-tpT" id="xJp-uK-i0N"/>
                         <outlet property="finishGroup" destination="Yb2-d5-eah" id="Qbf-EL-OeI"/>
+                        <outlet property="holeSelectGroup" destination="agK-6t-Y7z" id="fan-h2-VOV"/>
+                        <outlet property="holeSelectPicker" destination="CIR-Wk-jDd" id="hbS-zS-82f"/>
                         <outlet property="nextCourseButton" destination="4jS-4G-OfN" id="iOu-g4-lXD"/>
                         <outlet property="puttCounter" destination="GUM-0b-m8V" id="5DM-Af-0qw"/>
                         <outlet property="strokeCounter" destination="MuE-z1-YVm" id="ELR-fZ-SYE"/>
@@ -484,23 +527,61 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-137" y="357"/>
+            <point key="canvasLocation" x="-155" y="254"/>
         </scene>
-        <!--Interface Controller-->
+        <!--Hole Select Interface Controller-->
         <scene sceneID="xxI-xg-pSz">
             <objects>
-                <controller fullScreen="YES" id="gkS-wC-dmC">
+                <controller fullScreen="YES" id="gkS-wC-dmC" customClass="HoleSelectInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
                     <items>
                         <label alignment="left" text="Go To Hole:" id="cWC-gu-XWc"/>
                         <picker height="100" alignment="left" id="3OK-CT-V8S"/>
                     </items>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="-444" y="716"/>
+            <point key="canvasLocation" x="-808" y="773"/>
+        </scene>
+        <!--Main Menu Interface Controller-->
+        <scene sceneID="jen-eL-Sr3">
+            <objects>
+                <controller id="TKv-kM-adR" customClass="MainMenuInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="vertical" id="kcH-hk-JWN">
+                            <items>
+                                <group width="1" height="0.33000000000000002" alignment="left" id="N8T-Fg-JTw">
+                                    <items>
+                                        <button width="0.33000000000000002" height="1" alignment="center" title="G" id="0HT-ef-fSL">
+                                            <fontDescription key="font" type="system" pointSize="16"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" height="0.33000000000000002" alignment="left" id="eED-rP-6cJ">
+                                    <items>
+                                        <button width="0.33000000000000002" height="1" alignment="left" title="A" id="oEm-pB-czO">
+                                            <fontDescription key="font" type="system" pointSize="16"/>
+                                        </button>
+                                        <button width="0.33000000000000002" height="1" alignment="right" title="B" id="xNh-lh-fVO">
+                                            <fontDescription key="font" type="system" pointSize="16"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" height="0.33000000000000002" alignment="left" id="caE-79-37a">
+                                    <items>
+                                        <button width="0.33000000000000002" height="1" alignment="center" title="New 18 Hole" id="CWX-YW-RXf">
+                                            <fontDescription key="font" type="system" pointSize="16"/>
+                                        </button>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="221" y="43"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="q0f-i2-qkR"/>
-        <segue reference="PnQ-k7-Buh"/>
+        <segue reference="kcQ-nf-Nns"/>
     </inferredMetricsTieBreakers>
 </document>

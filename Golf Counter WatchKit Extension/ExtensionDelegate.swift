@@ -53,23 +53,71 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
     }
     
     func parseCoursesFromPhone(message: Dictionary<String,Any>) {
-        if message["addCourse"] as! Bool {
+        
+        let course = Course()
+        course.title = message["title"] as! String
+        course.dateCreated = message["dateCreated"] as! Date
+        course.par = message["par"] as! [Int]
+        
+        if (message["addCourse"] as! Bool) {
                 
             if var courseArray = UserDefaults.standard.stringArray(forKey: "courses") {
-                courseArray.append(message["title"] as! String)
+                courseArray.append(course.title)
                 UserDefaults.standard.set(courseArray, forKey: "courses")
             } else {
-                UserDefaults.standard.set([message["title"]] as! [String], forKey: "courses")
+                UserDefaults.standard.set([course.title], forKey: "courses")
             }
-            
+
             if var parArray = UserDefaults.standard.array(forKey: "coursePar") {
-                parArray.append(message["par"] as Any)
+                parArray.append(course.par)
                 UserDefaults.standard.set(parArray, forKey: "coursePar")
             } else {
-                UserDefaults.standard.set([message["par"]] as Any, forKey: "coursePar")
+                UserDefaults.standard.set([course.par], forKey: "coursePar")
             }
-        } else if message["removeCourse"] as! Bool {
+
+            if var courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") {
+                courseDateCreatedArray.append(course.dateCreated)
+                UserDefaults.standard.set(courseDateCreatedArray, forKey: "courseDateCreated")
+            } else {
+                UserDefaults.standard.set([course.dateCreated], forKey: "courseDateCreated")
+            }
             
+        } else if (message["updateCourse"] as! Bool) {
+            
+            var parArray = UserDefaults.standard.array(forKey: "coursePar")
+            let courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") as! [Date]
+            if let index = courseDateCreatedArray.index(of: course.dateCreated) {
+                parArray?[index] = course.par
+                UserDefaults.standard.set(parArray, forKey: "coursePar")
+            }
+            
+        } else if (message["deleteCourse"] as! Bool) {
+            guard var courseArray = UserDefaults.standard.stringArray(forKey: "courses") else {
+                print("could not establish courseArray")
+                return
+            }
+            guard var parArray = UserDefaults.standard.array(forKey: "coursePar") else {
+                print("could not establish parArray")
+                return
+            }
+            guard var courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") as! [Date]? else {
+                print("could not establish courseDateCreatedArray")
+                return
+            }
+            if let index = courseDateCreatedArray.index(of: course.dateCreated) {
+                courseArray.remove(at: index)
+                parArray.remove(at: index)
+                courseDateCreatedArray.remove(at: index)
+                UserDefaults.standard.set(courseArray, forKey: "courses")
+                UserDefaults.standard.set(parArray, forKey: "coursePar")
+                UserDefaults.standard.set(courseDateCreatedArray, forKey: "courseDateCreated")
+            }
+//            for index in 0..<courseDateCreatedArray.count {
+//                if course.dateCreated == courseDateCreatedArray[index] {
+//                    parArray![index] = message["par"] as Any
+//                    UserDefaults.standard.set(parArray, forKey: "coursePar")
+//                }
+//            }
         }
     }
     

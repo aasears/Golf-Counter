@@ -29,11 +29,18 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var finishGameButton: WKInterfaceButton!
     @IBOutlet var finishGroup: WKInterfaceGroup!
     
+    // Hole Select Outlets
+    @IBOutlet var holeSelectPicker: WKInterfacePicker!
+    @IBOutlet var holeSelectGroup: WKInterfaceGroup!
+    
+    
     var courseName = ""
     var strokeCount = [Int]()
     var puttCount = [Int]()
     var parCount = [Int]()
     var index = 0
+    var pickerIndex = 0
+    var holeArray = [WKPickerItem]()
     
     let session = WCSession.default
     
@@ -41,6 +48,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
+        UserDefaults.standard.set(true, forKey: "mainMenu")
         loadData()
     }
     
@@ -132,6 +140,33 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         UserDefaults.standard.set(index, forKey: "currentHole")
     }
     
+    // MARK: - Menu Item Methods
+    
+    @IBAction func mainMenuButton() {
+        dismiss()
+    }
+    
+    @IBAction func holeSelectMenuButton() {
+        setTitle("Select Hole:")
+        holeSelectPicker.setItems(holeArray)
+        holeSelectPicker.setSelectedItemIndex(index)
+        holeSelectPicker.focus()
+        counterGroup.setHidden(true)
+        summaryTable.setHidden(true)
+        finishGroup.setHidden(true)
+        holeSelectGroup.setHidden(false)
+    }
+    
+    // MARK: - General Methods
+    @IBAction func pickerAction(_ value: Int) {
+        pickerIndex = value
+    }
+    
+    @IBAction func goToHole() {
+        index = pickerIndex
+        loadInterfaceViews()
+    }
+    
     // MARK: - Connectivity Methods
     
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
@@ -183,6 +218,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         puttCount = UserDefaults.standard.array(forKey: "putts") as! [Int]
         parCount = UserDefaults.standard.array(forKey: "par") as! [Int]
         index = UserDefaults.standard.integer(forKey: "currentHole")
+        for hole in 1...strokeCount.count {
+            let pickerItem = WKPickerItem.init()
+            pickerItem.title = String(hole)
+            holeArray.append(pickerItem)
+        }
     }
     
     func loadInterfaceViews() {
@@ -191,15 +231,18 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             counterGroup.setHidden(false)
             summaryTable.setHidden(true)
             finishGroup.setHidden(true)
+            holeSelectGroup.setHidden(true)
         } else if index == strokeCount.count {
             loadSummaryFields()
             counterGroup.setHidden(true)
             summaryTable.setHidden(false)
             finishGroup.setHidden(true)
+            holeSelectGroup.setHidden(true)
         } else if index == strokeCount.count + 1 {
             counterGroup.setHidden(true)
             summaryTable.setHidden(true)
             finishGroup.setHidden(false)
+            holeSelectGroup.setHidden(true)
         }
     }
     

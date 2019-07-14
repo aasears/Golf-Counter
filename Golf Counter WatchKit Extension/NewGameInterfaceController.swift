@@ -20,11 +20,6 @@ class NewGameInterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        if UserDefaults.standard.bool(forKey: "activeGame") && UserDefaults.standard.bool(forKey: "continueGame") {
-            UserDefaults.standard.set(false, forKey: "continueGame")
-            presentController(withName: "GameController", context: nil)
-        }
-        
         courseArray = UserDefaults.standard.stringArray(forKey: "courses") ?? [""]
         courseParArray = UserDefaults.standard.array(forKey: "coursePar") as? [[Int]] ?? [[]]
         
@@ -33,6 +28,16 @@ class NewGameInterfaceController: WKInterfaceController {
 
     override func willActivate() {
         super.willActivate()
+        
+        if UserDefaults.standard.bool(forKey: "activeGame") && UserDefaults.standard.bool(forKey: "continueGame") {
+            UserDefaults.standard.set(false, forKey: "continueGame")
+            presentController(withName: "GameController", context: nil)
+        }
+        
+        if UserDefaults.standard.bool(forKey: "mainMenu") {
+            UserDefaults.standard.set(false, forKey: "mainMenu")
+            popToRootController()
+        }
         
     }
 
@@ -93,13 +98,13 @@ class NewGameInterfaceController: WKInterfaceController {
             UserDefaults.standard.set(eighteenHoleArray, forKey: "par")
         } else {
             
-            UserDefaults.standard.set(courseArray[rowIndex], forKey: "course")
-            UserDefaults.standard.set(courseParArray[rowIndex], forKey: "par")
+            UserDefaults.standard.set(courseArray[rowIndex - 2], forKey: "course")
+            UserDefaults.standard.set(courseParArray[rowIndex - 2], forKey: "par")
             
-            if courseParArray[rowIndex].count == 9 {
+            if courseParArray[rowIndex - 2].count == 9 {
                 UserDefaults.standard.set(nineHoleArray, forKey: "strokes")
                 UserDefaults.standard.set(nineHoleArray, forKey: "putts")
-            } else if courseParArray[rowIndex].count == 18 {
+            } else if courseParArray[rowIndex - 2].count == 18 {
                 UserDefaults.standard.set(eighteenHoleArray, forKey: "strokes")
                 UserDefaults.standard.set(eighteenHoleArray, forKey: "putts")
             }

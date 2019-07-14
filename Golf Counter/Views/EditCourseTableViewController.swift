@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import WatchConnectivity
 
 class EditCourseTableViewController: UITableViewController, editCourseHoleTableViewCellDelegate {
 
@@ -15,6 +16,7 @@ class EditCourseTableViewController: UITableViewController, editCourseHoleTableV
     var courseHoles = [Int]()
     var index: Int = 0
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let session = WCSession.default
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,6 +73,13 @@ class EditCourseTableViewController: UITableViewController, editCourseHoleTableV
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+        save()
+        self.session.transferUserInfo(["addCourse" : false,
+                                       "updateCourse" : true,
+                                       "deleteCourse" : false,
+                                       "dateCreated" : courseArray[index].dateCreated as Any,
+                                       "title" : courseArray[index].courseName as Any,
+                                       "par" : courseArray[index].coursePar as Any])
         navigationController?.popViewController(animated: true)
     }
     
