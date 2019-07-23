@@ -17,12 +17,15 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var strokeCounter: WKInterfaceLabel!
     @IBOutlet var puttCounter: WKInterfaceLabel!
     @IBOutlet var counterGroup: WKInterfaceGroup!
+    @IBOutlet var summaryCounterGroup: WKInterfaceGroup!
+    @IBOutlet var parGroup: WKInterfaceGroup!
+    @IBOutlet var parCountLabel: WKInterfaceLabel!
+    @IBOutlet var spacerLabel: WKInterfaceLabel!
+    @IBOutlet var netGroup: WKInterfaceGroup!
+    @IBOutlet var netCountLabel: WKInterfaceLabel!
     
     // Summary Outlets
     @IBOutlet var summaryTable: WKInterfaceTable!
-    @IBOutlet var totalCountLabel: WKInterfaceLabel!
-    @IBOutlet var parCountLabel: WKInterfaceLabel!
-    @IBOutlet var parGroup: WKInterfaceGroup!
     
     // Finish Outlets
     @IBOutlet var nextCourseButton: WKInterfaceButton!
@@ -33,7 +36,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var holeSelectPicker: WKInterfacePicker!
     @IBOutlet var holeSelectGroup: WKInterfaceGroup!
     
-    
+    // Variables
     var courseName = ""
     var strokeCount = [Int]()
     var puttCount = [Int]()
@@ -42,8 +45,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var pickerIndex = 0
     var holeArray = [WKPickerItem]()
     
+    // Connectivity
     let session = WCSession.default
     
+    
+    // MARK: - Default Functions
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -106,13 +112,11 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     @IBAction func finishGameButtonPressed() {
-        
         UserDefaults.standard.set(strokeCount, forKey: "strokes")
         UserDefaults.standard.set(puttCount, forKey: "putts")
         UserDefaults.standard.set(false, forKey: "activeGame")
         let dict = parseFinishedDefaultsFromWatch()
         sendGameToPhone(applicationContext: dict)
-        
         dismiss()
         
         // Add a finish later button
@@ -158,6 +162,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     // MARK: - General Methods
+    
     @IBAction func pickerAction(_ value: Int) {
         pickerIndex = value
     }
@@ -165,6 +170,28 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBAction func goToHole() {
         index = pickerIndex
         loadInterfaceViews()
+    }
+    
+    func calculateNet() -> Int {
+        
+        var totalPar = 0
+        var totalStroke = 0
+        for index in 0..<strokeCount.count {
+            if strokeCount[index] != 0 {
+                totalPar += parCount[index]
+                totalStroke += strokeCount[index]
+            }
+        }
+        return totalStroke - totalPar
+    }
+    
+    func setNet() {
+        let net = calculateNet()
+        if net > 0 {
+            netCountLabel.setText("+\(net)")
+        } else {
+            netCountLabel.setText("\(net)")
+        }
     }
     
     // MARK: - Connectivity Methods
@@ -223,6 +250,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             pickerItem.title = String(hole)
             holeArray.append(pickerItem)
         }
+        let summaryPage = WKPickerItem.init()
+        summaryPage.title = "Summary"
+        let finishPage = WKPickerItem.init()
+        finishPage.title = "Finish"
+        holeArray.append(summaryPage)
+        holeArray.append(finishPage)
     }
     
     func loadInterfaceViews() {
@@ -232,6 +265,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             summaryTable.setHidden(true)
             finishGroup.setHidden(true)
             holeSelectGroup.setHidden(true)
+            if WKInterfaceDevice.current().name.contains("40") {
+                counterGroup.setContentInset(.init(top: 0, left: 0, bottom: 14, right: 0))
+            } else if WKInterfaceDevice.current().name.contains("44") {
+                counterGroup.setContentInset(.init(top: 0, left: 0, bottom: 20, right: 0))
+            } else {
+                counterGroup.setContentInset(.init(top: 0, left: 0, bottom: 0, right: 0))
+            }
         } else if index == strokeCount.count {
             loadSummaryFields()
             counterGroup.setHidden(true)
@@ -250,6 +290,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         setTitle("Hole \(index + 1)")
         strokeCounter.setText("\(strokeCount[index])")
         puttCounter.setText("\(puttCount[index])")
+        if parCount[index] == 0 {
+            summaryCounterGroup.setHidden(true)
+        } else {
+            summaryCounterGroup.setHidden(false)
+            parCountLabel.setText("\(parCount[index])")
+            setNet()
+        }
     }
     
     func loadSummaryFields() {

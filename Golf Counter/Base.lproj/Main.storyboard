@@ -905,7 +905,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="182.66666666666666" height="401"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="continueGame" translatesAutoresizingMaskIntoConstraints="NO" id="lKB-Xm-znm">
-                                                <rect key="frame" x="192.66666666666663" y="0.0" width="182.33333333333337" height="401.00000000000023"/>
+                                                <rect key="frame" x="192.66666666666663" y="0.0" width="182.33333333333337" height="401"/>
                                             </imageView>
                                         </subviews>
                                         <constraints>
@@ -1716,6 +1716,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="9JP-WS-mx2"/>
         <segue reference="R8X-cS-R75"/>
-        <segue reference="xDa-nO-m1i"/>
+        <segue reference="mJu-2r-Egt"/>
     </inferredMetricsTieBreakers>
 </document>

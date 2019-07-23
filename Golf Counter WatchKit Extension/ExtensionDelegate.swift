@@ -112,12 +112,6 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
                 UserDefaults.standard.set(parArray, forKey: "coursePar")
                 UserDefaults.standard.set(courseDateCreatedArray, forKey: "courseDateCreated")
             }
-//            for index in 0..<courseDateCreatedArray.count {
-//                if course.dateCreated == courseDateCreatedArray[index] {
-//                    parArray![index] = message["par"] as Any
-//                    UserDefaults.standard.set(parArray, forKey: "coursePar")
-//                }
-//            }
         }
     }
     

@@ -112,6 +112,7 @@ class NewGameInterfaceController: WKInterfaceController {
         UserDefaults.standard.set(0, forKey: "currentHole")
         UserDefaults.standard.set(true, forKey: "activeGame")
         UserDefaults.standard.set(false, forKey: "continueGame")
+        UserDefaults.standard.set(Date(), forKey: "dateCreated")
         presentController(withName: "GameController", context: nil)
     }
 
