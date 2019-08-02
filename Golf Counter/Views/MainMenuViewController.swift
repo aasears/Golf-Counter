@@ -20,10 +20,10 @@ class MainMenuViewController: UIViewController, WCSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if UserDefaults.standard.bool(forKey: "contextUpdated") {
-            dictionaryToGolfHoleObject(message: session.receivedApplicationContext)
-            UserDefaults.standard.set(false, forKey: "contextUpdated")
-        }
+//        if UserDefaults.standard.bool(forKey: "contextUpdated") {
+//            dictionaryToGolfHoleObject(message: session.receivedApplicationContext)
+//            UserDefaults.standard.set(false, forKey: "contextUpdated")
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,30 +54,30 @@ class MainMenuViewController: UIViewController, WCSessionDelegate {
     func sessionDidDeactivate(_ session: WCSession) {
     }
     
-    func dictionaryToGolfHoleObject(message: Dictionary<String,Any>) {
-        let passedInGame = GolfGame(context: context)
-        passedInGame.initializeGolfGame()
-        passedInGame.courseName = message["course"] as? String
-        passedInGame.strokeCount = message["strokes"] as? [Int]
-        passedInGame.puttCount = message["putts"] as? [Int]
-        passedInGame.parCount = message["par"] as? [Int]
-        passedInGame.dateCreated = message["dateCreated"] as? Date
-        passedInGame.dateCompleted = message["dateCompleted"] as? Date ?? nil
-        passedInGame.isActive = message["isActive"] as? Bool ?? true
-        passedInGame.orderIdentifier = message["orderIdentifier"] as? Int16 ?? 0
-        
-        if passedInGame.isActive == false {
-            let finalGame = PastGolfGame(context: context)
-            finalGame.dateFinished = passedInGame.dateCompleted
-            
-            //        if golfHoleArray.count > 1 {
-            //            finalGame.title = "\(golfHoleArray[0].courseName ?? "") (\(golfHoleArray.count))"
-            //        } else {
-            finalGame.title = passedInGame.courseName
-            passedInGame.history = finalGame
-        }
-        save()
-    }
+//    func dictionaryToGolfHoleObject(message: Dictionary<String,Any>) {
+//        let passedInGame = GolfGame(context: context)
+//        passedInGame.initializeGolfGame()
+//        passedInGame.courseName = message["course"] as? String
+//        passedInGame.strokeCount = message["strokes"] as? [Int]
+//        passedInGame.puttCount = message["putts"] as? [Int]
+//        passedInGame.parCount = message["par"] as? [Int]
+//        passedInGame.dateCreated = message["dateCreated"] as? Date
+//        passedInGame.dateCompleted = message["dateCompleted"] as? Date ?? nil
+//        passedInGame.isActive = message["isActive"] as? Bool ?? true
+//        passedInGame.orderIdentifier = message["orderIdentifier"] as? Int16 ?? 0
+//
+//        if passedInGame.isActive == false {
+//            let finalGame = PastGolfGame(context: context)
+//            finalGame.dateFinished = passedInGame.dateCompleted
+//
+//            //        if golfHoleArray.count > 1 {
+//            //            finalGame.title = "\(golfHoleArray[0].courseName ?? "") (\(golfHoleArray.count))"
+//            //        } else {
+//            finalGame.title = passedInGame.courseName
+//            passedInGame.history = finalGame
+//        }
+//        save()
+//    }
     
     @IBAction func continueGame(_ sender: UIButton) {
         

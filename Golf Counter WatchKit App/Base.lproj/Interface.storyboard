@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14490.70" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RG7-5O-1J5">
-    <device id="watch44" orientation="portrait">
+    <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -9,6 +9,24 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14490.21"/>
     </dependencies>
     <scenes>
+        <!--Settings-->
+        <scene sceneID="sW0-wB-kBD">
+            <objects>
+                <controller identifier="settingsController" title="Settings" id="Oss-pD-shC" customClass="SettingsInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
+                    <items>
+                        <switch width="1" alignment="left" value="YES" title="Net Score" id="nKU-Uw-2bR">
+                            <connections>
+                                <action selector="netScoreChanged:" destination="Oss-pD-shC" id="ivI-BQ-jtw"/>
+                            </connections>
+                        </switch>
+                    </items>
+                    <connections>
+                        <outlet property="netScoreSwitch" destination="nKU-Uw-2bR" id="fr6-Ct-gx6"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-785" y="-112"/>
+        </scene>
         <!--Main Menu Interface Controller-->
         <scene sceneID="nCY-Yb-gPS">
             <objects>
@@ -45,6 +63,15 @@
                             </items>
                         </group>
                     </items>
+                    <menu key="menu" id="kM4-SA-ggO">
+                        <items>
+                            <menuItem title="Settings" icon="more" id="qEz-Im-7D1">
+                                <connections>
+                                    <action selector="goToSettings" destination="RG7-5O-1J5" id="uWd-59-aXb"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                 </controller>
             </objects>
             <point key="canvasLocation" x="-785" y="254"/>
@@ -605,13 +632,13 @@
                                 </group>
                                 <group width="1" alignment="left" verticalAlignment="center" id="Cav-Jb-hy6" userLabel="Summary Group">
                                     <items>
-                                        <group width="0.45000000000000001" alignment="left" spacing="8" id="wct-iP-2cw" userLabel="Par Group">
+                                        <group width="0.40000000000000002" alignment="left" spacing="4" id="wct-iP-2cw" userLabel="Par Group">
                                             <items>
-                                                <label alignment="center" text="XX" id="J4M-Hu-5dX">
-                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
+                                                <label alignment="center" text="X" id="J4M-Hu-5dX">
+                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
                                                 </label>
                                                 <label alignment="center" text="Par" id="XGe-wD-XHl">
-                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
+                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
                                                 </label>
                                             </items>
                                         </group>
@@ -619,13 +646,13 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
                                         </label>
-                                        <group width="0.45000000000000001" alignment="right" spacing="8" id="aoV-cr-QEl" userLabel="Net Group">
+                                        <group width="0.48999999999999999" height="20" alignment="right" spacing="4" id="aoV-cr-QEl" userLabel="Net Group">
                                             <items>
                                                 <label alignment="center" text="Net" id="Szw-TW-Wt4">
-                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
+                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
                                                 </label>
-                                                <label alignment="center" text="XX" id="iYX-ZQ-XFi">
-                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
+                                                <label alignment="center" text="+XX" id="iYX-ZQ-XFi">
+                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
                                                 </label>
                                             </items>
                                         </group>

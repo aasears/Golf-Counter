@@ -31,6 +31,7 @@
 		93F209062246DECC00A6E39A /* editCourseHoleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F209052246DECC00A6E39A /* editCourseHoleTableViewCell.swift */; };
 		E55472AB2291AC870005DD62 /* SummaryRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55472AA2291AC870005DD62 /* SummaryRowController.swift */; };
 		E55472AD2291F0E80005DD62 /* MainMenuInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55472AC2291F0E80005DD62 /* MainMenuInterfaceController.swift */; };
+		E55847F222EE5B46006FBBD0 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55847F122EE5B46006FBBD0 /* SettingsInterfaceController.swift */; };
 		E563734422DA6147001E8FFD /* HoleSelectInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E563734322DA6147001E8FFD /* HoleSelectInterfaceController.swift */; };
 		E5763D7022585666002D6F09 /* GolfGameExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5763D6F22585666002D6F09 /* GolfGameExtension.swift */; };
 		E5763D742259150A002D6F09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E5763D732259150A002D6F09 /* Assets.xcassets */; };
@@ -131,6 +132,7 @@
 		93F209052246DECC00A6E39A /* editCourseHoleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editCourseHoleTableViewCell.swift; sourceTree = "<group>"; };
 		E55472AA2291AC870005DD62 /* SummaryRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryRowController.swift; sourceTree = "<group>"; };
 		E55472AC2291F0E80005DD62 /* MainMenuInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuInterfaceController.swift; sourceTree = "<group>"; };
+		E55847F122EE5B46006FBBD0 /* SettingsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterfaceController.swift; sourceTree = "<group>"; };
 		E563734322DA6147001E8FFD /* HoleSelectInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoleSelectInterfaceController.swift; sourceTree = "<group>"; };
 		E5763D6F22585666002D6F09 /* GolfGameExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GolfGameExtension.swift; sourceTree = "<group>"; };
 		E5763D732259150A002D6F09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				93192381213CD9D00018B45F /* InterfaceController.swift */,
 				E563734322DA6147001E8FFD /* HoleSelectInterfaceController.swift */,
 				E5DDBF2D22BEC3B00019C232 /* CourseInterfaceController.swift */,
+				E55847F122EE5B46006FBBD0 /* SettingsInterfaceController.swift */,
 				93D7013822963E7400382509 /* HeaderRowController.swift */,
 				E55472AA2291AC870005DD62 /* SummaryRowController.swift */,
 				E5DDBF2F22BEC6880019C232 /* GenericGameRowController.swift */,
@@ -454,6 +457,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E5DDBF2C22BEC3870019C232 /* NewGameInterfaceController.swift in Sources */,
+				E55847F222EE5B46006FBBD0 /* SettingsInterfaceController.swift in Sources */,
 				E55472AB2291AC870005DD62 /* SummaryRowController.swift in Sources */,
 				E5F5C46A229E2CC000FB1E7E /* Course.swift in Sources */,
 				E5DDBF3022BEC6880019C232 /* GenericGameRowController.swift in Sources */,

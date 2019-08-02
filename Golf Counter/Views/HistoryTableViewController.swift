@@ -24,6 +24,10 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
         historyTableView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        historyTableView.reloadData()
+    }
+    
     //date formating for history page
     //        let dateStarted = Date()
     //        let formatter = DateFormatter()
@@ -65,6 +69,18 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    //NEW
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            self.context.delete(self.pastGolfGameArray[indexPath.row])
+            self.pastGolfGameArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+        save()
+        return [delete]
+    }
+    
     @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
         navigationController?.popToRootViewController(animated: true)
     }
@@ -80,6 +96,17 @@ class HistoryTableViewController: UIViewController, UITableViewDelegate, UITable
         } catch {
             print("Error fetching context \(error)")
         }
+    }
+    
+    func save() {
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
+        
+        historyTableView.reloadData()
     }
     
 }

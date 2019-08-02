@@ -226,14 +226,20 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         return dictionaryGame
     }
     
+//    func sendGameToPhone2(applicationContext: Dictionary<String,Any>) {
+//        if session.isReachable == true {
+//            do {
+//                try session.updateApplicationContext(applicationContext)
+//            } catch {
+//                print("error sending to phone \(error)")
+//            }
+//            //self.session.sendMessage(message, replyHandler: nil, errorHandler: nil)
+//        }
+//    }
+    
     func sendGameToPhone(applicationContext: Dictionary<String,Any>) {
         if session.isReachable == true {
-            do {
-                try session.updateApplicationContext(applicationContext)
-            } catch {
-                print("error sending to phone \(error)")
-            }
-            //self.session.sendMessage(message, replyHandler: nil, errorHandler: nil)
+            session.transferUserInfo(applicationContext)
         }
     }
     
@@ -265,6 +271,17 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             summaryTable.setHidden(true)
             finishGroup.setHidden(true)
             holeSelectGroup.setHidden(true)
+            
+            if UserDefaults.standard.bool(forKey: "netSettingActive") {
+                netGroup.setHidden(false)
+                spacerLabel.setHidden(false)
+                parGroup.setHorizontalAlignment(.left)
+            } else {
+                netGroup.setHidden(true)
+                spacerLabel.setHidden(true)
+                parGroup.setHorizontalAlignment(.center)
+            }
+            
             if WKInterfaceDevice.current().name.contains("40") {
                 counterGroup.setContentInset(.init(top: 0, left: 0, bottom: 14, right: 0))
             } else if WKInterfaceDevice.current().name.contains("44") {

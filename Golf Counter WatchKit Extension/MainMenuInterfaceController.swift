@@ -15,6 +15,7 @@ class MainMenuInterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
+        setupDefaults()
     }
 
     override func willActivate() {
@@ -33,6 +34,19 @@ class MainMenuInterfaceController: WKInterfaceController {
             UserDefaults.standard.set(true, forKey: "continueGame")
         }
         return nil
+    }
+    
+    @IBAction func goToSettings() {
+        presentController(withName: "settingsController", context: nil)
+    }
+    
+    // MARK: - Startup Functions
+    
+    func setupDefaults() {
+        guard UserDefaults.standard.value(forKey: "netSettingActive") != nil else {
+            UserDefaults.standard.set(true, forKey: "netSettingActive")
+            return
+        }
     }
     
 }

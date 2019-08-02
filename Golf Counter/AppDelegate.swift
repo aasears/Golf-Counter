@@ -92,10 +92,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     func sessionDidDeactivate(_ session: WCSession) {
     }
     
-    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
-        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReceivedWatchMessage"), object: self, userInfo: applicationContext)
-        UserDefaults.standard.set(true, forKey: "contextUpdated")
+//    func session(_ session: WCSession, didReceiveApplicationContext applicationContext: [String : Any]) {
+//        //NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ReceivedWatchMessage"), object: self, userInfo: applicationContext)
+//        UserDefaults.standard.set(true, forKey: "contextUpdated")
+//    }
+    
+    func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
+        dictionaryToGolfHoleObject(message: userInfo)
     }
 
+    func dictionaryToGolfHoleObject(message: Dictionary<String,Any>) {
+        let passedInGame = GolfGame(context: persistentContainer.viewContext)
+        passedInGame.initializeGolfGame()
+        passedInGame.courseName = message["course"] as? String
+        passedInGame.strokeCount = message["strokes"] as? [Int]
+        passedInGame.puttCount = message["putts"] as? [Int]
+        passedInGame.parCount = message["par"] as? [Int]
+        passedInGame.dateCreated = message["dateCreated"] as? Date
+        passedInGame.dateCompleted = message["dateCompleted"] as? Date ?? nil
+        passedInGame.isActive = message["isActive"] as? Bool ?? true
+        passedInGame.orderIdentifier = message["orderIdentifier"] as? Int16 ?? 0
+        
+        if passedInGame.isActive == false {
+            let finalGame = PastGolfGame(context: persistentContainer.viewContext)
+            finalGame.dateFinished = passedInGame.dateCompleted
+            
+            //        if golfHoleArray.count > 1 {
+            //            finalGame.title = "\(golfHoleArray[0].courseName ?? "") (\(golfHoleArray.count))"
+            //        } else {
+            finalGame.title = passedInGame.courseName
+            passedInGame.history = finalGame
+        }
+        saveContext()
+    }
+    
 }
 
