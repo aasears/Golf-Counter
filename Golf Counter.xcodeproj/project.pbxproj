@@ -636,6 +636,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				INFOPLIST_FILE = "Golf Counter WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -658,6 +659,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				INFOPLIST_FILE = "Golf Counter WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -681,6 +683,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				IBSC_MODULE = Golf_Counter_WatchKit_Extension;
 				INFOPLIST_FILE = "Golf Counter WatchKit App/Info.plist";
@@ -700,6 +703,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				IBSC_MODULE = Golf_Counter_WatchKit_Extension;
 				INFOPLIST_FILE = "Golf Counter WatchKit App/Info.plist";
@@ -718,6 +722,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				INFOPLIST_FILE = "Golf Counter/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -737,6 +742,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				INFOPLIST_FILE = "Golf Counter/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;

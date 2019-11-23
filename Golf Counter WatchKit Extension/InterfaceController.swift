@@ -41,6 +41,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     var strokeCount = [Int]()
     var puttCount = [Int]()
     var parCount = [Int]()
+    var netCount = 0
     var index = 0
     var pickerIndex = 0
     var holeArray = [WKPickerItem]()
@@ -70,6 +71,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         UserDefaults.standard.set(strokeCount, forKey: "strokes")
         UserDefaults.standard.set(puttCount, forKey: "putts")
         UserDefaults.standard.set(index, forKey: "currentHole")
+        UserDefaults.standard.set(netCount, forKey: "net")
     }
     
     // MARK: - Count Functions
@@ -250,6 +252,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         strokeCount = UserDefaults.standard.array(forKey: "strokes") as! [Int]
         puttCount = UserDefaults.standard.array(forKey: "putts") as! [Int]
         parCount = UserDefaults.standard.array(forKey: "par") as! [Int]
+        netCount = UserDefaults.standard.integer(forKey: "net")
         index = UserDefaults.standard.integer(forKey: "currentHole")
         for hole in 1...strokeCount.count {
             let pickerItem = WKPickerItem.init()

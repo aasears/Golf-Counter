@@ -20,7 +20,8 @@ class SettingsInterfaceController: WKInterfaceController {
         super.awake(withContext: context)
         
         switchState = UserDefaults.standard.bool(forKey: "netSettingActive")
-        netScoreSwitch.setOn(switchState)
+        setupSettingLayout()
+        
     }
 
     override func willActivate() {
@@ -39,6 +40,12 @@ class SettingsInterfaceController: WKInterfaceController {
         }
         netScoreSwitch.setOn(switchState)
         UserDefaults.standard.set(switchState, forKey: "netSettingActive")
+    }
+    
+    func setupSettingLayout() {
+        
+        netScoreSwitch.setHeight(50)
+        netScoreSwitch.setOn(switchState)
     }
     
 }

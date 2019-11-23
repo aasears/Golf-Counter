@@ -50,6 +50,8 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         UserDefaults.standard.set(message["par"], forKey: "par")
         UserDefaults.standard.set(message["dateCreated"], forKey: "dateCreated")
         UserDefaults.standard.set(message["orderIdentifier"], forKey: "orderIdentifier")
+        UserDefaults.standard.set(0, forKey: "net")
+        UserDefaults.standard.set(true, forKey: "activeGame")
     }
     
     func parseCoursesFromPhone(message: Dictionary<String,Any>) {
