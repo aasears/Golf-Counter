@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14868" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RG7-5O-1J5">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15702" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RG7-5O-1J5">
     <device id="watch38"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14643"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
     </dependencies>
     <scenes>
         <!--Settings-->
@@ -171,196 +171,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="-785" y="641"/>
-        </scene>
-        <!--Main Menu Interface Controller-->
-        <scene sceneID="efF-SG-Rk3">
-            <objects>
-                <controller id="RB9-qn-abP" customClass="MainMenuInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
-                    <items>
-                        <button width="1" height="50" alignment="left" title="Continue Game" id="sz4-R2-LpA">
-                            <fontDescription key="font" type="system" pointSize="16"/>
-                            <connections>
-                                <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToContinueGame" id="nKI-jb-KwY"/>
-                            </connections>
-                        </button>
-                        <button width="1" alignment="left" title="New 9 Hole" id="5v4-ST-znd">
-                            <fontDescription key="font" type="system" pointSize="16"/>
-                            <connections>
-                                <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToNewNineHoleGame" id="q0f-i2-qkR"/>
-                            </connections>
-                        </button>
-                        <button width="1" alignment="left" title="New 18 Hole" id="Rrm-a9-IXP">
-                            <fontDescription key="font" type="system" pointSize="16"/>
-                            <connections>
-                                <segue destination="AgC-eL-Hgc" kind="modal" identifier="goToNewEighteenHoleGame" id="Rhe-43-oLg"/>
-                            </connections>
-                        </button>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="221" y="345"/>
-        </scene>
-        <!--Hole XX-->
-        <scene sceneID="aou-V4-d1y">
-            <objects>
-                <controller title="Hole XX" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Golf_Counter_WatchKit_App" customModuleProvider="target">
-                    <items>
-                        <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="U13-Qu-84I">
-                            <items>
-                                <group width="1" height="45" alignment="center" id="bY4-7W-UPg">
-                                    <items>
-                                        <label alignment="center" verticalAlignment="center" text="XX" id="TQj-zl-1dv">
-                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <fontDescription key="font" type="system" weight="semibold" pointSize="40"/>
-                                        </label>
-                                        <button width="42" height="1" alignment="left" title="-" id="bnI-2d-CEh">
-                                            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
-                                            <connections>
-                                                <action selector="minusStrokeButtonPressed" destination="AgC-eL-Hgc" id="xeg-j3-4ix"/>
-                                            </connections>
-                                        </button>
-                                        <button width="42" height="1" alignment="right" title="+" id="Nnr-PA-L12">
-                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
-                                            <connections>
-                                                <action selector="plusStrokeButtonPressed" destination="AgC-eL-Hgc" id="0hZ-o5-JKZ"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                </group>
-                                <label height="20" alignment="center" text="Strokes" id="OXu-gG-8gB">
-                                    <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
-                                </label>
-                                <separator alignment="left" verticalAlignment="center" id="Cwc-jp-ZTM"/>
-                                <label height="20" alignment="center" verticalAlignment="bottom" text="Putts" id="MWJ-XG-mTB">
-                                    <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
-                                </label>
-                                <group width="1" height="45" alignment="center" verticalAlignment="bottom" id="3KA-UB-sx4">
-                                    <items>
-                                        <label alignment="center" verticalAlignment="center" text="XX" id="RzP-zt-WC3">
-                                            <fontDescription key="font" type="system" weight="semibold" pointSize="40"/>
-                                        </label>
-                                        <button width="42" height="1" alignment="left" verticalAlignment="center" title="-" id="rZU-DJ-4M4">
-                                            <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
-                                            <connections>
-                                                <action selector="minusPuttButtonPressed" destination="AgC-eL-Hgc" id="Fka-xM-zqh"/>
-                                            </connections>
-                                        </button>
-                                        <button width="42" height="1" alignment="right" verticalAlignment="center" title="+" id="NM9-lR-AAk">
-                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
-                                            <connections>
-                                                <action selector="plusPuttButtonPressed" destination="AgC-eL-Hgc" id="iVa-Na-OJZ"/>
-                                            </connections>
-                                        </button>
-                                    </items>
-                                </group>
-                            </items>
-                            <gestureRecognizers>
-                                <swipeGestureRecognizer id="gkj-3S-hkx" userLabel="Right Swipe">
-                                    <connections>
-                                        <action selector="rightSwipe:" destination="AgC-eL-Hgc" id="pLI-aE-zon"/>
-                                    </connections>
-                                </swipeGestureRecognizer>
-                                <swipeGestureRecognizer direction="2" id="6s0-oh-xB8" userLabel="Left Swipe">
-                                    <connections>
-                                        <action selector="leftSwipe:" destination="AgC-eL-Hgc" id="oPY-6k-jqF"/>
-                                    </connections>
-                                </swipeGestureRecognizer>
-                            </gestureRecognizers>
-                        </group>
-                        <table alignment="left" id="hxB-0J-kie">
-                            <items>
-                                <tableRow identifier="HeaderRowController" selectable="NO" id="4P1-Hu-OG5" userLabel="HeaderRow" customClass="HeaderRowController" customModule="Golf_Counter_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="30" alignment="left" radius="4" spacing="3" id="iUW-mt-O8V">
-                                        <items>
-                                            <label alignment="left" verticalAlignment="center" text="Total" id="ohq-jg-mlr">
-                                                <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
-                                            </label>
-                                            <label alignment="right" verticalAlignment="center" text="XXX" textAlignment="right" id="lCt-5h-Sc1">
-                                                <fontDescription key="font" type="system" weight="semibold" pointSize="18"/>
-                                            </label>
-                                        </items>
-                                    </group>
-                                    <connections>
-                                        <outlet property="titleCountLabel" destination="lCt-5h-Sc1" id="pmJ-kt-Fzd"/>
-                                        <outlet property="titleLabel" destination="ohq-jg-mlr" id="otd-ms-NBw"/>
-                                    </connections>
-                                </tableRow>
-                                <tableRow identifier="SummaryRowController" selectable="NO" id="bV9-po-4kJ" userLabel="SummaryRow" customClass="SummaryRowController" customModule="Golf_Counter_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="30" alignment="left" id="5eP-D4-DUD">
-                                        <items>
-                                            <label alignment="left" verticalAlignment="center" text="Hole" textAlignment="left" id="MFB-3M-Gmc">
-                                                <fontDescription key="font" type="system" pointSize="18"/>
-                                            </label>
-                                            <label alignment="left" verticalAlignment="center" text="XX" id="Qc1-dL-qbp">
-                                                <fontDescription key="font" type="system" pointSize="18"/>
-                                            </label>
-                                            <label alignment="right" verticalAlignment="center" text="XX" textAlignment="right" id="tea-Gx-edg">
-                                                <fontDescription key="font" type="system" pointSize="18"/>
-                                            </label>
-                                        </items>
-                                    </group>
-                                    <connections>
-                                        <outlet property="holeNumberLabel" destination="Qc1-dL-qbp" id="Fcj-eo-Tql"/>
-                                        <outlet property="strokeCountLabel" destination="tea-Gx-edg" id="2sA-iV-tNB"/>
-                                    </connections>
-                                </tableRow>
-                            </items>
-                            <gestureRecognizers>
-                                <swipeGestureRecognizer id="goz-Rb-fa5" userLabel="Right Swipe">
-                                    <connections>
-                                        <action selector="rightSwipe:" destination="AgC-eL-Hgc" id="Zco-FP-VsS"/>
-                                    </connections>
-                                </swipeGestureRecognizer>
-                                <swipeGestureRecognizer direction="2" id="qLB-gF-Wm2" userLabel="Left Swipe">
-                                    <connections>
-                                        <action selector="leftSwipe:" destination="AgC-eL-Hgc" id="dva-zg-vDh"/>
-                                    </connections>
-                                </swipeGestureRecognizer>
-                            </gestureRecognizers>
-                        </table>
-                        <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="w9U-Zj-xyK" userLabel="Finish Group">
-                            <items>
-                                <button width="1" height="50" alignment="left" hidden="YES" title="Next Course" id="4fs-U3-bHi">
-                                    <connections>
-                                        <action selector="nextCourseButtonPressed" destination="AgC-eL-Hgc" id="S12-sB-7N8"/>
-                                    </connections>
-                                </button>
-                                <button width="1" height="50" alignment="left" title="FInish Game" id="eTW-7S-VX0">
-                                    <connections>
-                                        <action selector="finishGameButtonPressed" destination="AgC-eL-Hgc" id="Xyu-lc-rRe"/>
-                                    </connections>
-                                </button>
-                            </items>
-                            <gestureRecognizers>
-                                <swipeGestureRecognizer id="XhM-2a-l25" userLabel="Right Swipe">
-                                    <connections>
-                                        <action selector="rightSwipe:" destination="AgC-eL-Hgc" id="HBZ-hW-No1"/>
-                                    </connections>
-                                </swipeGestureRecognizer>
-                                <swipeGestureRecognizer direction="2" id="Anb-by-UZO" userLabel="Left Swipe">
-                                    <connections>
-                                        <action selector="leftSwipe:" destination="AgC-eL-Hgc" id="TCO-FT-f7e"/>
-                                    </connections>
-                                </swipeGestureRecognizer>
-                            </gestureRecognizers>
-                        </group>
-                    </items>
-                    <connections>
-                        <outlet property="counterGroup" destination="U13-Qu-84I" id="SK2-A2-IOe"/>
-                        <outlet property="finishGameButton" destination="eTW-7S-VX0" id="dXy-Ps-8PD"/>
-                        <outlet property="finishGroup" destination="w9U-Zj-xyK" id="Wvu-Pj-hpb"/>
-                        <outlet property="nextCourseButton" destination="4fs-U3-bHi" id="ujX-Fr-UEx"/>
-                        <outlet property="puttCounter" destination="RzP-zt-WC3" id="Xcg-vY-TZc"/>
-                        <outlet property="strokeCounter" destination="TQj-zl-1dv" id="hKP-Ss-NZM"/>
-                        <outlet property="summaryTable" destination="hxB-0J-kie" id="gYG-U5-ka6"/>
-                    </connections>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="543" y="345"/>
         </scene>
         <!--Hole XX-->
         <scene sceneID="62k-W4-flv">
@@ -553,44 +363,6 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="-188" y="-58"/>
-        </scene>
-        <!--Main Menu Interface Controller-->
-        <scene sceneID="jen-eL-Sr3">
-            <objects>
-                <controller id="TKv-kM-adR" customClass="MainMenuInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
-                    <items>
-                        <group width="1" height="1" alignment="left" layout="vertical" id="kcH-hk-JWN">
-                            <items>
-                                <group width="1" height="0.33000000000000002" alignment="left" id="N8T-Fg-JTw">
-                                    <items>
-                                        <button width="0.33000000000000002" height="1" alignment="center" title="G" id="0HT-ef-fSL">
-                                            <fontDescription key="font" type="system" pointSize="16"/>
-                                        </button>
-                                    </items>
-                                </group>
-                                <group width="1" height="0.33000000000000002" alignment="left" id="eED-rP-6cJ">
-                                    <items>
-                                        <button width="0.33000000000000002" height="1" alignment="left" title="A" id="oEm-pB-czO">
-                                            <fontDescription key="font" type="system" pointSize="16"/>
-                                        </button>
-                                        <button width="0.33000000000000002" height="1" alignment="right" title="B" id="xNh-lh-fVO">
-                                            <fontDescription key="font" type="system" pointSize="16"/>
-                                        </button>
-                                    </items>
-                                </group>
-                                <group width="1" height="0.33000000000000002" alignment="left" id="caE-79-37a">
-                                    <items>
-                                        <button width="0.33000000000000002" height="1" alignment="center" title="New 18 Hole" id="CWX-YW-RXf">
-                                            <fontDescription key="font" type="system" pointSize="16"/>
-                                        </button>
-                                    </items>
-                                </group>
-                            </items>
-                        </group>
-                    </items>
-                </controller>
-            </objects>
-            <point key="canvasLocation" x="221" y="43"/>
         </scene>
         <!--Hole XX-->
         <scene sceneID="pDP-OB-JLi">
@@ -831,7 +603,6 @@
         <image name="HomeBarButton" width="24" height="24"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="q0f-i2-qkR"/>
         <segue reference="kcQ-nf-Nns"/>
     </inferredMetricsTieBreakers>
 </document>

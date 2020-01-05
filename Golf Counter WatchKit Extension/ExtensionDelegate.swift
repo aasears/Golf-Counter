@@ -62,58 +62,87 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         course.par = message["par"] as! [Int]
         
         if (message["addCourse"] as! Bool) {
-                
-            if var courseArray = UserDefaults.standard.stringArray(forKey: "courses") {
-                courseArray.append(course.title)
-                UserDefaults.standard.set(courseArray, forKey: "courses")
-            } else {
-                UserDefaults.standard.set([course.title], forKey: "courses")
-            }
-
-            if var parArray = UserDefaults.standard.array(forKey: "coursePar") {
-                parArray.append(course.par)
-                UserDefaults.standard.set(parArray, forKey: "coursePar")
-            } else {
-                UserDefaults.standard.set([course.par], forKey: "coursePar")
-            }
-
-            if var courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") {
-                courseDateCreatedArray.append(course.dateCreated)
-                UserDefaults.standard.set(courseDateCreatedArray, forKey: "courseDateCreated")
-            } else {
-                UserDefaults.standard.set([course.dateCreated], forKey: "courseDateCreated")
-            }
+            addCourse(newCourse: course)
             
         } else if (message["updateCourse"] as! Bool) {
-            
-            var parArray = UserDefaults.standard.array(forKey: "coursePar")
-            let courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") as! [Date]
-            if let index = courseDateCreatedArray.index(of: course.dateCreated) {
-                parArray?[index] = course.par
-                UserDefaults.standard.set(parArray, forKey: "coursePar")
+            if !updateCourse(updateCourse: course) {
+                addCourse(newCourse: course)
             }
             
         } else if (message["deleteCourse"] as! Bool) {
-            guard var courseArray = UserDefaults.standard.stringArray(forKey: "courses") else {
-                print("could not establish courseArray")
-                return
-            }
-            guard var parArray = UserDefaults.standard.array(forKey: "coursePar") else {
-                print("could not establish parArray")
-                return
-            }
-            guard var courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") as! [Date]? else {
-                print("could not establish courseDateCreatedArray")
-                return
-            }
-            if let index = courseDateCreatedArray.index(of: course.dateCreated) {
-                courseArray.remove(at: index)
-                parArray.remove(at: index)
-                courseDateCreatedArray.remove(at: index)
-                UserDefaults.standard.set(courseArray, forKey: "courses")
-                UserDefaults.standard.set(parArray, forKey: "coursePar")
-                UserDefaults.standard.set(courseDateCreatedArray, forKey: "courseDateCreated")
-            }
+            deleteCourse(deletedCourse: course)
+        }
+    }
+    
+    func addCourse(newCourse: Course) {
+        
+        if var courseArray = UserDefaults.standard.stringArray(forKey: "courses") {
+            courseArray.append(newCourse.title)
+            UserDefaults.standard.set(courseArray, forKey: "courses")
+        } else {
+            UserDefaults.standard.set([newCourse.title], forKey: "courses")
+        }
+
+        if var parArray = UserDefaults.standard.array(forKey: "coursePar") {
+            parArray.append(newCourse.par)
+            UserDefaults.standard.set(parArray, forKey: "coursePar")
+        } else {
+            UserDefaults.standard.set([newCourse.par], forKey: "coursePar")
+        }
+
+        if var courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") {
+            courseDateCreatedArray.append(newCourse.dateCreated)
+            UserDefaults.standard.set(courseDateCreatedArray, forKey: "courseDateCreated")
+        } else {
+            UserDefaults.standard.set([newCourse.dateCreated], forKey: "courseDateCreated")
+        }
+        
+    }
+    
+    func updateCourse(updateCourse: Course) -> Bool {
+        
+        var updateFlag = false
+        
+        guard var parArray = UserDefaults.standard.array(forKey: "coursePar") else {
+            print("could not establish parArray")
+            return updateFlag
+        }
+        
+        guard let courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") as! [Date]? else {
+            print("could not establish courseDateCreatedArray")
+            return updateFlag
+        }
+        
+        if let index = courseDateCreatedArray.index(of: updateCourse.dateCreated) {
+            parArray[index] = updateCourse.par
+            UserDefaults.standard.set(parArray, forKey: "coursePar")
+            updateFlag = true
+        }
+        
+        return updateFlag
+    }
+    
+    func deleteCourse(deletedCourse: Course) {
+        
+        guard var courseArray = UserDefaults.standard.stringArray(forKey: "courses") else {
+            print("could not establish courseArray")
+            return
+        }
+        guard var parArray = UserDefaults.standard.array(forKey: "coursePar") else {
+            print("could not establish parArray")
+            return
+        }
+        guard var courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") as! [Date]? else {
+            print("could not establish courseDateCreatedArray")
+            return
+        }
+        if let index = courseDateCreatedArray.index(of: deletedCourse.dateCreated) {
+            courseArray.remove(at: index)
+            parArray.remove(at: index)
+            courseDateCreatedArray.remove(at: index)
+            UserDefaults.standard.set(courseArray, forKey: "courses")
+            UserDefaults.standard.set(parArray, forKey: "coursePar")
+            UserDefaults.standard.set(courseDateCreatedArray, forKey: "courseDateCreated")
         }
     }
     
@@ -122,32 +151,28 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         // Sent when the system needs to launch the application in the background to process tasks. Tasks arrive in a set, so loop through and process each one.
         for task in backgroundTasks {
             // Use a switch statement to check the task type
-            if #available(watchOSApplicationExtension 5.0, *) {
-                switch task {
-                case let backgroundTask as WKApplicationRefreshBackgroundTask:
-                    // Be sure to complete the background task once you’re done.
-                    backgroundTask.setTaskCompletedWithSnapshot(false)
-                case let snapshotTask as WKSnapshotRefreshBackgroundTask:
-                    // Snapshot tasks have a unique completion call, make sure to set your expiration date
-                    snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
-                case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
-                    // Be sure to complete the connectivity task once you’re done.
-                    connectivityTask.setTaskCompletedWithSnapshot(false)
-                case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
-                    // Be sure to complete the URL session task once you’re done.
-                    urlSessionTask.setTaskCompletedWithSnapshot(false)
-                case let relevantShortcutTask as WKRelevantShortcutRefreshBackgroundTask:
-                    // Be sure to complete the relevant-shortcut task once you're done.
-                    relevantShortcutTask.setTaskCompletedWithSnapshot(false)
-                case let intentDidRunTask as WKIntentDidRunRefreshBackgroundTask:
-                    // Be sure to complete the intent-did-run task once you're done.
-                    intentDidRunTask.setTaskCompletedWithSnapshot(false)
-                default:
-                    // make sure to complete unhandled task types
-                    task.setTaskCompletedWithSnapshot(false)
-                }
-            } else {
-                // Fallback on earlier versions
+            switch task {
+            case let backgroundTask as WKApplicationRefreshBackgroundTask:
+                // Be sure to complete the background task once you’re done.
+                backgroundTask.setTaskCompletedWithSnapshot(false)
+            case let snapshotTask as WKSnapshotRefreshBackgroundTask:
+                // Snapshot tasks have a unique completion call, make sure to set your expiration date
+                snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: Date.distantFuture, userInfo: nil)
+            case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
+                // Be sure to complete the connectivity task once you’re done.
+                connectivityTask.setTaskCompletedWithSnapshot(false)
+            case let urlSessionTask as WKURLSessionRefreshBackgroundTask:
+                // Be sure to complete the URL session task once you’re done.
+                urlSessionTask.setTaskCompletedWithSnapshot(false)
+            case let relevantShortcutTask as WKRelevantShortcutRefreshBackgroundTask:
+                // Be sure to complete the relevant-shortcut task once you're done.
+                relevantShortcutTask.setTaskCompletedWithSnapshot(false)
+            case let intentDidRunTask as WKIntentDidRunRefreshBackgroundTask:
+                // Be sure to complete the intent-did-run task once you're done.
+                intentDidRunTask.setTaskCompletedWithSnapshot(false)
+            default:
+                // make sure to complete unhandled task types
+                task.setTaskCompletedWithSnapshot(false)
             }
         }
     }

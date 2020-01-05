@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18F108f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Course" representedClassName="Course" syncable="YES" codeGenerationType="class">
-        <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="coursePar" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
-        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="courseName" optional="YES" attributeType="String"/>
+        <attribute name="coursePar" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="GolfGame" representedClassName=".GolfGame" syncable="YES" codeGenerationType="class">
-        <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dateCompleted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="orderIdentifier" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="parCount" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
-        <attribute name="puttCount" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
-        <attribute name="strokeCount" optional="YES" attributeType="Transformable" customClassName="[Int]" syncable="YES"/>
-        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PastGolfGame" inverseName="games" inverseEntity="PastGolfGame" syncable="YES"/>
+        <attribute name="courseName" optional="YES" attributeType="String"/>
+        <attribute name="dateCompleted" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="orderIdentifier" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="parCount" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
+        <attribute name="puttCount" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
+        <attribute name="strokeCount" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[Int]"/>
+        <relationship name="history" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PastGolfGame" inverseName="games" inverseEntity="PastGolfGame"/>
     </entity>
     <entity name="PastGolfGame" representedClassName="PastGolfGame" syncable="YES" codeGenerationType="class">
-        <attribute name="dateFinished" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GolfGame" inverseName="history" inverseEntity="GolfGame" syncable="YES"/>
+        <attribute name="dateFinished" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <relationship name="games" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="GolfGame" inverseName="history" inverseEntity="GolfGame"/>
     </entity>
     <elements>
-        <element name="Course" positionX="-305.7109375" positionY="-12.0234375" width="128" height="90"/>
+        <element name="Course" positionX="-305.7109375" positionY="-12.0234375" width="128" height="88"/>
         <element name="GolfGame" positionX="-113.62109375" positionY="-91.25390625" width="128" height="178"/>
         <element name="PastGolfGame" positionX="-306.75390625" positionY="-95.87109375" width="128" height="88"/>
     </elements>
