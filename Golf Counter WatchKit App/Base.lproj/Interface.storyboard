@@ -77,7 +77,7 @@
         <!--New Game-->
         <scene sceneID="Yhh-dN-YAd">
             <objects>
-                <controller title="New Game" id="0nV-3q-rKp" customClass="NewGameInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
+                <controller identifier="NewGameInterfaceController" title="New Game" id="0nV-3q-rKp" customClass="NewGameInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
                     <items>
                         <table alignment="left" id="IAC-Ll-TeV">
                             <items>
@@ -171,6 +171,52 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="-785" y="641"/>
+        </scene>
+        <!--MultipleCourseInterfaceController-->
+        <scene sceneID="N7n-es-jRF">
+            <objects>
+                <controller identifier="MultipleCourseInterfaceController" id="r6s-rU-kWG" customClass="MultipleCourseInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
+                    <items>
+                        <button width="1" alignment="left" title="+" id="auD-Gc-0uP">
+                            <color key="backgroundColor" red="0.10516422659648757" green="0.62535691624365475" blue="0.0021906363200231366" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <fontDescription key="font" type="system" pointSize="22"/>
+                            <connections>
+                                <action selector="addCourseButton" destination="r6s-rU-kWG" id="Ex4-Zu-seT"/>
+                            </connections>
+                        </button>
+                        <table alignment="left" id="3HU-vO-TCd">
+                            <items>
+                                <tableRow selectable="NO" id="sth-vN-AYF" customClass="MultipleCourseRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="60" alignment="left" layout="vertical" id="ndq-RF-KYO">
+                                        <items>
+                                            <label alignment="left" verticalAlignment="center" text="Course Name" id="0GC-fQ-XZE"/>
+                                            <group width="120" alignment="left" verticalAlignment="center" id="LVr-m9-TnJ">
+                                                <items>
+                                                    <label alignment="left" verticalAlignment="center" text="XX Holes" id="M26-uf-Jio">
+                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                    </label>
+                                                    <label alignment="right" text="XX" id="O66-Jc-cBk">
+                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="holeCountLabel" destination="M26-uf-Jio" id="6Oo-Vb-jKO"/>
+                                        <outlet property="orderIdentifierLabel" destination="O66-Jc-cBk" id="uaF-Tg-INw"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="addCourse" destination="auD-Gc-0uP" id="9iq-w4-pM6"/>
+                        <outlet property="multipleCourseTable" destination="3HU-vO-TCd" id="gjl-q1-FeB"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-467" y="-112"/>
         </scene>
         <!--Hole XX-->
         <scene sceneID="62k-W4-flv">
@@ -523,12 +569,12 @@
                         </table>
                         <group width="1" height="1" alignment="left" hidden="YES" layout="vertical" id="JuF-8K-F0e" userLabel="Finish Group">
                             <items>
-                                <button width="1" height="50" alignment="left" hidden="YES" title="Next Course" id="Wfu-be-ySG">
+                                <button width="1" height="0.5" alignment="left" title="Next Course" id="Wfu-be-ySG">
                                     <connections>
                                         <action selector="nextCourseButtonPressed" destination="aFY-jS-9uX" id="TKJ-nN-kG7"/>
                                     </connections>
                                 </button>
-                                <button width="1" height="50" alignment="left" title="FInish Game" id="K2a-Tb-GXL">
+                                <button width="1" height="0.5" alignment="left" title="FInish Game" id="K2a-Tb-GXL">
                                     <connections>
                                         <action selector="finishGameButtonPressed" destination="aFY-jS-9uX" id="74e-9X-j9Z"/>
                                     </connections>

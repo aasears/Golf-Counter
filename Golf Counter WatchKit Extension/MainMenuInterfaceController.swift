@@ -8,10 +8,12 @@
 
 import WatchKit
 import Foundation
-
+import CoreData
 
 class MainMenuInterfaceController: WKInterfaceController {
 
+    let context = (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
@@ -20,6 +22,18 @@ class MainMenuInterfaceController: WKInterfaceController {
 
     override func willActivate() {
         super.willActivate()
+        
+        switch UserDefaults.standard.string(forKey: "navigationState") {
+        case "selectMultiCourse":
+            UserDefaults.standard.set("onSelectMultiCourse", forKey: "navigationState")
+            presentController(withName: "MultipleCourseInterfaceController", context: nil)
+        case "startMultiCourse":
+            UserDefaults.standard.set("onStartMultiCourse", forKey: "navigationState")
+            UserDefaults.standard.set(true, forKey: "multiCourse")
+            pushController(withName: "NewGameInterfaceController", context: nil)
+        default:
+            print("value not handled forKey: 'selectMultiCourse'. Printed \(UserDefaults.standard.string(forKey: "navigationState") ?? "")")
+        }
     }
 
     override func didDeactivate() {
@@ -47,6 +61,7 @@ class MainMenuInterfaceController: WKInterfaceController {
             UserDefaults.standard.set(true, forKey: "netSettingActive")
             return
         }
+        UserDefaults.standard.set(false, forKey: "mainMenu")
     }
     
 }

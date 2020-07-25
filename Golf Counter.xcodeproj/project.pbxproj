@@ -29,6 +29,9 @@
 		93F209022246C47200A6E39A /* courseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F209012246C47200A6E39A /* courseTableViewCell.swift */; };
 		93F209042246DA6600A6E39A /* EditCourseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F209032246DA6600A6E39A /* EditCourseTableViewController.swift */; };
 		93F209062246DECC00A6E39A /* editCourseHoleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F209052246DECC00A6E39A /* editCourseHoleTableViewCell.swift */; };
+		E5235EC323C2E622002B7D84 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E5235EC123C2E622002B7D84 /* Model.xcdatamodeld */; };
+		E5235EC623CBFBEF002B7D84 /* MultipleCourseRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5235EC523CBFBEF002B7D84 /* MultipleCourseRowController.swift */; };
+		E5235EC823CBFD62002B7D84 /* MultipleCourseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5235EC723CBFD62002B7D84 /* MultipleCourseInterfaceController.swift */; };
 		E55472AB2291AC870005DD62 /* SummaryRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55472AA2291AC870005DD62 /* SummaryRowController.swift */; };
 		E55472AD2291F0E80005DD62 /* MainMenuInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55472AC2291F0E80005DD62 /* MainMenuInterfaceController.swift */; };
 		E55847F222EE5B46006FBBD0 /* SettingsInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E55847F122EE5B46006FBBD0 /* SettingsInterfaceController.swift */; };
@@ -100,9 +103,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		93085CCD226BC3C9000AEC35 /* Golf Counter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Golf Counter.entitlements"; sourceTree = "<group>"; };
-		93085CCE226BC42D000AEC35 /* Golf Counter WatchKit App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Golf Counter WatchKit App.entitlements"; sourceTree = "<group>"; };
-		93085CCF226BC466000AEC35 /* Golf Counter WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Golf Counter WatchKit Extension.entitlements"; sourceTree = "<group>"; };
 		9319235B213CD9CD0018B45F /* Golf Counter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Golf Counter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9319235E213CD9CD0018B45F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		93192360213CD9CD0018B45F /* CounterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +130,9 @@
 		93F209012246C47200A6E39A /* courseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = courseTableViewCell.swift; sourceTree = "<group>"; };
 		93F209032246DA6600A6E39A /* EditCourseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCourseTableViewController.swift; sourceTree = "<group>"; };
 		93F209052246DECC00A6E39A /* editCourseHoleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editCourseHoleTableViewCell.swift; sourceTree = "<group>"; };
+		E5235EC223C2E622002B7D84 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		E5235EC523CBFBEF002B7D84 /* MultipleCourseRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCourseRowController.swift; sourceTree = "<group>"; };
+		E5235EC723CBFD62002B7D84 /* MultipleCourseInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleCourseInterfaceController.swift; sourceTree = "<group>"; };
 		E55472AA2291AC870005DD62 /* SummaryRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryRowController.swift; sourceTree = "<group>"; };
 		E55472AC2291F0E80005DD62 /* MainMenuInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuInterfaceController.swift; sourceTree = "<group>"; };
 		E55847F122EE5B46006FBBD0 /* SettingsInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsInterfaceController.swift; sourceTree = "<group>"; };
@@ -189,7 +192,6 @@
 		9319235D213CD9CD0018B45F /* Golf Counter */ = {
 			isa = PBXGroup;
 			children = (
-				93085CCD226BC3C9000AEC35 /* Golf Counter.entitlements */,
 				9319235E213CD9CD0018B45F /* AppDelegate.swift */,
 				9319239A213D89CA0018B45F /* Controllers */,
 				93192399213D89BD0018B45F /* Views */,
@@ -206,7 +208,6 @@
 		93192371213CD9CF0018B45F /* Golf Counter WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
-				93085CCE226BC42D000AEC35 /* Golf Counter WatchKit App.entitlements */,
 				93192372213CD9CF0018B45F /* Interface.storyboard */,
 				93192375213CD9CF0018B45F /* Assets.xcassets */,
 				93192377213CD9CF0018B45F /* Info.plist */,
@@ -217,20 +218,22 @@
 		93192380213CD9D00018B45F /* Golf Counter WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				93085CCF226BC466000AEC35 /* Golf Counter WatchKit Extension.entitlements */,
 				93192383213CD9D00018B45F /* ExtensionDelegate.swift */,
 				E55472AC2291F0E80005DD62 /* MainMenuInterfaceController.swift */,
 				E5DDBF2B22BEC3870019C232 /* NewGameInterfaceController.swift */,
 				93192381213CD9D00018B45F /* InterfaceController.swift */,
 				E563734322DA6147001E8FFD /* HoleSelectInterfaceController.swift */,
 				E5DDBF2D22BEC3B00019C232 /* CourseInterfaceController.swift */,
+				E5235EC723CBFD62002B7D84 /* MultipleCourseInterfaceController.swift */,
 				E55847F122EE5B46006FBBD0 /* SettingsInterfaceController.swift */,
 				93D7013822963E7400382509 /* HeaderRowController.swift */,
 				E55472AA2291AC870005DD62 /* SummaryRowController.swift */,
 				E5DDBF2F22BEC6880019C232 /* GenericGameRowController.swift */,
 				E5DDBF3122BEC8410019C232 /* CourseGameRowController.swift */,
+				E5235EC523CBFBEF002B7D84 /* MultipleCourseRowController.swift */,
 				93192385213CD9D00018B45F /* NotificationController.swift */,
 				E5F5C469229E2CC000FB1E7E /* Course.swift */,
+				E5235EC423C2E62E002B7D84 /* Data Model */,
 				93192387213CD9D00018B45F /* Assets.xcassets */,
 				93192389213CD9D00018B45F /* Info.plist */,
 				9319238A213CD9D00018B45F /* PushNotificationPayload.apns */,
@@ -280,6 +283,14 @@
 				E5763D6F22585666002D6F09 /* GolfGameExtension.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		E5235EC423C2E62E002B7D84 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				E5235EC123C2E622002B7D84 /* Model.xcdatamodeld */,
+			);
+			path = "Data Model";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,11 +470,14 @@
 				E5DDBF2C22BEC3870019C232 /* NewGameInterfaceController.swift in Sources */,
 				E55847F222EE5B46006FBBD0 /* SettingsInterfaceController.swift in Sources */,
 				E55472AB2291AC870005DD62 /* SummaryRowController.swift in Sources */,
+				E5235EC323C2E622002B7D84 /* Model.xcdatamodeld in Sources */,
+				E5235EC823CBFD62002B7D84 /* MultipleCourseInterfaceController.swift in Sources */,
 				E5F5C46A229E2CC000FB1E7E /* Course.swift in Sources */,
 				E5DDBF3022BEC6880019C232 /* GenericGameRowController.swift in Sources */,
 				93D7013922963E7400382509 /* HeaderRowController.swift in Sources */,
 				E5DDBF2E22BEC3B00019C232 /* CourseInterfaceController.swift in Sources */,
 				93192386213CD9D00018B45F /* NotificationController.swift in Sources */,
+				E5235EC623CBFBEF002B7D84 /* MultipleCourseRowController.swift in Sources */,
 				93192384213CD9D00018B45F /* ExtensionDelegate.swift in Sources */,
 				E55472AD2291F0E80005DD62 /* MainMenuInterfaceController.swift in Sources */,
 				93192382213CD9D00018B45F /* InterfaceController.swift in Sources */,
@@ -650,7 +664,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
 		};
@@ -673,7 +687,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Release;
 		};
@@ -693,7 +707,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Debug;
 		};
@@ -713,7 +727,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+				WATCHOS_DEPLOYMENT_TARGET = 5.0;
 			};
 			name = Release;
 		};
@@ -806,6 +820,16 @@
 			);
 			currentVersion = 931923A0213D9BF70018B45F /* DataModel.xcdatamodel */;
 			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		E5235EC123C2E622002B7D84 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E5235EC223C2E622002B7D84 /* Model.xcdatamodel */,
+			);
+			currentVersion = E5235EC223C2E622002B7D84 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

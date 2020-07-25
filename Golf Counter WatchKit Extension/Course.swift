@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Course {
+public class Courses {
     
     var title = ""
     var par = [Int]()

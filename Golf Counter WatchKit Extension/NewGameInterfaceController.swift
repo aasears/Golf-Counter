@@ -8,14 +8,19 @@
 
 import WatchKit
 import Foundation
-
+import CoreData
 
 class NewGameInterfaceController: WKInterfaceController {
 
     @IBOutlet var courseTable: WKInterfaceTable!
     
+    let context = (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext
+    
     var courseArray = [String]()
     var courseParArray = [[Int]]()
+    var golfGameArray = [GolfGame]()
+    var orderCounter = 0
+    var activeGame = false
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
@@ -23,13 +28,14 @@ class NewGameInterfaceController: WKInterfaceController {
         courseArray = UserDefaults.standard.stringArray(forKey: "courses") ?? [""]
         courseParArray = UserDefaults.standard.array(forKey: "coursePar") as? [[Int]] ?? [[]]
         
+        loadData()
         loadNewGameFields()
     }
 
     override func willActivate() {
         super.willActivate()
         
-        if UserDefaults.standard.bool(forKey: "activeGame") && UserDefaults.standard.bool(forKey: "continueGame") {
+        if checkForActiveGame() && UserDefaults.standard.bool(forKey: "continueGame") {
             UserDefaults.standard.set(false, forKey: "continueGame")
             presentController(withName: "GameController", context: nil)
         }
@@ -38,7 +44,6 @@ class NewGameInterfaceController: WKInterfaceController {
             UserDefaults.standard.set(false, forKey: "mainMenu")
             popToRootController()
         }
-        
     }
 
     override func didDeactivate() {
@@ -83,38 +88,135 @@ class NewGameInterfaceController: WKInterfaceController {
     
     override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         
+        loadData()
         let nineHoleArray = [0,0,0,0,0,0,0,0,0]
         let eighteenHoleArray = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
         
-        if rowIndex == 0 {
-            UserDefaults.standard.set("9 Hole Game", forKey: "course")
-            UserDefaults.standard.set(nineHoleArray, forKey: "strokes")
-            UserDefaults.standard.set(nineHoleArray, forKey: "putts")
-            UserDefaults.standard.set(nineHoleArray, forKey: "par")
-        } else if rowIndex == 1 {
-            UserDefaults.standard.set("18 Hole Game", forKey: "course")
-            UserDefaults.standard.set(eighteenHoleArray, forKey: "strokes")
-            UserDefaults.standard.set(eighteenHoleArray, forKey: "putts")
-            UserDefaults.standard.set(eighteenHoleArray, forKey: "par")
-        } else {
+        if UserDefaults.standard.bool(forKey: "multiCourse") {
             
-            UserDefaults.standard.set(courseArray[rowIndex - 2], forKey: "course")
-            UserDefaults.standard.set(courseParArray[rowIndex - 2], forKey: "par")
+            var orderCounter = UserDefaults.standard.integer(forKey: "orderCounter")
+            let multiGame = GolfGame(context: context)
             
-            if courseParArray[rowIndex - 2].count == 9 {
-                UserDefaults.standard.set(nineHoleArray, forKey: "strokes")
-                UserDefaults.standard.set(nineHoleArray, forKey: "putts")
-            } else if courseParArray[rowIndex - 2].count == 18 {
-                UserDefaults.standard.set(eighteenHoleArray, forKey: "strokes")
-                UserDefaults.standard.set(eighteenHoleArray, forKey: "putts")
+            if rowIndex == 0 {
+                multiGame.courseName = "9 Hole Game"
+                multiGame.strokeCount = nineHoleArray
+                multiGame.puttCount = nineHoleArray
+                multiGame.parCount = nineHoleArray
+                
+            } else if rowIndex == 1 {
+                multiGame.courseName = "18 Hole Game"
+                multiGame.strokeCount = eighteenHoleArray
+                multiGame.puttCount = eighteenHoleArray
+                multiGame.parCount = eighteenHoleArray
+                
+            } else {
+                multiGame.courseName = courseArray[rowIndex - 2]
+                multiGame.parCount = courseParArray[rowIndex - 2]
+                
+                if courseParArray[rowIndex - 2].count == 9 {
+                    multiGame.strokeCount = nineHoleArray
+                    multiGame.puttCount = nineHoleArray
+                    
+                } else if courseParArray[rowIndex - 2].count == 18 {
+                    multiGame.strokeCount = eighteenHoleArray
+                    multiGame.puttCount = eighteenHoleArray
+                }
             }
+            orderCounter += 1
+            multiGame.isActive = true
+            multiGame.dateCreated = Date()
+            multiGame.orderIdentifier = Int16(orderCounter)
+            setNewGameDefaults(orderCount: orderCounter, courseIndex: orderCounter)
+        } else {
+    
+            for game in golfGameArray {
+                context.delete(game)
+            }
+            
+            let newGame = GolfGame(context: context)
+            
+            if rowIndex == 0 {
+                newGame.courseName = "9 Hole Game"
+                newGame.strokeCount = nineHoleArray
+                newGame.puttCount = nineHoleArray
+                newGame.parCount = nineHoleArray
+                newGame.netCount = nineHoleArray
+                
+            } else if rowIndex == 1 {
+                newGame.courseName = "18 Hole Game"
+                newGame.strokeCount = eighteenHoleArray
+                newGame.puttCount = eighteenHoleArray
+                newGame.parCount = eighteenHoleArray
+                newGame.netCount = eighteenHoleArray
+                
+            } else {
+                newGame.courseName = courseArray[rowIndex - 2]
+                newGame.parCount = courseParArray[rowIndex - 2]
+                
+                if courseParArray[rowIndex - 2].count == 9 {
+                    newGame.strokeCount = nineHoleArray
+                    newGame.puttCount = nineHoleArray
+                    newGame.netCount = nineHoleArray
+                    
+                } else if courseParArray[rowIndex - 2].count == 18 {
+                    newGame.strokeCount = eighteenHoleArray
+                    newGame.puttCount = eighteenHoleArray
+                    newGame.netCount = eighteenHoleArray
+
+                }
+            }
+            UserDefaults.standard.set(0, forKey: "net")
+            UserDefaults.standard.set(false, forKey: "continueGame")
+            
+            newGame.orderIdentifier = 0
+            newGame.isActive = true
+            newGame.dateCreated = Date()
+            setNewGameDefaults(orderCount: 0, courseIndex: 0)
         }
-        UserDefaults.standard.set(0, forKey: "currentHole")
-        UserDefaults.standard.set(0, forKey: "net")
-        UserDefaults.standard.set(true, forKey: "activeGame")
-        UserDefaults.standard.set(false, forKey: "continueGame")
-        UserDefaults.standard.set(Date(), forKey: "dateCreated")
+        save()
         presentController(withName: "GameController", context: nil)
+    }
+    
+    func setNewGameDefaults(orderCount: Int, courseIndex: Int) {
+        
+        UserDefaults.standard.set(0, forKey: "currentHole")
+        UserDefaults.standard.set(orderCounter, forKey: "orderCounter")
+        UserDefaults.standard.set(courseIndex, forKey: "courseIndex")
+        UserDefaults.standard.set(false, forKey: "multiCourse")
+    }
+    
+    func checkForActiveGame() -> Bool {
+        
+        for game in golfGameArray {
+            if game.isActive { activeGame = true }
+        }
+        return activeGame
+    }
+    
+    // MARK: - CoreData functions
+    
+    func loadData() {
+        
+        let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        let activePredicate = NSPredicate(format: "isActive == true")
+        request.predicate = activePredicate
+        let sort = NSSortDescriptor(key: "orderIdentifier", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        do {
+            golfGameArray = try context.fetch(request)
+        } catch {
+            print("Error fetching context \(error)")
+        }
+    }
+    
+    func save() {
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
     }
 
 }

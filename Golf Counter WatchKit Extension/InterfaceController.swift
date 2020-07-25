@@ -9,7 +9,7 @@
 import WatchKit
 import Foundation
 import WatchConnectivity
-
+import CoreData
 
 class InterfaceController: WKInterfaceController, WCSessionDelegate {
 
@@ -37,18 +37,17 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBOutlet var holeSelectGroup: WKInterfaceGroup!
     
     // Variables
-    var courseName = ""
-    var strokeCount = [Int]()
-    var puttCount = [Int]()
-    var parCount = [Int]()
+    var golfGameArray = [GolfGame]()
     var netCount = 0
     var index = 0
+    var courseIndex = 0
     var pickerIndex = 0
     var holeArray = [WKPickerItem]()
     
     // Connectivity
     let session = WCSession.default
-    
+    let context = (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext
+
     
     // MARK: - Default Functions
     
@@ -68,55 +67,61 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     override func didDeactivate() {
         super.didDeactivate()
         
-        UserDefaults.standard.set(strokeCount, forKey: "strokes")
-        UserDefaults.standard.set(puttCount, forKey: "putts")
         UserDefaults.standard.set(index, forKey: "currentHole")
         UserDefaults.standard.set(netCount, forKey: "net")
+        save()
     }
     
     // MARK: - Count Functions
     
     @IBAction func plusStrokeButtonPressed() {
-        if strokeCount[index] < 99 {
-            strokeCount[index] += 1
-            strokeCounter.setText("\(strokeCount[index])")
+        if (golfGameArray[courseIndex].strokeCount?[index] ?? 0) < 99 {
+            golfGameArray[courseIndex].strokeCount?[index] += 1
+            strokeCounter.setText("\(golfGameArray[courseIndex].strokeCount?[index] ?? 0)")
         }
     }
     
     @IBAction func minusStrokeButtonPressed() {
-        if strokeCount[index] > 0 && strokeCount[index] > puttCount[index] {
-            strokeCount[index] -= 1
-            strokeCounter.setText("\(strokeCount[index])")
+        if (golfGameArray[courseIndex].strokeCount?[index] ?? 0) > 0 &&
+            (golfGameArray[courseIndex].strokeCount?[index] ?? 0) > (golfGameArray[courseIndex].puttCount?[index] ?? 0) {
+            golfGameArray[courseIndex].strokeCount?[index] -= 1
+            strokeCounter.setText("\(golfGameArray[courseIndex].strokeCount?[index] ?? 0)")
         }
     }
     
     @IBAction func plusPuttButtonPressed() {
-        if strokeCount[index] < 99 {
-            puttCount[index] += 1
-            strokeCount[index] += 1
-            puttCounter.setText("\(puttCount[index])")
-            strokeCounter.setText("\(strokeCount[index])")
+        if (golfGameArray[courseIndex].strokeCount?[index] ?? 0) < 99 {
+            golfGameArray[courseIndex].puttCount?[index] += 1
+            golfGameArray[courseIndex].strokeCount?[index] += 1
+            puttCounter.setText("\(golfGameArray[courseIndex].puttCount?[index] ?? 0)")
+            strokeCounter.setText("\(golfGameArray[courseIndex].strokeCount?[index] ?? 0)")
         }
     }
     
     @IBAction func minusPuttButtonPressed() {
-        if strokeCount[index] > 0 && puttCount[index] > 0 {
-            puttCount[index] -= 1
-            strokeCount[index] -= 1
-            puttCounter.setText("\(puttCount[index])")
-            strokeCounter.setText("\(strokeCount[index])")
+        if (golfGameArray[courseIndex].strokeCount?[index] ?? 0) > 0 &&
+            (golfGameArray[courseIndex].puttCount?[index] ?? 0) > 0 {
+            golfGameArray[courseIndex].puttCount?[index] -= 1
+            golfGameArray[courseIndex].strokeCount?[index] -= 1
+            puttCounter.setText("\(golfGameArray[courseIndex].puttCount?[index] ?? 0)")
+            strokeCounter.setText("\(golfGameArray[courseIndex].strokeCount?[index] ?? 0)")
         }
     }
     
     // MARK: - Finish Game Methods
     
     @IBAction func nextCourseButtonPressed() {
+        UserDefaults.standard.set("selectMultiCourse", forKey: "navigationState")
+        UserDefaults.standard.set(0, forKey: "currentHole")
+        UserDefaults.standard.set(true, forKey: "selectActiveCourseFl")
+        dismiss()
     }
     
     @IBAction func finishGameButtonPressed() {
-        UserDefaults.standard.set(strokeCount, forKey: "strokes")
-        UserDefaults.standard.set(puttCount, forKey: "putts")
         UserDefaults.standard.set(false, forKey: "activeGame")
+        UserDefaults.standard.set(false, forKey: "multiCourse")
+        UserDefaults.standard.set(0, forKey: "courseIndex")
+        save()
         let dict = parseFinishedDefaultsFromWatch()
         sendGameToPhone(applicationContext: dict)
         dismiss()
@@ -128,7 +133,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     @IBAction func leftSwipe(_ sender: Any) {
         
-        if index <= strokeCount.count {
+        if index <= (golfGameArray[courseIndex].strokeCount?.count ?? 0) {
             index += 1
         }
         
@@ -178,10 +183,12 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         
         var totalPar = 0
         var totalStroke = 0
-        for index in 0..<strokeCount.count {
-            if strokeCount[index] != 0 {
-                totalPar += parCount[index]
-                totalStroke += strokeCount[index]
+        if let holeCount = golfGameArray[courseIndex].strokeCount?.count {
+            for index in 0..<holeCount {
+                if golfGameArray[courseIndex].strokeCount?[index] != 0 {
+                    totalPar += golfGameArray[courseIndex].parCount?[index] ?? 0
+                    totalStroke += golfGameArray[courseIndex].strokeCount?[index] ?? 0
+                }
             }
         }
         return totalStroke - totalPar
@@ -201,30 +208,30 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
     }
     
-    func parseDefaultsFromWatch() -> Dictionary<String,Any> {
-        
-        let dictionaryGame = [
-            "strokes" : UserDefaults.standard.array(forKey: "strokes") as Any,
-            "putts" : UserDefaults.standard.array(forKey: "putts") as Any,
-            "par" : UserDefaults.standard.array(forKey: "par") as Any,
-            "course" : UserDefaults.standard.string(forKey: "course") as Any,
-            "dateCreated" : UserDefaults.standard.object(forKey: "dateCreated") as Any,
-            "isActive" : true as Any,
-            "orderIdentifier" : UserDefaults.standard.integer(forKey: "orderIdentifier") as Any]
-        return dictionaryGame
-    }
+//    func parseDefaultsFromWatch() -> Dictionary<String,Any> {
+//
+//        let dictionaryGame = [
+//            "strokes" : UserDefaults.standard.array(forKey: "strokes") as Any,
+//            "putts" : UserDefaults.standard.array(forKey: "putts") as Any,
+//            "par" : UserDefaults.standard.array(forKey: "par") as Any,
+//            "course" : UserDefaults.standard.string(forKey: "course") as Any,
+//            "dateCreated" : UserDefaults.standard.object(forKey: "dateCreated") as Any,
+//            "isActive" : true as Any,
+//            "orderIdentifier" : UserDefaults.standard.integer(forKey: "orderIdentifier") as Any]
+//        return dictionaryGame
+//    }
 
     func parseFinishedDefaultsFromWatch() -> Dictionary<String,Any> {
         
         let dictionaryGame = [
-            "strokes" : UserDefaults.standard.array(forKey: "strokes") as Any,
-            "putts" : UserDefaults.standard.array(forKey: "putts") as Any,
-            "par" : UserDefaults.standard.array(forKey: "par") as Any,
-            "course" : UserDefaults.standard.string(forKey: "course") as Any,
-            "dateCreated" : UserDefaults.standard.object(forKey: "dateCreated") as Any,
+            "strokes" : golfGameArray[courseIndex].strokeCount as Any,
+            "putts" : golfGameArray[courseIndex].puttCount as Any,
+            "par" : golfGameArray[courseIndex].parCount as Any,
+            "course" : golfGameArray[courseIndex].courseName as Any,
+            "dateCreated" : golfGameArray[courseIndex].dateCreated as Any,
             "dateCompleted" : Date() as Any,
             "isActive" : false as Any,
-            "orderIdentifier" : UserDefaults.standard.integer(forKey: "orderIdentifier") as Any]
+            "orderIdentifier" : golfGameArray[courseIndex].orderIdentifier as Any]
         return dictionaryGame
     }
     
@@ -248,16 +255,17 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     // MARK: - Load Data Methods
     
     func loadData() {
-        courseName = UserDefaults.standard.string(forKey: "course") ?? ""
-        strokeCount = UserDefaults.standard.array(forKey: "strokes") as! [Int]
-        puttCount = UserDefaults.standard.array(forKey: "putts") as! [Int]
-        parCount = UserDefaults.standard.array(forKey: "par") as! [Int]
+        loadCoreData()
         netCount = UserDefaults.standard.integer(forKey: "net")
         index = UserDefaults.standard.integer(forKey: "currentHole")
-        for hole in 1...strokeCount.count {
-            let pickerItem = WKPickerItem.init()
-            pickerItem.title = String(hole)
-            holeArray.append(pickerItem)
+        courseIndex = UserDefaults.standard.integer(forKey: "courseIndex")
+        
+        if let holeCount = golfGameArray[courseIndex].strokeCount?.count {
+            for hole in 1...holeCount {
+                let pickerItem = WKPickerItem.init()
+                pickerItem.title = String(hole)
+                holeArray.append(pickerItem)
+            }
         }
         let summaryPage = WKPickerItem.init()
         summaryPage.title = "Summary"
@@ -268,7 +276,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     }
     
     func loadInterfaceViews() {
-        if index < strokeCount.count {
+        if index < (golfGameArray[courseIndex].strokeCount?.count ?? 0) {
             loadCounterFields()
             counterGroup.setHidden(false)
             summaryTable.setHidden(true)
@@ -292,13 +300,13 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             } else {
                 counterGroup.setContentInset(.init(top: 0, left: 0, bottom: 0, right: 0))
             }
-        } else if index == strokeCount.count {
+        } else if index == golfGameArray[courseIndex].strokeCount?.count {
             loadSummaryFields()
             counterGroup.setHidden(true)
             summaryTable.setHidden(false)
             finishGroup.setHidden(true)
             holeSelectGroup.setHidden(true)
-        } else if index == strokeCount.count + 1 {
+        } else if index == (golfGameArray[courseIndex].strokeCount?.count ?? 0) + 1 {
             counterGroup.setHidden(true)
             summaryTable.setHidden(true)
             finishGroup.setHidden(false)
@@ -308,27 +316,29 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     
     func loadCounterFields() {
         setTitle("Hole \(index + 1)")
-        strokeCounter.setText("\(strokeCount[index])")
-        puttCounter.setText("\(puttCount[index])")
-        if parCount[index] == 0 {
+        strokeCounter.setText("\(golfGameArray[courseIndex].strokeCount?[index] ?? 0)")
+        puttCounter.setText("\(golfGameArray[courseIndex].puttCount?[index] ?? 0)")
+        if golfGameArray[courseIndex].parCount?[index] == 0 {
             summaryCounterGroup.setHidden(true)
         } else {
             summaryCounterGroup.setHidden(false)
-            parCountLabel.setText("\(parCount[index])")
+            parCountLabel.setText("\(golfGameArray[courseIndex].parCount?[index] ?? 0)")
             setNet()
         }
     }
     
     func loadSummaryFields() {
-        setTitle(courseName)
+        setTitle(golfGameArray[courseIndex].courseName)
         
         var rowTypes = ["HeaderRowController","HeaderRowController"]
         var strokeSum = 0
         var parSum = 0
-        for hole in 0..<strokeCount.count {
-            rowTypes.append("SummaryRowController")
-            strokeSum += strokeCount[hole]
-            parSum += parCount[hole]
+        if let holeCount = golfGameArray[courseIndex].strokeCount?.count {
+            for hole in 0..<holeCount {
+                rowTypes.append("SummaryRowController")
+                strokeSum += golfGameArray[courseIndex].strokeCount?[hole] ?? 0
+                parSum += golfGameArray[courseIndex].parCount?[hole] ?? 0
+            }
         }
         
         if parSum == 0 {
@@ -353,12 +363,37 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
             default:
                 let controller = summaryTable.rowController(at: index) as! SummaryRowController
                 controller.hole = holeIndex + 1
-                controller.strokes = strokeCount[holeIndex]
+                controller.strokes = golfGameArray[courseIndex].strokeCount?[holeIndex]
                 holeIndex += 1
             }
         }
     }
     
+    // MARK: - CoreData functions
+    
+    func loadCoreData() {
+        
+        let request: NSFetchRequest<GolfGame> = GolfGame.fetchRequest()
+        let activePredicate = NSPredicate(format: "isActive == true")
+        request.predicate = activePredicate
+        let sort = NSSortDescriptor(key: "orderIdentifier", ascending: true)
+        request.sortDescriptors = [sort]
+        
+        do {
+            golfGameArray = try context.fetch(request)
+        } catch {
+            print("Error fetching context \(error)")
+        }
+    }
+    
+    func save() {
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context \(error)")
+        }
+    }
 
 
 }

@@ -16,12 +16,14 @@ class CourseInterfaceController: WKInterfaceController {
     
     var courseArray = [String]()
     var courseParArray = [[Int]]()
+    var courseDateCreatedArray = [Date]()
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        courseArray = UserDefaults.standard.stringArray(forKey: "courses") ?? [""]
-        courseParArray = UserDefaults.standard.array(forKey: "coursePar") as? [[Int]] ?? [[]]
+        courseArray = UserDefaults.standard.stringArray(forKey: "courses") ?? []
+        courseParArray = UserDefaults.standard.array(forKey: "coursePar") as? [[Int]] ?? []
+        courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") as? [Date] ?? []
         
         loadCourseFields()
     }
@@ -55,18 +57,12 @@ class CourseInterfaceController: WKInterfaceController {
             rowTypes.append("CourseGameRowController")
         }
         
-        if courseArray.count == 1 && courseArray[0] == "" {
-            courseArray[0] = "Nothing to show"
-        }
-        
         courseTable.setRowTypes(rowTypes)
         
         for index in 0..<courseTable.numberOfRows {
             let controller = courseTable.rowController(at: index) as! CourseGameRowController
             controller.course = courseArray[index]
-            if courseArray[0] != "Nothing to show" {
-                controller.count = courseParArray[index].count
-            }
+            controller.count = courseParArray[index].count
         }
     }
 

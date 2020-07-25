@@ -8,6 +8,7 @@
 
 import WatchKit
 import WatchConnectivity
+import CoreData
 
 @available(watchOSApplicationExtension 5.0, *)
 class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
@@ -56,7 +57,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
     
     func parseCoursesFromPhone(message: Dictionary<String,Any>) {
         
-        let course = Course()
+        let course = Courses()
         course.title = message["title"] as! String
         course.dateCreated = message["dateCreated"] as! Date
         course.par = message["par"] as! [Int]
@@ -74,7 +75,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         }
     }
     
-    func addCourse(newCourse: Course) {
+    func addCourse(newCourse: Courses) {
         
         if var courseArray = UserDefaults.standard.stringArray(forKey: "courses") {
             courseArray.append(newCourse.title)
@@ -99,7 +100,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         
     }
     
-    func updateCourse(updateCourse: Course) -> Bool {
+    func updateCourse(updateCourse: Courses) -> Bool {
         
         var updateFlag = false
         
@@ -122,7 +123,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
         return updateFlag
     }
     
-    func deleteCourse(deletedCourse: Course) {
+    func deleteCourse(deletedCourse: Courses) {
         
         guard var courseArray = UserDefaults.standard.stringArray(forKey: "courses") else {
             print("could not establish courseArray")
@@ -143,6 +144,33 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate, WCSessionDelegate {
             UserDefaults.standard.set(courseArray, forKey: "courses")
             UserDefaults.standard.set(parArray, forKey: "coursePar")
             UserDefaults.standard.set(courseDateCreatedArray, forKey: "courseDateCreated")
+        }
+    }
+    
+    // MARK: - Core Data stack
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Model")
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                fatalError("Unable to load persistent stores: \(error)")
+            }
+        }
+        return container
+    }()
+    
+    // MARK: - Core Data Saving support
+
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
         }
     }
     
