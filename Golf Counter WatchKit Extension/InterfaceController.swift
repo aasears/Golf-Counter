@@ -134,6 +134,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBAction func leftSwipe(_ sender: Any) {
         
         if index <= (golfGameArray[courseIndex].strokeCount?.count ?? 0) {
+            golfGameArray[courseIndex].holeComplete?[index] = 1
             index += 1
         }
         
@@ -185,7 +186,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
         var totalStroke = 0
         if let holeCount = golfGameArray[courseIndex].strokeCount?.count {
             for index in 0..<holeCount {
-                if golfGameArray[courseIndex].strokeCount?[index] != 0 {
+                if golfGameArray[courseIndex].strokeCount?[index] != 0 && golfGameArray[courseIndex].holeComplete?[index] != 0 {
                     totalPar += golfGameArray[courseIndex].parCount?[index] ?? 0
                     totalStroke += golfGameArray[courseIndex].strokeCount?[index] ?? 0
                 }

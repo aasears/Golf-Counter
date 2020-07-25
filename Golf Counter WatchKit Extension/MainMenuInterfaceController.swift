@@ -25,14 +25,16 @@ class MainMenuInterfaceController: WKInterfaceController {
         
         switch UserDefaults.standard.string(forKey: "navigationState") {
         case "selectMultiCourse":
+            print("test1")
             UserDefaults.standard.set("onSelectMultiCourse", forKey: "navigationState")
             presentController(withName: "MultipleCourseInterfaceController", context: nil)
         case "startMultiCourse":
+            print("test2")
             UserDefaults.standard.set("onStartMultiCourse", forKey: "navigationState")
             UserDefaults.standard.set(true, forKey: "multiCourse")
             pushController(withName: "NewGameInterfaceController", context: nil)
         default:
-            print("value not handled forKey: 'selectMultiCourse'. Printed \(UserDefaults.standard.string(forKey: "navigationState") ?? "")")
+            print("value not handled forKey: 'selectMultiCourse'. Printed \(UserDefaults.standard.string(forKey: "navigationState") ?? "nothing to print")")
         }
     }
 

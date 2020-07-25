@@ -102,12 +102,14 @@ class NewGameInterfaceController: WKInterfaceController {
                 multiGame.strokeCount = nineHoleArray
                 multiGame.puttCount = nineHoleArray
                 multiGame.parCount = nineHoleArray
+                multiGame.holeComplete = nineHoleArray
                 
             } else if rowIndex == 1 {
                 multiGame.courseName = "18 Hole Game"
                 multiGame.strokeCount = eighteenHoleArray
                 multiGame.puttCount = eighteenHoleArray
                 multiGame.parCount = eighteenHoleArray
+                multiGame.holeComplete = eighteenHoleArray
                 
             } else {
                 multiGame.courseName = courseArray[rowIndex - 2]
@@ -116,10 +118,12 @@ class NewGameInterfaceController: WKInterfaceController {
                 if courseParArray[rowIndex - 2].count == 9 {
                     multiGame.strokeCount = nineHoleArray
                     multiGame.puttCount = nineHoleArray
+                    multiGame.holeComplete = nineHoleArray
                     
                 } else if courseParArray[rowIndex - 2].count == 18 {
                     multiGame.strokeCount = eighteenHoleArray
                     multiGame.puttCount = eighteenHoleArray
+                    multiGame.holeComplete = eighteenHoleArray
                 }
             }
             orderCounter += 1
@@ -141,6 +145,7 @@ class NewGameInterfaceController: WKInterfaceController {
                 newGame.puttCount = nineHoleArray
                 newGame.parCount = nineHoleArray
                 newGame.netCount = nineHoleArray
+                newGame.holeComplete = nineHoleArray
                 
             } else if rowIndex == 1 {
                 newGame.courseName = "18 Hole Game"
@@ -148,6 +153,7 @@ class NewGameInterfaceController: WKInterfaceController {
                 newGame.puttCount = eighteenHoleArray
                 newGame.parCount = eighteenHoleArray
                 newGame.netCount = eighteenHoleArray
+                newGame.holeComplete = eighteenHoleArray
                 
             } else {
                 newGame.courseName = courseArray[rowIndex - 2]
@@ -157,11 +163,13 @@ class NewGameInterfaceController: WKInterfaceController {
                     newGame.strokeCount = nineHoleArray
                     newGame.puttCount = nineHoleArray
                     newGame.netCount = nineHoleArray
+                    newGame.holeComplete = nineHoleArray
                     
                 } else if courseParArray[rowIndex - 2].count == 18 {
                     newGame.strokeCount = eighteenHoleArray
                     newGame.puttCount = eighteenHoleArray
                     newGame.netCount = eighteenHoleArray
+                    newGame.holeComplete = eighteenHoleArray
 
                 }
             }
