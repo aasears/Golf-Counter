@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="16097.2" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RG7-5O-1J5">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="17140" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RG7-5O-1J5">
     <device id="watch38"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="16012"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17115"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="17031"/>
     </dependencies>
     <scenes>
         <!--Settings-->
@@ -127,7 +127,7 @@
                     <items>
                         <table alignment="left" id="3Ju-bk-KLG">
                             <items>
-                                <tableRow identifier="CourseGameRowController" selectable="NO" id="HxU-T2-csA" userLabel="CourseGameRowController" customClass="CourseGameRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                <tableRow identifier="CourseGameRowController" id="HxU-T2-csA" userLabel="CourseGameRowController" customClass="CourseGameRowController" customModule="Golf_Counter_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="60" alignment="left" layout="vertical" id="r3I-CO-sUA">
                                         <items>
                                             <label alignment="left" verticalAlignment="center" text="Course Name" id="VfL-n0-N52">
@@ -137,6 +137,9 @@
                                                 <fontDescription key="font" type="system" pointSize="12"/>
                                             </label>
                                         </items>
+                                        <connections>
+                                            <segue destination="Kmo-dJ-Qom" kind="push" identifier="goToEditCourse" id="VVl-Hg-mXZ"/>
+                                        </connections>
                                     </group>
                                     <connections>
                                         <outlet property="courseNameLabel" destination="VfL-n0-N52" id="3GG-vm-6H2"/>
@@ -149,7 +152,7 @@
                             <color key="backgroundColor" red="0.10516422659999999" green="0.6253569162" blue="0.0021906363200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <fontDescription key="font" type="system" pointSize="22"/>
                             <connections>
-                                <segue destination="Kmo-dJ-Qom" kind="push" id="VcA-9Q-NjP"/>
+                                <segue destination="Kmo-dJ-Qom" kind="push" identifier="goToAddCourse" id="VcA-9Q-NjP"/>
                             </connections>
                         </button>
                     </items>
@@ -184,11 +187,15 @@
             <objects>
                 <controller id="Kmo-dJ-Qom" customClass="NewCourseInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
                     <items>
-                        <textField width="1" alignment="left" text="Text" id="rHW-3D-EfP"/>
+                        <textField width="1" alignment="left" id="rHW-3D-EfP">
+                            <connections>
+                                <action selector="getCourseName:" destination="Kmo-dJ-Qom" id="6wH-hG-IYv"/>
+                            </connections>
+                        </textField>
                         <table alignment="left" id="zE5-s6-nMj">
                             <items>
-                                <tableRow id="VW6-oB-Ew3" customClass="CourseParRowController" customModule="Golf_Counter_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="60" alignment="left" layout="vertical" id="Otz-yx-B2C">
+                                <tableRow identifier="CourseParRowController" id="VW6-oB-Ew3" customClass="CourseParRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="50" alignment="left" layout="vertical" id="Otz-yx-B2C">
                                         <items>
                                             <group width="1" alignment="left" id="T5V-lB-925">
                                                 <items>
@@ -202,11 +209,14 @@
                                             </group>
                                             <group width="1" alignment="left" verticalAlignment="center" id="iJx-CO-7zD">
                                                 <items>
-                                                    <label alignment="left" text="Par" id="6gA-7I-UlV"/>
-                                                    <label alignment="left" text="X" id="uCn-8y-jRb"/>
+                                                    <label alignment="center" text="Par" id="6gA-7I-UlV"/>
+                                                    <label alignment="center" text="X" id="uCn-8y-jRb"/>
                                                 </items>
                                             </group>
                                         </items>
+                                        <connections>
+                                            <segue destination="y2c-dF-14u" kind="modal" identifier="goToUpdatePar" id="q2B-gw-liD"/>
+                                        </connections>
                                     </group>
                                     <connections>
                                         <outlet property="holeCountLabel" destination="ccz-nY-k1L" id="zUB-rL-R6t"/>
@@ -215,6 +225,17 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <button width="1" alignment="left" title="Add 9 Holes" id="FdR-M7-avz">
+                            <connections>
+                                <action selector="addNineHolesButton" destination="Kmo-dJ-Qom" id="35d-dl-zKa"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Save" id="QCJ-dq-Las">
+                            <color key="backgroundColor" red="0.10516422659999999" green="0.6253569162" blue="0.0021906363200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="saveCourseButton" destination="Kmo-dJ-Qom" id="DhG-J9-5gm"/>
+                            </connections>
+                        </button>
                     </items>
                     <connections>
                         <outlet property="courseName" destination="rHW-3D-EfP" id="ePd-dC-fWk"/>
@@ -223,6 +244,54 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="-467" y="641"/>
+        </scene>
+        <!--Update Par Interface Controller-->
+        <scene sceneID="jMp-DH-fkz">
+            <objects>
+                <controller id="y2c-dF-14u" customClass="UpdateParInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
+                    <items>
+                        <group width="1" height="0.37" alignment="left" id="X6A-wK-pcA">
+                            <items>
+                                <button width="0.29999999999999999" height="1" alignment="left" verticalAlignment="center" title="-" id="btQ-gj-ERp">
+                                    <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                    <connections>
+                                        <action selector="subtParButton" destination="y2c-dF-14u" id="XXH-gB-LgJ"/>
+                                    </connections>
+                                </button>
+                                <group width="0.40000000000000002" alignment="center" layout="vertical" id="Hil-MM-mS2">
+                                    <items>
+                                        <label alignment="center" text="X" textAlignment="center" id="cha-m3-d8Z">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="32"/>
+                                        </label>
+                                        <label alignment="center" verticalAlignment="bottom" text="Par" id="cGs-yQ-iEl">
+                                            <fontDescription key="font" type="system" weight="semibold" pointSize="13"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <button width="0.29999999999999999" height="1" alignment="right" title="+" id="iQz-7n-kg5">
+                                    <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" weight="semibold" pointSize="30"/>
+                                    <connections>
+                                        <action selector="addParButton" destination="y2c-dF-14u" id="2dS-yc-5B0"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Save" id="lId-HI-KxO">
+                            <color key="backgroundColor" red="0.10516422659999999" green="0.6253569162" blue="0.0021906363200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="saveButton" destination="y2c-dF-14u" id="jte-Ii-PyB"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="parLabel" destination="cha-m3-d8Z" id="AlB-sp-8YR"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-188" y="641"/>
         </scene>
         <!--MultipleCourseInterfaceController-->
         <scene sceneID="N7n-es-jRF">
@@ -238,7 +307,7 @@
                         </button>
                         <table alignment="left" id="3HU-vO-TCd">
                             <items>
-                                <tableRow selectable="NO" id="sth-vN-AYF" customClass="MultipleCourseRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                <tableRow identifier="MultipleCourseRowController" selectable="NO" id="sth-vN-AYF" customClass="MultipleCourseRowController" customModule="Golf_Counter_WatchKit_Extension">
                                     <group key="rootItem" width="1" height="60" alignment="left" layout="vertical" id="ndq-RF-KYO">
                                         <items>
                                             <label alignment="left" verticalAlignment="center" text="Course Name" id="0GC-fQ-XZE"/>
@@ -697,7 +766,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kcQ-nf-Nns"/>
+        <segue reference="VVl-Hg-mXZ"/>
+        <segue reference="PnQ-k7-Buh"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="FlagBarButton" width="24" height="24"/>

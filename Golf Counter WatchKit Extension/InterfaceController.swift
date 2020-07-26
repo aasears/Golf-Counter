@@ -227,6 +227,7 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     func parseFinishedDefaultsFromWatch() -> Dictionary<String,Any> {
         
         let dictionaryGame = [
+            "messageType" : "Finished Game",
             "strokes" : golfGameArray[courseIndex].strokeCount as Any,
             "putts" : golfGameArray[courseIndex].puttCount as Any,
             "par" : golfGameArray[courseIndex].parCount as Any,

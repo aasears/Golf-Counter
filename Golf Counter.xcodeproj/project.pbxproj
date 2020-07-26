@@ -44,12 +44,14 @@
 		E592EA3A2263D94600862BBE /* GameSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E592EA392263D94600862BBE /* GameSummaryViewController.swift */; };
 		E5B9103A227554D500D90D45 /* NextCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5B91039227554D500D90D45 /* NextCourseViewController.swift */; };
 		E5BF64B622C98EC100A68A12 /* HistoryGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BF64B522C98EC100A68A12 /* HistoryGameViewController.swift */; };
+		E5CDA5F724CDF33F00FEBDF6 /* UpdateParInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5CDA5F624CDF33F00FEBDF6 /* UpdateParInterfaceController.swift */; };
 		E5D3FD272251A7670066736A /* newGameCourseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3FD262251A7670066736A /* newGameCourseTableViewCell.swift */; };
 		E5D3FD292251A96C0066736A /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D3FD282251A96C0066736A /* NewGameViewController.swift */; };
 		E5DDBF2C22BEC3870019C232 /* NewGameInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DDBF2B22BEC3870019C232 /* NewGameInterfaceController.swift */; };
 		E5DDBF2E22BEC3B00019C232 /* CourseInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DDBF2D22BEC3B00019C232 /* CourseInterfaceController.swift */; };
 		E5DDBF3022BEC6880019C232 /* GenericGameRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DDBF2F22BEC6880019C232 /* GenericGameRowController.swift */; };
 		E5DDBF3222BEC8410019C232 /* CourseGameRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DDBF3122BEC8410019C232 /* CourseGameRowController.swift */; };
+		E5DF930F24CE3C5A0076D30D /* PhoneSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5DF930E24CE3C5A0076D30D /* PhoneSessionManager.swift */; };
 		E5F5C46A229E2CC000FB1E7E /* Courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5F5C469229E2CC000FB1E7E /* Courses.swift */; };
 /* End PBXBuildFile section */
 
@@ -148,12 +150,14 @@
 		E592EA392263D94600862BBE /* GameSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSummaryViewController.swift; sourceTree = "<group>"; };
 		E5B91039227554D500D90D45 /* NextCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextCourseViewController.swift; sourceTree = "<group>"; };
 		E5BF64B522C98EC100A68A12 /* HistoryGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryGameViewController.swift; sourceTree = "<group>"; };
+		E5CDA5F624CDF33F00FEBDF6 /* UpdateParInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateParInterfaceController.swift; sourceTree = "<group>"; };
 		E5D3FD262251A7670066736A /* newGameCourseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newGameCourseTableViewCell.swift; sourceTree = "<group>"; };
 		E5D3FD282251A96C0066736A /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
 		E5DDBF2B22BEC3870019C232 /* NewGameInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameInterfaceController.swift; sourceTree = "<group>"; };
 		E5DDBF2D22BEC3B00019C232 /* CourseInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseInterfaceController.swift; sourceTree = "<group>"; };
 		E5DDBF2F22BEC6880019C232 /* GenericGameRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericGameRowController.swift; sourceTree = "<group>"; };
 		E5DDBF3122BEC8410019C232 /* CourseGameRowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseGameRowController.swift; sourceTree = "<group>"; };
+		E5DF930E24CE3C5A0076D30D /* PhoneSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSessionManager.swift; sourceTree = "<group>"; };
 		E5F5C469229E2CC000FB1E7E /* Courses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Courses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -199,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				9319235E213CD9CD0018B45F /* AppDelegate.swift */,
+				E5DF930E24CE3C5A0076D30D /* PhoneSessionManager.swift */,
 				9319239A213D89CA0018B45F /* Controllers */,
 				93192399213D89BD0018B45F /* Views */,
 				93F208F8224484E400A6E39A /* Models */,
@@ -232,6 +237,7 @@
 				E563734322DA6147001E8FFD /* HoleSelectInterfaceController.swift */,
 				E5DDBF2D22BEC3B00019C232 /* CourseInterfaceController.swift */,
 				E56C170C24CCD0D200D97242 /* NewCourseInterfaceController.swift */,
+				E5CDA5F624CDF33F00FEBDF6 /* UpdateParInterfaceController.swift */,
 				E5235EC723CBFD62002B7D84 /* MultipleCourseInterfaceController.swift */,
 				E55847F122EE5B46006FBBD0 /* SettingsInterfaceController.swift */,
 				93D7013822963E7400382509 /* HeaderRowController.swift */,
@@ -457,6 +463,7 @@
 				E5BF64B622C98EC100A68A12 /* HistoryGameViewController.swift in Sources */,
 				93F209062246DECC00A6E39A /* editCourseHoleTableViewCell.swift in Sources */,
 				E5763D7022585666002D6F09 /* GolfGameExtension.swift in Sources */,
+				E5DF930F24CE3C5A0076D30D /* PhoneSessionManager.swift in Sources */,
 				93192361213CD9CD0018B45F /* CounterViewController.swift in Sources */,
 				E592EA3A2263D94600862BBE /* GameSummaryViewController.swift in Sources */,
 				93F208FC2246998D00A6E39A /* CoursesViewController.swift in Sources */,
@@ -480,6 +487,7 @@
 				E56C170D24CCD0D200D97242 /* NewCourseInterfaceController.swift in Sources */,
 				E55847F222EE5B46006FBBD0 /* SettingsInterfaceController.swift in Sources */,
 				E56C170F24CCD57000D97242 /* WatchSessionManager.swift in Sources */,
+				E5CDA5F724CDF33F00FEBDF6 /* UpdateParInterfaceController.swift in Sources */,
 				E55472AB2291AC870005DD62 /* SummaryRowController.swift in Sources */,
 				E5235EC323C2E622002B7D84 /* Model.xcdatamodeld in Sources */,
 				E5235EC823CBFD62002B7D84 /* MultipleCourseInterfaceController.swift in Sources */,
@@ -664,7 +672,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				INFOPLIST_FILE = "Golf Counter WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -687,7 +695,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				INFOPLIST_FILE = "Golf Counter WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -711,7 +719,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				IBSC_MODULE = Golf_Counter_WatchKit_Extension;
 				INFOPLIST_FILE = "Golf Counter WatchKit App/Info.plist";
@@ -731,7 +739,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				IBSC_MODULE = Golf_Counter_WatchKit_Extension;
 				INFOPLIST_FILE = "Golf Counter WatchKit App/Info.plist";
@@ -750,7 +758,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				INFOPLIST_FILE = "Golf Counter/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -761,7 +769,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.searsstudio.Golf-Counter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -770,7 +778,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 68P5L6FJV2;
 				INFOPLIST_FILE = "Golf Counter/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
@@ -781,7 +789,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.searsstudio.Golf-Counter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

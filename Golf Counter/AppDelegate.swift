@@ -14,6 +14,7 @@ import WatchConnectivity
 class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
     
     var window: UIWindow?
+    var courseArray = [Course]()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -72,6 +73,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 
     // MARK: - Core Data Saving support
 
+    func loadCourses() {
+    
+        let request: NSFetchRequest<Course> = Course.fetchRequest()
+        
+        do {
+            courseArray = try persistentContainer.viewContext.fetch(request)
+            let sort = NSSortDescriptor(key: "courseName", ascending: true)
+            request.sortDescriptors = [sort]
+        } catch {
+            print("Error fetching context \(error)")
+        }
+    }
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
@@ -100,7 +114,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
 //    }
     
     func session(_ session: WCSession, didReceiveUserInfo userInfo: [String : Any]) {
-        dictionaryToGolfHoleObject(message: userInfo)
+        if userInfo["messageType"] as? String == "Finished Game" {
+            dictionaryToGolfHoleObject(message: userInfo)
+        } else if userInfo["messageType"] as? String == "Course" {
+            parseCoursesFromWatch(message: userInfo)
+        }
+        
+        
     }
 
     func dictionaryToGolfHoleObject(message: Dictionary<String,Any>) {
@@ -124,6 +144,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
             //        } else {
             finalGame.title = passedInGame.courseName
             passedInGame.history = finalGame
+        }
+        saveContext()
+    }
+    
+    func parseCoursesFromWatch(message: Dictionary<String,Any>) {
+        let newCourseName = message["title"] as? String
+        let newDateCreated = message["dateCreated"] as? Date
+        let newCoursePar = message["par"] as? [Int]
+        
+        if (message["addCourse"] as! Bool) {
+            //addCourse(newCourse: course)
+            let course = Course(context: persistentContainer.viewContext)
+            course.courseName = newCourseName
+            course.dateCreated = newDateCreated
+            course.coursePar = newCoursePar
+            
+        } else if (message["updateCourse"] as! Bool) {
+            
+            var index = 0
+            var updateFlag = false
+            
+            loadCourses()
+            
+            for existingCourse in courseArray {
+                if existingCourse.dateCreated == newDateCreated {
+                    courseArray[index].courseName = newCourseName
+                    courseArray[index].coursePar = newCoursePar
+                    updateFlag = true
+                }
+                index += 1
+            }
+            
+            if !updateFlag {
+                let course = Course(context: persistentContainer.viewContext)
+                course.courseName = newCourseName
+                course.dateCreated = newDateCreated
+                course.coursePar = newCoursePar
+            }
+            
+        } else if (message["deleteCourse"] as! Bool) {
+                    
+            loadCourses()
+            
+            var index = 0
+            
+            for existingCourse in courseArray {
+                if existingCourse.dateCreated == newDateCreated {
+                    persistentContainer.viewContext.delete(courseArray[index])
+                }
+                index += 1
+            }
         }
         saveContext()
     }

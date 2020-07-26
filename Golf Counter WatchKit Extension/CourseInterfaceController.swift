@@ -11,23 +11,22 @@ import Foundation
 import CoreData
 
 
-class CourseInterfaceController: WKInterfaceController {
+class contextForEditedCourse: NSObject {
+    var course = Course()
+    var delegate: AnyObject? = nil
+}
+
+class CourseInterfaceController: WKInterfaceController, EditCourseDelegate {
 
     @IBOutlet var courseTable: WKInterfaceTable!
     
     let context = (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext
     var courseArray = [Course]()
     
-    //var courseArray1 = [String]()
-    //var courseParArray = [[Int]]()
-    //var courseDateCreatedArray = [Date]()
+    var courseIndex = 0
     
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
-        
-        //courseArray1 = UserDefaults.standard.stringArray(forKey: "courses") ?? []
-        //courseParArray = UserDefaults.standard.array(forKey: "coursePar") as? [[Int]] ?? []
-        //courseDateCreatedArray = UserDefaults.standard.array(forKey: "courseDateCreated") as? [Date] ?? []
         
         loadCourses()
         loadCourseFields()
@@ -41,6 +40,28 @@ class CourseInterfaceController: WKInterfaceController {
     override func didDeactivate() {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
+    }
+    
+    // MARK: - Delegate Methods
+    
+    func saveEditedCourse(editedCourse: Course) {
+        courseArray[courseIndex] = editedCourse
+        save()
+    }
+    
+    // MARK: - Segue Methods
+    
+    override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
+        
+        courseIndex = rowIndex
+        let editCourseContext = contextForEditedCourse()
+        editCourseContext.course = courseArray[rowIndex]
+        editCourseContext.delegate = self
+        return editCourseContext
+    }
+    
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
+        presentController(withName: "goToEditCourse", context: self)
     }
     
     // MARK: - Menu Item Methods
