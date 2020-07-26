@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="15702" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RG7-5O-1J5">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="16097.2" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="RG7-5O-1J5">
     <device id="watch38"/>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="15501"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="16012"/>
     </dependencies>
     <scenes>
         <!--Settings-->
@@ -145,6 +145,13 @@
                                 </tableRow>
                             </items>
                         </table>
+                        <button width="1" alignment="left" title="+" id="kti-Aq-FS5">
+                            <color key="backgroundColor" red="0.10516422659999999" green="0.6253569162" blue="0.0021906363200000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <fontDescription key="font" type="system" pointSize="22"/>
+                            <connections>
+                                <segue destination="Kmo-dJ-Qom" kind="push" id="VcA-9Q-NjP"/>
+                            </connections>
+                        </button>
                     </items>
                     <menu key="menu" id="kef-El-yIh">
                         <items>
@@ -171,6 +178,51 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="-785" y="641"/>
+        </scene>
+        <!--New Course Interface Controller-->
+        <scene sceneID="6P6-Vk-EvV">
+            <objects>
+                <controller id="Kmo-dJ-Qom" customClass="NewCourseInterfaceController" customModule="Golf_Counter_WatchKit_Extension">
+                    <items>
+                        <textField width="1" alignment="left" text="Text" id="rHW-3D-EfP"/>
+                        <table alignment="left" id="zE5-s6-nMj">
+                            <items>
+                                <tableRow id="VW6-oB-Ew3" customClass="CourseParRowController" customModule="Golf_Counter_WatchKit_Extension">
+                                    <group key="rootItem" width="1" height="60" alignment="left" layout="vertical" id="Otz-yx-B2C">
+                                        <items>
+                                            <group width="1" alignment="left" id="T5V-lB-925">
+                                                <items>
+                                                    <label alignment="left" text="Hole" id="54u-LS-5GI">
+                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                    </label>
+                                                    <label alignment="left" text="XX" id="ccz-nY-k1L">
+                                                        <fontDescription key="font" type="system" pointSize="12"/>
+                                                    </label>
+                                                </items>
+                                            </group>
+                                            <group width="1" alignment="left" verticalAlignment="center" id="iJx-CO-7zD">
+                                                <items>
+                                                    <label alignment="left" text="Par" id="6gA-7I-UlV"/>
+                                                    <label alignment="left" text="X" id="uCn-8y-jRb"/>
+                                                </items>
+                                            </group>
+                                        </items>
+                                    </group>
+                                    <connections>
+                                        <outlet property="holeCountLabel" destination="ccz-nY-k1L" id="zUB-rL-R6t"/>
+                                        <outlet property="holeParLabel" destination="uCn-8y-jRb" id="czP-ak-ZX5"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <connections>
+                        <outlet property="courseName" destination="rHW-3D-EfP" id="ePd-dC-fWk"/>
+                        <outlet property="parTable" destination="zE5-s6-nMj" id="uB1-aC-wlW"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-467" y="641"/>
         </scene>
         <!--MultipleCourseInterfaceController-->
         <scene sceneID="N7n-es-jRF">
@@ -644,11 +696,11 @@
             <point key="canvasLocation" x="-188" y="253"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="kcQ-nf-Nns"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="FlagBarButton" width="24" height="24"/>
         <image name="HomeBarButton" width="24" height="24"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="kcQ-nf-Nns"/>
-    </inferredMetricsTieBreakers>
 </document>

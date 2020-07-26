@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         // Override point for customization after application launch.
         //print("Documents Directory: ", persistentContainer.persistentStoreCoordinator.persistentStores.last?.url ?? "Not Found!")
         
+        //WatchSessionManager.sharedManager.startSession()
+        
         if WCSession.isSupported() {
             let session = WCSession.default
             session.delegate = self

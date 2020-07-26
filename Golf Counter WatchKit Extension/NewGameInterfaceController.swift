@@ -181,6 +181,7 @@ class NewGameInterfaceController: WKInterfaceController {
             newGame.dateCreated = Date()
             setNewGameDefaults(orderCount: 0, courseIndex: 0)
         }
+        print(golfGameArray)
         save()
         presentController(withName: "GameController", context: nil)
     }
@@ -213,6 +214,7 @@ class NewGameInterfaceController: WKInterfaceController {
         
         do {
             golfGameArray = try context.fetch(request)
+            print(golfGameArray)
         } catch {
             print("Error fetching context \(error)")
         }
