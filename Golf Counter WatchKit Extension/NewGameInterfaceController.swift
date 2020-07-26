@@ -16,8 +16,8 @@ class NewGameInterfaceController: WKInterfaceController {
     
     let context = (WKExtension.shared().delegate as! ExtensionDelegate).persistentContainer.viewContext
     
-    var courseArray = [String]()
-    var courseParArray = [[Int]]()
+    var courseArray = [Course]()
+    //var courseParArray = [[Int]]()
     var golfGameArray = [GolfGame]()
     var orderCounter = 0
     var activeGame = false
@@ -25,10 +25,11 @@ class NewGameInterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
-        courseArray = UserDefaults.standard.stringArray(forKey: "courses") ?? [""]
-        courseParArray = UserDefaults.standard.array(forKey: "coursePar") as? [[Int]] ?? [[]]
+        //courseArray = UserDefaults.standard.stringArray(forKey: "courses") ?? [""]
+        //courseParArray = UserDefaults.standard.array(forKey: "coursePar") as? [[Int]] ?? [[]]
         
         loadData()
+        loadCourses()
         loadNewGameFields()
     }
 
@@ -59,9 +60,9 @@ class NewGameInterfaceController: WKInterfaceController {
             rowTypes.append("CourseGameRowController")
         }
         
-        if courseArray.count == 1 && courseArray[0] == "" {
-            rowTypes.remove(at: 2)
-        }
+//        if courseArray.count == 1 && courseArray[0] == "" {
+//            rowTypes.remove(at: 2)
+//        }
         
         courseTable.setRowTypes(rowTypes)
         
@@ -79,8 +80,8 @@ class NewGameInterfaceController: WKInterfaceController {
                 }
             default:
                 let controller = courseTable.rowController(at: index) as! CourseGameRowController
-                controller.course = courseArray[courseIndex]
-                controller.count = courseParArray[courseIndex].count
+                controller.course = courseArray[courseIndex].courseName
+                controller.count = courseArray[courseIndex].coursePar?.count
                 courseIndex += 1
             }
         }
@@ -112,15 +113,15 @@ class NewGameInterfaceController: WKInterfaceController {
                 multiGame.holeComplete = eighteenHoleArray
                 
             } else {
-                multiGame.courseName = courseArray[rowIndex - 2]
-                multiGame.parCount = courseParArray[rowIndex - 2]
+                multiGame.courseName = courseArray[rowIndex - 2].courseName
+                multiGame.parCount = courseArray[rowIndex - 2].coursePar
                 
-                if courseParArray[rowIndex - 2].count == 9 {
+                if courseArray[rowIndex - 2].coursePar?.count == 9 {
                     multiGame.strokeCount = nineHoleArray
                     multiGame.puttCount = nineHoleArray
                     multiGame.holeComplete = nineHoleArray
                     
-                } else if courseParArray[rowIndex - 2].count == 18 {
+                } else if courseArray[rowIndex - 2].coursePar?.count == 18 {
                     multiGame.strokeCount = eighteenHoleArray
                     multiGame.puttCount = eighteenHoleArray
                     multiGame.holeComplete = eighteenHoleArray
@@ -156,16 +157,16 @@ class NewGameInterfaceController: WKInterfaceController {
                 newGame.holeComplete = eighteenHoleArray
                 
             } else {
-                newGame.courseName = courseArray[rowIndex - 2]
-                newGame.parCount = courseParArray[rowIndex - 2]
+                newGame.courseName = courseArray[rowIndex - 2].courseName
+                newGame.parCount = courseArray[rowIndex - 2].coursePar
                 
-                if courseParArray[rowIndex - 2].count == 9 {
+                if courseArray[rowIndex - 2].coursePar?.count == 9 {
                     newGame.strokeCount = nineHoleArray
                     newGame.puttCount = nineHoleArray
                     newGame.netCount = nineHoleArray
                     newGame.holeComplete = nineHoleArray
                     
-                } else if courseParArray[rowIndex - 2].count == 18 {
+                } else if courseArray[rowIndex - 2].coursePar?.count == 18 {
                     newGame.strokeCount = eighteenHoleArray
                     newGame.puttCount = eighteenHoleArray
                     newGame.netCount = eighteenHoleArray
@@ -215,6 +216,19 @@ class NewGameInterfaceController: WKInterfaceController {
         do {
             golfGameArray = try context.fetch(request)
             print(golfGameArray)
+        } catch {
+            print("Error fetching context \(error)")
+        }
+    }
+    
+    func loadCourses() {
+    
+        let request: NSFetchRequest<Course> = Course.fetchRequest()
+        
+        do {
+            courseArray = try context.fetch(request)
+            let sort = NSSortDescriptor(key: "courseName", ascending: true)
+            request.sortDescriptors = [sort]
         } catch {
             print("Error fetching context \(error)")
         }

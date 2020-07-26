@@ -134,7 +134,9 @@ class InterfaceController: WKInterfaceController, WCSessionDelegate {
     @IBAction func leftSwipe(_ sender: Any) {
         
         if index <= (golfGameArray[courseIndex].strokeCount?.count ?? 0) {
-            golfGameArray[courseIndex].holeComplete?[index] = 1
+            if index < golfGameArray[courseIndex].holeComplete?.count ?? 0 {
+                golfGameArray[courseIndex].holeComplete?[index] = 1
+            }
             index += 1
         }
         
